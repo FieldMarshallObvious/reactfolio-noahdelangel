@@ -1,0 +1,49 @@
+@import "../../../data/styles.css";
+
+.progress-bar-container {
+	width: 100%;
+}
+
+.progress-bar-title {
+	display: flex;
+	align-items: center;
+	margin-top: 0.5rem;
+	font-size: 0.875rem;
+	font-weight: 700;
+}
+
+.title-icon {
+	font-size: 1.2em;
+}
+
+.progress-bar-boxes {
+	display: flex;
+	gap: 0.25rem;
+}
+
+.progress-box {
+	height: 0.9rem;
+	flex: 1 1 0%;
+	border-radius: 0.25rem;
+	transition: all 0.5s ease-out;
+	transform-origin: center;
+}
+
+.progress-box-filled {
+	background-color: var(--link-color);
+}
+
+.progress-box-empty {
+	background-color: #e5e7eb;
+}
+
+.progress-text {
+	font-size: 1rem;
+	font-weight: 700;
+	padding-left: 20px;
+	color: var(--secondary-color);
+}
+
+.progress-text .filled {
+	color: var(--link-color) !important;
+}
