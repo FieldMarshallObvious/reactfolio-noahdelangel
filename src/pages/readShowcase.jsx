@@ -1,5 +1,5 @@
-import React, { useEffect } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 import { Helmet } from "react-helmet";
 import styled from "styled-components";
 
@@ -13,7 +13,21 @@ import "./styles/readShowcase.css";
 
 const ReadShowcase = () => {
 	const navigate = useNavigate();
+	const location = useLocation();
 	const { id } = useParams();
+
+	const [past, setPast] = useState("projects");
+
+	useEffect(() => {
+		console.log("location: ", location);
+		if (location?.state?.from) {
+			setPast(
+				!location.state.from.includes("projects") ? "home" : "projects",
+			);
+		} else {
+			setPast("projects");
+		}
+	}, [location]);
 
 	const project = INFO.projects.find((project) => project.accessor === id);
 
@@ -39,7 +53,7 @@ const ReadShowcase = () => {
 			</Helmet>
 
 			<div className="page-content">
-				<NavBar active="projects" />
+				<NavBar active={past} />
 				<div className="content-wrapper">
 					<div className="showcase-logo-container">
 						<div className="showcase-logo">

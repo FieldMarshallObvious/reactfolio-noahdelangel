@@ -1,5 +1,5 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useEffect } from "react";
+import { Link, useLocation } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faLink } from "@fortawesome/free-solid-svg-icons";
 
@@ -7,11 +7,23 @@ import "./styles/project.css";
 
 const Project = (props) => {
 	const { logo, title, description, linkText, link } = props;
+	const location = useLocation();
+
+	useEffect(() => {
+		console.log("Location object project", location);
+	}, [location]);
 
 	return (
 		<React.Fragment>
 			<div className="project">
-				<Link to={link}>
+				<Link
+					to={link}
+					state={
+						link?.includes("/projects/")
+							? { from: location.pathname }
+							: undefined
+					}
+				>
 					<div className="project-container">
 						<div className="project-logo">
 							<img src={logo} alt="logo" />

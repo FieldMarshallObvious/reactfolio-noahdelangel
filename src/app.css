@@ -77,6 +77,10 @@
 	border-top: 2px solid var(--tertiary-color);
 }
 
+.react-flow__attribution {
+	opacity: 0;
+}
+
 @media (max-width: 1270px) {
 	.page-content:before,
 	.page-content:after {

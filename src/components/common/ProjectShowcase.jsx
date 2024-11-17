@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { motion } from "motion/react";
 import {
 	Container,
 	Row,
@@ -19,9 +20,9 @@ import {
 	faArrowRight,
 	faClock,
 	faCalendar,
-	faUser,
 } from "@fortawesome/free-solid-svg-icons";
 import styled from "styled-components";
+import "@xyflow/react/dist/style.css";
 
 const ArticleHeader = styled.div`
 	padding: 3rem 0;
@@ -121,34 +122,47 @@ const ProjectShowCase = ({
 	description,
 	date,
 	duration,
-	author,
 	techStack = [],
 	flowchart,
 	languages = [],
 	demoLink,
 	sourceLink,
-	problemStatement,
-	approach,
-	challenges,
-	outcomes,
-	futureWork,
+	sections = [],
 }) => {
 	const [activeTab, setActiveTab] = useState("1");
 
 	return (
 		<Container className="project-article">
-			<ArticleHeader>
+			<ArticleHeader style={{ paddingBottom: "25px" }}>
 				<h1>{title}</h1>
-				<ProjectMeta>
-					<span>
-						<FontAwesomeIcon icon={faCalendar} className="me-2" />
-						{date}
-					</span>
-					<span>
-						<FontAwesomeIcon icon={faClock} className="me-2" />
-						{duration}
-					</span>
-				</ProjectMeta>
+				{date || duration ? (
+					<ProjectMeta>
+						{date ? (
+							<span>
+								<FontAwesomeIcon
+									icon={faCalendar}
+									className="me-2"
+								/>
+								{date}
+							</span>
+						) : (
+							<></>
+						)}
+						{duration ? (
+							<span>
+								<FontAwesomeIcon
+									icon={faClock}
+									className="me-2"
+								/>
+								{duration}
+							</span>
+						) : (
+							<></>
+						)}
+					</ProjectMeta>
+				) : (
+					<></>
+				)}
 				<p className="lead">{description}</p>
 				<ProjectLinks>
 					{demoLink && (
@@ -175,34 +189,20 @@ const ProjectShowCase = ({
 			</ArticleHeader>
 
 			<Row>
-				<Col md={8}>
-					<Section>
-						<SectionTitle>Problem Statement</SectionTitle>
-						<p>{problemStatement}</p>
-					</Section>
-
-					<Section>
-						<SectionTitle>Approach</SectionTitle>
-						<p>{approach}</p>
-					</Section>
-
-					<Section>
-						<SectionTitle>Challenges & Solutions</SectionTitle>
-						<div>{challenges}</div>
-					</Section>
-
-					<Section>
-						<SectionTitle>Outcomes & Impact</SectionTitle>
-						<div>{outcomes}</div>
-					</Section>
-
-					<Section>
-						<SectionTitle>Future Work</SectionTitle>
-						<p>{futureWork}</p>
-					</Section>
+				<Col md={7}>
+					{sections && Array.isArray(sections) ? (
+						sections.map((element) => (
+							<Section key={`${element.title}`}>
+								<SectionTitle>{element.title}</SectionTitle>
+								<p>{element.content}</p>
+							</Section>
+						))
+					) : (
+						<></>
+					)}
 				</Col>
 
-				<Col md={4}>
+				<Col md={5}>
 					<Card className="sticky-top" style={{ top: "2rem" }}>
 						<CardBody>
 							<Nav tabs>
@@ -246,12 +246,26 @@ const ProjectShowCase = ({
 							<TabContent activeTab={activeTab} className="mt-3">
 								<TabPane tabId="1">
 									{techStack.map((tech, index) => (
-										<TechStackCard key={index}>
-											<h5>{tech.name}</h5>
-											<p className="text-muted mb-0">
-												{tech.description}
-											</p>
-										</TechStackCard>
+										<div key={index}>
+											<TechStackCard
+												style={
+													tech.borderColor
+														? {
+																borderColor:
+																	tech.borderColor,
+															}
+														: undefined
+												}
+											>
+												<h5>
+													{tech.icon && tech.icon}
+													<span>{tech.name}</span>
+												</h5>
+												<p className="text-muted mb-0">
+													{tech.description}
+												</p>
+											</TechStackCard>
+										</div>
 									))}
 								</TabPane>
 
