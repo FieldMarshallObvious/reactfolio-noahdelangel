@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import { motion } from "motion/react";
+import { Link, useLocation } from "react-router-dom";
+import { GoArrowLeft } from "react-icons/go";
 import {
 	Container,
 	Row,
@@ -89,7 +91,6 @@ const LanguageBar = styled.div`
 
 const LanguageProgress = styled.div`
 	height: 100%;
-	background-color: var(--primary-color);
 	border-radius: 4px;
 	transition: width 0.3s ease-in-out;
 `;
@@ -132,7 +133,7 @@ const ProjectShowCase = ({
 	const [activeTab, setActiveTab] = useState("1");
 
 	return (
-		<Container className="project-article">
+		<Container className="project-article" style={{}}>
 			<ArticleHeader style={{ paddingBottom: "25px" }}>
 				<h1>{title}</h1>
 				{date || duration ? (
@@ -286,6 +287,7 @@ const ProjectShowCase = ({
 												<LanguageProgress
 													style={{
 														width: `${lang.percentage}%`,
+														backgroundColor: `${lang.color || "var(--primary-color)"}`,
 													}}
 												/>
 											</LanguageBar>

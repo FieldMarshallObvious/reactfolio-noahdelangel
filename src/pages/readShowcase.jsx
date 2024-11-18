@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 import { Helmet } from "react-helmet";
-import styled from "styled-components";
 
 import NavBar from "../components/common/navBar";
 import Footer from "../components/common/footer";
@@ -19,7 +18,6 @@ const ReadShowcase = () => {
 	const [past, setPast] = useState("projects");
 
 	useEffect(() => {
-		console.log("location: ", location);
 		if (location?.state?.from) {
 			setPast(
 				!location.state.from.includes("projects") ? "home" : "projects",
