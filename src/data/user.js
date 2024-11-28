@@ -15,13 +15,17 @@ import {
 	signageEdges,
 	signageNodes,
 } from "../components/projects/flowcharts/computerVisionDigitalSignage";
+import {
+	iceBreakEdges,
+	iceBreakNodes,
+} from "../components/projects/flowcharts/iceBreakDating";
 
 const INFO = {
 	main: {
 		title: "Noah del Angel Portfolio",
 		name: "Noah del Angel",
 		email: "noahdelangel@gmail.com",
-		logo: "/logo.png",
+		logo: "/noah_icon.png",
 	},
 
 	socials: {
@@ -142,9 +146,9 @@ const INFO = {
 	},
 
 	about: {
-		title: "I’m Noah del Angel, recent graduate designing innovative solutions.",
+		title: "I’m Noah del Angel, software engineer designing innovative solutions.",
 		description:
-			"Recent college graduate with hands-on experience across diverse projects and industries, including computer vision, real estate analytics, and digital signage. Skilled in developing solutions that enhance workflow efficiency, optimize deployment, and improve user experience. My GitHub showcases school work alongside innovative projects, and I’m always open to new ideas and collaboration. Experienced with a wide range of technologies, including Node.js, MongoDB, React, Kotlin, TensorFlow, Vertex AI, and AWS, I’m passionate about contributing to impactful, high-quality projects.",
+			"Junior level software engineer with hands-on experience across diverse projects and industries, including computer vision, real estate analytics, and digital signage. Skilled in developing solutions that enhance workflow efficiency, optimize deployment, and improve user experience. My GitHub showcases school work alongside innovative projects, and I’m always open to new ideas and collaboration. Experienced with a wide range of technologies, including Node.js, MongoDB, React, Kotlin, TensorFlow, Vertex AI, and AWS, I’m passionate about contributing to impactful, high-quality projects.",
 	},
 
 	projects: [
@@ -478,10 +482,10 @@ const INFO = {
 				],
 				flowchart: (
 					<div style={{ height: "500px", overflow: "hidden" }}>
-						<div style={{ height: "900px" }}>
+						<div style={{ height: "800px" }}>
 							<ReactFlow
-								nodes={signageNodes}
-								edges={signageEdges}
+								nodes={iceBreakNodes}
+								edges={iceBreakEdges}
 								defaultViewport={{ x: 60, y: 0, zoom: 0.5 }}
 								edgesUpdatable={false}
 								edgesFocusable={false}

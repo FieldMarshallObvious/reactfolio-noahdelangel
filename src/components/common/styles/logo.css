@@ -1,6 +1,15 @@
+.logo_container {
+	border-radius: 50%;
+	overflow: hidden;
+	background: #f4d151;
+}
+
 .logo {
 	border-radius: 50%;
-	display: block;
+	display: flex;
+	align-items: flex-end;
 	margin: 0;
+	margin-left: 0.5px;
 	padding: 0;
+	overflow: hidden;
 }

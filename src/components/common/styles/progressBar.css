@@ -21,19 +21,31 @@
 	gap: 0.25rem;
 }
 
+.progress-box-container {
+	display: grid;
+	height: 0.9rem;
+	flex: 1 1 0%;
+	border-radius: 0.25rem;
+}
+
 .progress-box {
 	height: 0.9rem;
 	flex: 1 1 0%;
 	border-radius: 0.25rem;
-	transition: all 0.5s ease-out;
 	transform-origin: center;
 }
 
 .progress-box-filled {
+	grid-row: 1;
+	grid-column: 1;
 	background-color: var(--link-color);
+	transition: all 0.5s ease-out;
+	z-index: 1;
 }
 
 .progress-box-empty {
+	grid-row: 1;
+	grid-column: 1;
 	background-color: #e5e7eb;
 }
 

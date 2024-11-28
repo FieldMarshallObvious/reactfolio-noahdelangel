@@ -88,6 +88,7 @@
 	padding-top: 30px;
 	padding-left: 10px;
 }
+
 @media (max-width: 1024px) {
 	.homepage-first-area {
 		flex-direction: column;
@@ -138,7 +139,7 @@
 	}
 }
 
-@media (max-width: 810px) {
+@media (max-width: 1022px) {
 	.homepage-logo-container {
 		padding-top: 0px;
 	}
