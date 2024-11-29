@@ -11,11 +11,32 @@ import INFO from "../data/user";
 import "./styles/readShowcase.css";
 
 const ReadShowcase = () => {
-	const navigate = useNavigate();
 	const location = useLocation();
 	const { id } = useParams();
 
 	const [past, setPast] = useState("projects");
+	const [mobileSize, setMobileSize] = useState(false);
+
+	const mobileLogoStyle = {
+		display: "flex",
+		position: "fixed",
+		top: "2vh",
+		zIndex: 999,
+		border: "1px solid white",
+		borderRadius: "50%",
+		boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.25)",
+	};
+
+	useEffect(() => {
+		const checkWindowWidth = () => {
+			setMobileSize(window.innerWidth <= 490);
+		};
+
+		checkWindowWidth();
+
+		window.addEventListener("resize", checkWindowWidth);
+		return () => window.removeEventListener("resize", checkWindowWidth);
+	}, []);
 
 	useEffect(() => {
 		if (location?.state?.from) {
@@ -54,9 +75,15 @@ const ReadShowcase = () => {
 				<NavBar active={past} />
 				<div className="content-wrapper">
 					<div className="showcase-logo-container">
-						<div className="showcase-logo">
-							<Logo width={46} />
-						</div>
+						{!mobileSize ? (
+							<div className="showcase-logo">
+								<Logo width={46} />
+							</div>
+						) : (
+							<div style={mobileLogoStyle}>
+								<Logo width={40} />
+							</div>
+						)}
 					</div>
 
 					<div className="showcase-container">

@@ -19,6 +19,7 @@ import Languages from "../components/homepage/languages";
 
 const Homepage = () => {
 	const [stayLogo, setStayLogo] = useState(false);
+	const [mobileSize, setMobileSize] = useState(false);
 	const [logoSize, setLogoSize] = useState(80);
 	const [oldLogoSize, setOldLogoSize] = useState(80);
 
@@ -27,11 +28,18 @@ const Homepage = () => {
 	}, []);
 
 	useEffect(() => {
+		const checkWindowWidth = () => {
+			setMobileSize(window.innerWidth <= 490);
+		};
+
+		checkWindowWidth();
+
+		window.addEventListener("resize", checkWindowWidth);
+
 		const handleScroll = () => {
 			let scroll = Math.round(window.pageYOffset, 2);
 
 			let newLogoSize = 80 - (scroll * 4) / 10;
-
 			if (newLogoSize < oldLogoSize) {
 				if (newLogoSize > 40) {
 					setLogoSize(newLogoSize);
@@ -47,19 +55,32 @@ const Homepage = () => {
 		};
 
 		window.addEventListener("scroll", handleScroll);
-		return () => window.removeEventListener("scroll", handleScroll);
+		return () => {
+			window.removeEventListener("scroll", handleScroll);
+			window.removeEventListener("resize", checkWindowWidth);
+		};
 	}, [logoSize, oldLogoSize]);
 
 	const currentSEO = SEO.find((item) => item.page === "home");
 
-	const logoStyle = {
+	const miniLogoStyle = {
 		display: "flex",
-		position: stayLogo ? "fixed" : "relative",
-		top: stayLogo ? "3vh" : "auto",
+		position: "fixed",
+		top: mobileSize ? "2vh" : "3vh",
 		zIndex: 999,
-		border: stayLogo ? "1px solid white" : "none",
-		borderRadius: stayLogo ? "50%" : "none",
-		boxShadow: stayLogo ? "0px 4px 10px rgba(0, 0, 0, 0.25)" : "none",
+		border: "1px solid white",
+		borderRadius: "50%",
+		boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.25)",
+	};
+
+	const maxLogoStyle = {
+		display: "flex",
+		position: "relative",
+		top: "auto",
+		zIndex: 999,
+		border: "none",
+		borderRadius: "none",
+		boxShadow: "none",
 	};
 
 	return (
@@ -77,9 +98,18 @@ const Homepage = () => {
 				<NavBar active="home" />
 				<div className="content-wrapper">
 					<div className="homepage-logo-container">
-						<div style={logoStyle}>
-							<Logo width={logoSize} link={false} />
-						</div>
+						{stayLogo || mobileSize ? (
+							<div style={miniLogoStyle}>
+								<Logo
+									width={mobileSize ? 40 : logoSize}
+									link={false}
+								/>
+							</div>
+						) : (
+							<div style={maxLogoStyle}>
+								<Logo width={logoSize} link={false} />
+							</div>
+						)}{" "}
 					</div>
 
 					<div className="homepage-container">

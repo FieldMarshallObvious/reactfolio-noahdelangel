@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Helmet } from "react-helmet";
 import { Row, Col } from "reactstrap";
 
@@ -14,11 +14,34 @@ import "./styles/contact.css";
 import ContactForm from "../components/common/contactForm";
 
 const Contact = () => {
+	const [mobileSize, setMobileSize] = useState(false);
+
+	const currentSEO = SEO.find((item) => item.page === "contact");
+
+	const mobileLogoStyle = {
+		display: "flex",
+		position: "fixed",
+		top: "2vh",
+		zIndex: 999,
+		border: "1px solid white",
+		borderRadius: "50%",
+		boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.25)",
+	};
+
+	useEffect(() => {
+		const checkWindowWidth = () => {
+			setMobileSize(window.innerWidth <= 490);
+		};
+
+		checkWindowWidth();
+
+		window.addEventListener("resize", checkWindowWidth);
+		return () => window.removeEventListener("resize", checkWindowWidth);
+	}, []);
+
 	useEffect(() => {
 		window.scrollTo(0, 0);
 	}, []);
-
-	const currentSEO = SEO.find((item) => item.page === "contact");
 
 	return (
 		<React.Fragment>
@@ -35,9 +58,15 @@ const Contact = () => {
 				<NavBar active="contact" />
 				<div className="content-wrapper">
 					<div className="contact-logo-container">
-						<div className="contact-logo">
-							<Logo width={46} />
-						</div>
+						{!mobileSize ? (
+							<div className="contact-logo">
+								<Logo width={46} />
+							</div>
+						) : (
+							<div style={mobileLogoStyle}>
+								<Logo width={40} />
+							</div>
+						)}
 					</div>
 
 					<div className="contact-container">

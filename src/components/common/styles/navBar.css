@@ -55,6 +55,51 @@
 	transition: color 0.3s ease-in-out;
 }
 
+.mobile-nav-container {
+	margin: 0;
+	width: 100%;
+}
+
+.mobile-navbar {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	z-index: 999;
+	height: 50px;
+	background: #fff;
+	box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
+	border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.mobile-nav-list {
+	display: flex;
+	justify-content: flex-end;
+	list-style: none;
+	align-items: center;
+	margin: 0;
+	padding: 0 15px;
+	width: 100%;
+}
+
+.mobile-nav-item {
+	margin-left: 15px;
+	font-weight: bold;
+	font-size: 80%;
+}
+
+.mobile-nav-item a {
+	text-decoration: none;
+	color: var(--primary-color);
+}
+
+.mobile-nav-item.active a {
+	color: var(--link-color);
+}
+
 @media (max-width: 600px) {
 	.navbar {
 		margin-left: 25%;

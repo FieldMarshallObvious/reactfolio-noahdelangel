@@ -31,13 +31,13 @@ const ProgressBar = ({ title, filled = 0, max = 10, icon }) => {
 											? "progress-box-filled"
 											: "progress-box-empty"
 									}`}
-									initial={{ width: 0, zIndex: 999 }}
+									initial={{ width: 0, zIndex: 500 }}
 									animate={{
 										width:
 											isInView && i < filled
 												? "100%"
 												: "0%",
-										zIndex: 999,
+										zIndex: 500,
 									}}
 									transition={{
 										duration: 0.4,

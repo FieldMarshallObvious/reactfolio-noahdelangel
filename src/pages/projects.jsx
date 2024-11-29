@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Helmet } from "react-helmet";
 
 import NavBar from "../components/common/navBar";
@@ -12,8 +12,31 @@ import SEO from "../data/seo";
 import "./styles/projects.css";
 
 const Projects = () => {
+	const [mobileSize, setMobileSize] = useState(false);
+
+	const mobileLogoStyle = {
+		display: "flex",
+		position: "fixed",
+		top: "2vh",
+		zIndex: 999,
+		border: "1px solid white",
+		borderRadius: "50%",
+		boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.25)",
+	};
+
 	useEffect(() => {
 		window.scrollTo(0, 0);
+	}, []);
+
+	useEffect(() => {
+		const checkWindowWidth = () => {
+			setMobileSize(window.innerWidth <= 490);
+		};
+
+		checkWindowWidth();
+
+		window.addEventListener("resize", checkWindowWidth);
+		return () => window.removeEventListener("resize", checkWindowWidth);
 	}, []);
 
 	const currentSEO = SEO.find((item) => item.page === "projects");
@@ -33,9 +56,15 @@ const Projects = () => {
 				<NavBar active="projects" />
 				<div className="content-wrapper">
 					<div className="projects-logo-container">
-						<div className="projects-logo">
-							<Logo width={46} />
-						</div>
+						{!mobileSize ? (
+							<div className="projects-logo">
+								<Logo width={46} />
+							</div>
+						) : (
+							<div style={mobileLogoStyle}>
+								<Logo width={40} />
+							</div>
+						)}
 					</div>
 					<div className="projects-container">
 						<div className="title projects-title">
