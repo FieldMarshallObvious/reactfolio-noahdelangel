@@ -5,7 +5,7 @@ import { Helmet } from "react-helmet";
 import NavBar from "../components/common/navBar";
 import Footer from "../components/common/footer";
 import Logo from "../components/common/logo";
-import ProjectShowcase from "../components/common/ProjectShowcase";
+import ProjectShowcase from "../components/common/ProjectShowcase/ProjectShowcase";
 import INFO from "../data/user";
 
 import "./styles/readShowcase.css";

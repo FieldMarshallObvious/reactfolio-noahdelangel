@@ -13,6 +13,10 @@ const Logo = (props) => {
 		setImageLoaded(true);
 	};
 
+	if (link === undefined) {
+		link = true;
+	}
+
 	const imageElement = (
 		<div
 			style={{

@@ -9,10 +9,6 @@ const Project = (props) => {
 	const { logo, title, description, linkText, link } = props;
 	const location = useLocation();
 
-	useEffect(() => {
-		console.log("Location object project", location);
-	}, [location]);
-
 	return (
 		<React.Fragment>
 			<div className="project">

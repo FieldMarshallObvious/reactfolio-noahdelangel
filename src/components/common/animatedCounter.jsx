@@ -2,9 +2,9 @@ import { animate } from "motion";
 import { useInView } from "motion/react";
 import React, { useEffect, useRef } from "react";
 
-const AnimatedCounter = ({ from, to, animationOptions }) => {
+const AnimatedCounter = ({ from, to, animationOptions, duration = 2 }) => {
 	const ref = useRef(null);
-	const inView = useInView(ref, { once: true });
+	const inView = useInView(ref, { once: true, amount: "some" });
 
 	useEffect(() => {
 		const element = ref.current;
@@ -23,7 +23,7 @@ const AnimatedCounter = ({ from, to, animationOptions }) => {
 		// Small delay to ensure initial render is complete
 		const animationTimer = setTimeout(() => {
 			const controls = animate(from, to, {
-				duration: 2,
+				duration: duration,
 				ease: "easeOut",
 				...animationOptions,
 				onUpdate(value) {
