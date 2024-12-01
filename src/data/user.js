@@ -157,6 +157,8 @@ const INFO = {
 			accessor: "llmScraper",
 			description:
 				"Developed an automated prospecting tool with Selenium, Python, AWS, and LLM integration to qualify client profiles precisely.",
+			shortDescription:
+				"Prospecting with LLM integration & advanced scraping.",
 			logo: "https://cdn.jsdelivr.net/npm/programming-languages-logos/src/python/python.png",
 			linkText: "Read About Project",
 			get link() {
@@ -263,6 +265,8 @@ const INFO = {
 			title: "To Do App",
 			description:
 				"Implemented a to-do app emphasizing human-centered design, enabling extensive customization with React, JavaScript, and Firebase.",
+			shortDescription:
+				"A customizable task management app using React, focusing on human-centered design.",
 			logo: "../react_icon.svg",
 			linkText: "View Project",
 			link: "https://github.com/FieldMarshallObvious/To-do-app",
@@ -272,6 +276,8 @@ const INFO = {
 			title: "Internet Plagiarism Checker",
 			description:
 				"Built a plagiarism checker leveraging advanced NLP techniques and Google Search API in Python, with a React-based interface.",
+			shortDescription:
+				"Plagiarism detection tool using NLP and Google API.",
 			logo: "../nlp.png",
 			linkText: "View Project",
 			link: "https://github.com/FieldMarshallObvious/PlagiarismChecker",
@@ -281,6 +287,8 @@ const INFO = {
 			title: "Computer Vision Digital Signage",
 			description:
 				"Created & Embedded TFLite computer vision models in a Kotlin Android app, enabling ad preemption and programmatic advertising.",
+			shortDescription:
+				"Vision based app to enable  programmatic advertising and ad preemption.",
 			accessor: "computer_vision_digital_signage",
 			logo: "https://cdn.jsdelivr.net/npm/programming-languages-logos/src/kotlin/kotlin.png",
 			linkText: "Read About Project",
@@ -399,6 +407,8 @@ const INFO = {
 			title: "IceBreak Dating",
 			description:
 				'Built a dating app featuring custom "IceBreakers" games, using a Swift frontend and Node.js/Firebase backend.',
+			shortDescription:
+				"A Swift and Firebase dating app with innovative games to drive unique interactions.",
 			accessor: "icebreak_dating",
 			logo: "https://cdn.jsdelivr.net/npm/programming-languages-logos/src/swift/swift.png",
 			linkText: "Read About Project",
@@ -510,6 +520,8 @@ const INFO = {
 			title: "Terminal Graphics Engine",
 			description:
 				"Built a terminal-based graphics engine in C++, powered by vector math to render basic visual elements and animations.",
+			shortDescription:
+				"A vector-powered terminal graphics engine rendering visual elements efficiently.",
 			logo: "https://cdn.jsdelivr.net/npm/programming-languages-logos/src/cpp/cpp.png",
 			linkText: "View Project",
 			link: "https://github.com/FieldMarshallObvious/School-Work/tree/master/Personal%20Projects/Terminal%20Engine",
@@ -519,6 +531,8 @@ const INFO = {
 			title: "Http Server",
 			description:
 				"Developed an HTTP server in Node.js with support for multiple protocols and request types, providing a foundational implementation.",
+			shortDescription:
+				"A HTTP server project with multiple protocols using robust foundational capabilities.",
 			logo: "https://cdn.jsdelivr.net/npm/programming-languages-logos/src/javascript/javascript.png",
 			linkText: "View Project",
 			link: "https://github.com/FieldMarshallObvious/CodeCrafters-HttpServer",
@@ -528,6 +542,8 @@ const INFO = {
 			title: "Python Shell",
 			description:
 				"Built a basic shell in Python, handling various commands and protocols to create a foundational interface.",
+			shortDescription:
+				"A shell interface designed to handle various commands and system protocols comprehensively.",
 			logo: "https://cdn.jsdelivr.net/npm/programming-languages-logos/src/python/python.png",
 			linkText: "View Project",
 			link: "https://github.com/FieldMarshallObvious/codecrafters-shell-python",

@@ -20,6 +20,7 @@ import Languages from "../components/homepage/languages";
 const Homepage = () => {
 	const [stayLogo, setStayLogo] = useState(false);
 	const [mobileSize, setMobileSize] = useState(false);
+	const [smallSize, setSmallSize] = useState(false);
 	const [logoSize, setLogoSize] = useState(80);
 	const [oldLogoSize, setOldLogoSize] = useState(80);
 
@@ -29,7 +30,8 @@ const Homepage = () => {
 
 	useEffect(() => {
 		const checkWindowWidth = () => {
-			setMobileSize(window.innerWidth <= 490);
+			setMobileSize(window.innerWidth <= 600);
+			setSmallSize(window.innerWidth <= 440);
 		};
 
 		checkWindowWidth();
@@ -114,8 +116,24 @@ const Homepage = () => {
 
 					<div className="homepage-container">
 						<div className="homepage-first-area">
+							{smallSize ? (
+								<div className="homepage-image-wrapper">
+									<img
+										src="noah_sitting.png"
+										alt="about"
+										className="homepage-image"
+									/>
+								</div>
+							) : (
+								<></>
+							)}
 							<div className="homepage-first-area-left-side">
-								<div className="title homepage-title">
+								<div
+									className="title homepage-title"
+									style={
+										mobileSize ? { lineHeight: "50px" } : {}
+									}
+								>
 									{INFO.homepage.title}
 								</div>
 
@@ -124,17 +142,21 @@ const Homepage = () => {
 								</div>
 							</div>
 
-							<div className="homepage-first-area-right-side">
-								<div className="homepage-image-container">
-									<div className="homepage-image-wrapper">
-										<img
-											src="noah_sitting.png"
-											alt="about"
-											className="homepage-image"
-										/>
+							{!smallSize ? (
+								<div className="homepage-first-area-right-side">
+									<div className="homepage-image-container">
+										<div className="homepage-image-wrapper">
+											<img
+												src="noah_sitting.png"
+												alt="about"
+												className="homepage-image"
+											/>
+										</div>
 									</div>
 								</div>
-							</div>
+							) : (
+								<></>
+							)}
 						</div>
 
 						<div className="homepage-socials">

@@ -1,7 +1,7 @@
-import React from "react";
+import React, { useRef } from "react";
 import AnimatedCounter from "../../common/animatedCounter";
 import styled from "styled-components";
-import { motion } from "motion/react";
+import { motion, useInView } from "motion/react";
 
 const LanguageBar = styled.div`
 	width: 100%;
@@ -19,6 +19,9 @@ const LanguageProgress = styled.div`
 `;
 
 const LanguageItem = ({ lang, key = `lang_progress`, index = 1 }) => {
+	const ref = useRef(null);
+	const isInView = useInView(ref, { once: true, amount: 1 });
+
 	return (
 		<div key={key} className="mb-4">
 			<div className="d-flex justify-content-between align-items-center">
@@ -34,20 +37,18 @@ const LanguageItem = ({ lang, key = `lang_progress`, index = 1 }) => {
 			</div>
 			<LanguageBar>
 				<motion.div
+					ref={ref}
 					style={{
 						height: "100%",
 						backgroundColor: `${lang.color || "var(--primary-color)"}`,
 						borderRadius: "4px",
+						willChange: "transform",
 					}}
 					initial={{
 						width: 0,
 					}}
-					viewport={{
-						once: true,
-						amount: 1,
-					}}
-					whileInView={{
-						width: `${lang.percentage}%`,
+					animate={{
+						width: isInView ? `${lang.percentage}%` : 0,
 					}}
 					transition={{
 						duration: 0.5,

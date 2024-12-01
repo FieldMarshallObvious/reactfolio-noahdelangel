@@ -103,16 +103,12 @@ const ProjectShowCase = ({
 	sections = [],
 }) => {
 	const [activeTab, setActiveTab] = useState("1");
+	const [changedLayout, setchangedLayout] = useState(false);
 	const [mainLayout, setMainLayout] = useState(false);
 
 	useEffect(() => {
 		const checkWindowWidth = () => {
 			setMainLayout(window.innerWidth > 768);
-			if (window.innerWidth <= 768) {
-				setActiveTab("4");
-			} else if (activeTab == "4") {
-				setActiveTab("1");
-			}
 		};
 
 		checkWindowWidth();
@@ -194,8 +190,8 @@ const ProjectShowCase = ({
 					<Nav tabs style={{ marginBottom: "24px" }}>
 						<NavItem>
 							<StyledNavLink
-								className={activeTab === "4" ? "active" : ""}
-								onClick={() => setActiveTab("4")}
+								className={activeTab === "1" ? "active" : ""}
+								onClick={() => setActiveTab("1")}
 							>
 								<FontAwesomeIcon icon={faBook} />
 								Description
@@ -203,8 +199,8 @@ const ProjectShowCase = ({
 						</NavItem>
 						<NavItem>
 							<StyledNavLink
-								className={activeTab === "1" ? "active" : ""}
-								onClick={() => setActiveTab("1")}
+								className={activeTab === "2" ? "active" : ""}
+								onClick={() => setActiveTab("2")}
 							>
 								<FontAwesomeIcon icon={faLayerGroup} />
 								Tech Stack
@@ -212,8 +208,8 @@ const ProjectShowCase = ({
 						</NavItem>
 						<NavItem>
 							<StyledNavLink
-								className={activeTab === "2" ? "active" : ""}
-								onClick={() => setActiveTab("2")}
+								className={activeTab === "3" ? "active" : ""}
+								onClick={() => setActiveTab("3")}
 							>
 								<FontAwesomeIcon icon={faDiagramProject} />
 								Flow
@@ -221,8 +217,8 @@ const ProjectShowCase = ({
 						</NavItem>
 						<NavItem>
 							<StyledNavLink
-								className={activeTab === "3" ? "active" : ""}
-								onClick={() => setActiveTab("3")}
+								className={activeTab === "4" ? "active" : ""}
+								onClick={() => setActiveTab("4")}
 							>
 								<FontAwesomeIcon icon={faCode} />
 								Languages
@@ -253,7 +249,11 @@ const ProjectShowCase = ({
 						<Col md={5}>
 							<Card
 								className="sticky-top"
-								style={{ top: "2rem" }}
+								style={{
+									top: "2rem",
+									postion: "sticky",
+									zIndex: "1",
+								}}
 							>
 								<CardBody>
 									<Nav tabs>
@@ -345,7 +345,7 @@ const ProjectShowCase = ({
 					</>
 				) : (
 					<TabContent activeTab={activeTab} className="mt-3">
-						<TabPane tabId="4">
+						<TabPane tabId="1">
 							{sections && Array.isArray(sections) ? (
 								sections.map((element) => (
 									<Section key={`${element.title}`}>
@@ -359,19 +359,19 @@ const ProjectShowCase = ({
 								<></>
 							)}
 						</TabPane>
-						<TabPane tabId="1">
+						<TabPane tabId="2">
 							{techStack.map((tech, index) => (
 								<TechItem tech={tech} key={index} />
 							))}
 						</TabPane>
 
-						<TabPane tabId="2">
+						<TabPane tabId="3">
 							<div className="p-3 border rounded">
 								{flowchart}
 							</div>
 						</TabPane>
 
-						<TabPane tabId="3">
+						<TabPane tabId="4">
 							{languages.map((lang, index) => (
 								<LanguageItem
 									lang={lang}

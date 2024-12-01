@@ -5,10 +5,52 @@ import Project from "./project";
 import INFO from "../../data/user";
 
 import "./styles/allProjects.css";
-import { motion, useScroll, useSpring, useTransform } from "motion/react";
+import { motion, useInView } from "motion/react";
+
+const AllProjectItem = ({ project, index, smallLayout, showcase }) => {
+	const ref = useRef(null);
+	const isInView = useInView(ref, { once: true, amount: 0.35 });
+	const linePosition = index % (smallLayout ? 2 : 3);
+
+	return showcase.length == 0 ? (
+		<motion.div
+			key={project.title}
+			ref={ref}
+			style={{ willChange: "transform" }}
+			initial={{ opacity: 0, x: -50 }}
+			animate={{ opacity: isInView ? 1 : 0, x: isInView ? 0 : -50 }}
+			transition={{
+				duration: 0.5,
+				delay: linePosition * 0.2,
+				ease: "easeInOut",
+			}}
+			className="all-projects-project"
+		>
+			<Project
+				logo={project.logo}
+				title={project.title}
+				description={project.description}
+				linkText={project.linkText}
+				link={project.link}
+			/>
+		</motion.div>
+	) : (
+		<div className="all-projects-project">
+			<Project
+				logo={project.logo}
+				title={project.title}
+				description={
+					smallLayout ? project.shortDescription : project.description
+				}
+				linkText={project.linkText}
+				link={project.link}
+			/>
+		</div>
+	);
+};
 
 const AllProjects = ({ showcase = [] }) => {
-	const [projectPerLine, setProjectPerLine] = useState(3);
+	const [smallLayout, setSmallLayout] = useState(false);
 	const containerRef = useRef(null);
 
 	const projectVariants = {
@@ -26,7 +68,7 @@ const AllProjects = ({ showcase = [] }) => {
 
 	useEffect(() => {
 		const checkWindowWidth = () => {
-			setProjectPerLine(window.innerWidth <= 600 ? 2 : 3);
+			setSmallLayout(window.innerWidth <= 600);
 		};
 
 		checkWindowWidth();
@@ -43,39 +85,14 @@ const AllProjects = ({ showcase = [] }) => {
 					if (showcase.length === 0) return true;
 					return showcase.includes(project.title);
 				})
-				.map((project, index) => {
-					const linePosition = index % projectPerLine;
-
-					return showcase.length == 0 ? (
-						<motion.div
-							key={project.title}
-							variants={projectVariants}
-							initial="hidden"
-							whileInView="visible"
-							custom={linePosition}
-							viewport={{ once: true, amount: 0.25 }}
-							className="all-projects-project"
-						>
-							<Project
-								logo={project.logo}
-								title={project.title}
-								description={project.description}
-								linkText={project.linkText}
-								link={project.link}
-							/>
-						</motion.div>
-					) : (
-						<div className="all-projects-project">
-							<Project
-								logo={project.logo}
-								title={project.title}
-								description={project.description}
-								linkText={project.linkText}
-								link={project.link}
-							/>
-						</div>
-					);
-				})}
+				.map((project, index) => (
+					<AllProjectItem
+						project={project}
+						index={index}
+						smallLayout={smallLayout}
+						showcase={showcase}
+					/>
+				))}
 		</div>
 	);
 };

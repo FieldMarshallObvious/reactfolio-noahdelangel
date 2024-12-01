@@ -106,9 +106,7 @@ const NavBar = (props) => {
 
 	useEffect(() => {
 		const checkWindowWidth = () => {
-			setMobileSize(window.innerWidth <= 490);
-			console.log("Window:", window.innerWidth);
-			console.log("Mobile size:", mobileSize);
+			setMobileSize(window.innerWidth <= 600);
 		};
 
 		checkWindowWidth();

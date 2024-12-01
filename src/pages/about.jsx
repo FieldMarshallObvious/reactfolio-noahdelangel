@@ -27,7 +27,7 @@ const About = () => {
 
 	useEffect(() => {
 		const checkWindowWidth = () => {
-			setMobileSize(window.innerWidth <= 490);
+			setMobileSize(window.innerWidth <= 600);
 		};
 
 		checkWindowWidth();
