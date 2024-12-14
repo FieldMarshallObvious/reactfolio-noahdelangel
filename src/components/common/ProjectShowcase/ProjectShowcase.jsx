@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import {
 	Container,
 	Row,
@@ -25,6 +25,7 @@ import styled from "styled-components";
 import "@xyflow/react/dist/style.css";
 import LanguageItem from "./LanguageItem";
 import TechItem from "./TechItem";
+import { motion, useInView } from "motion/react";
 
 const ArticleHeader = styled.div`
 	padding: 3rem 0;
@@ -42,7 +43,6 @@ const ProjectMeta = styled.div`
 
 const StyledNavLink = styled(NavLink)`
 	cursor: pointer;
-	color: var(--secondary-color) !important;
 	display: flex;
 	align-items: center;
 	gap: 0.5rem;
@@ -106,6 +106,9 @@ const ProjectShowCase = ({
 	const [changedLayout, setchangedLayout] = useState(false);
 	const [mainLayout, setMainLayout] = useState(false);
 
+	const navRef = useRef(null);
+	const inView = useInView(navRef, { once: true, amount: "all" });
+
 	useEffect(() => {
 		const checkWindowWidth = () => {
 			setMainLayout(window.innerWidth > 768);
@@ -117,6 +120,29 @@ const ProjectShowCase = ({
 
 		return () => window.removeEventListener("resize", checkWindowWidth);
 	}, []);
+
+	const menuItems = [
+		{
+			tabLocation: "1",
+			icon: faBook,
+			title: "Description",
+		},
+		{
+			tabLocation: "2",
+			icon: faLayerGroup,
+			title: "Tech Stack",
+		},
+		{
+			tabLocation: "3",
+			icon: faDiagramProject,
+			title: "Flow",
+		},
+		{
+			tabLocation: "4",
+			icon: faCode,
+			title: "Languages",
+		},
+	];
 
 	return (
 		<Container className="project-article" style={{}}>
@@ -187,43 +213,63 @@ const ProjectShowCase = ({
 
 			<Row>
 				{!mainLayout ? (
-					<Nav tabs style={{ marginBottom: "24px" }}>
-						<NavItem>
-							<StyledNavLink
-								className={activeTab === "1" ? "active" : ""}
-								onClick={() => setActiveTab("1")}
-							>
-								<FontAwesomeIcon icon={faBook} />
-								Description
-							</StyledNavLink>
-						</NavItem>
-						<NavItem>
-							<StyledNavLink
-								className={activeTab === "2" ? "active" : ""}
-								onClick={() => setActiveTab("2")}
-							>
-								<FontAwesomeIcon icon={faLayerGroup} />
-								Tech Stack
-							</StyledNavLink>
-						</NavItem>
-						<NavItem>
-							<StyledNavLink
-								className={activeTab === "3" ? "active" : ""}
-								onClick={() => setActiveTab("3")}
-							>
-								<FontAwesomeIcon icon={faDiagramProject} />
-								Flow
-							</StyledNavLink>
-						</NavItem>
-						<NavItem>
-							<StyledNavLink
-								className={activeTab === "4" ? "active" : ""}
-								onClick={() => setActiveTab("4")}
-							>
-								<FontAwesomeIcon icon={faCode} />
-								Languages
-							</StyledNavLink>
-						</NavItem>
+					<Nav tabs style={{ marginBottom: "24px" }} ref={navRef}>
+						{menuItems.map((item, index) => (
+							<NavItem key={`nav_${index}`}>
+								<StyledNavLink
+									className={
+										activeTab === `${item.tabLocation}`
+											? "active"
+											: ""
+									}
+									onClick={() =>
+										setActiveTab(`${item.tabLocation}`)
+									}
+									initial={["visible", "active"]}
+								>
+									<motion.div
+										initial={{
+											color: "var(--primary-color)",
+										}}
+										animate={{
+											color: [
+												"var(--primary-color)",
+												"var(--link-color)",
+												"var(--primary-color)",
+											],
+										}}
+										transition={{
+											duration: 0.8,
+											delay: 0.1,
+											times: [0, 0.5, 1],
+											type: "tween",
+										}}
+									>
+										<FontAwesomeIcon icon={item.icon} />
+									</motion.div>
+									<motion.div
+										initial={{
+											color: "var(--primary-color)",
+										}}
+										animate={{
+											color: [
+												"var(--primary-color)",
+												"var(--link-color)",
+												"var(--primary-color)",
+											],
+										}}
+										transition={{
+											duration: 0.8,
+											delay: index * 0.1,
+											times: [0, 0.5, 1],
+											type: "tween",
+										}}
+									>
+										{item.title}
+									</motion.div>
+								</StyledNavLink>
+							</NavItem>
+						))}
 					</Nav>
 				) : (
 					<></>
@@ -257,57 +303,28 @@ const ProjectShowCase = ({
 							>
 								<CardBody>
 									<Nav tabs>
-										<NavItem>
-											<StyledNavLink
-												className={
-													activeTab === "1"
-														? "active"
-														: ""
-												}
-												onClick={() =>
-													setActiveTab("1")
-												}
-											>
-												<FontAwesomeIcon
-													icon={faLayerGroup}
-												/>
-												Tech Stack
-											</StyledNavLink>
-										</NavItem>
-										<NavItem>
-											<StyledNavLink
-												className={
-													activeTab === "2"
-														? "active"
-														: ""
-												}
-												onClick={() =>
-													setActiveTab("2")
-												}
-											>
-												<FontAwesomeIcon
-													icon={faDiagramProject}
-												/>
-												Flow
-											</StyledNavLink>
-										</NavItem>
-										<NavItem>
-											<StyledNavLink
-												className={
-													activeTab === "3"
-														? "active"
-														: ""
-												}
-												onClick={() =>
-													setActiveTab("3")
-												}
-											>
-												<FontAwesomeIcon
-													icon={faCode}
-												/>
-												Languages
-											</StyledNavLink>
-										</NavItem>
+										{menuItems.map((item, index) => (
+											<NavItem key={`nav_${index}`}>
+												<StyledNavLink
+													className={
+														activeTab ===
+														`${item.tabLocation}`
+															? "active"
+															: ""
+													}
+													onClick={() =>
+														setActiveTab(
+															`${item.tabLocation}`,
+														)
+													}
+												>
+													<FontAwesomeIcon
+														icon={item.icon}
+													/>
+													{item.title}
+												</StyledNavLink>
+											</NavItem>
+										))}
 									</Nav>
 
 									<TabContent

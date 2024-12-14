@@ -6,6 +6,7 @@ import INFO from "../../data/user";
 
 import "./styles/allProjects.css";
 import { motion, useInView } from "motion/react";
+import ProjectShowCase from "../common/ProjectShowcase/ProjectShowcase";
 
 const AllProjectItem = ({ project, index, smallLayout, showcase }) => {
 	const ref = useRef(null);
@@ -35,13 +36,17 @@ const AllProjectItem = ({ project, index, smallLayout, showcase }) => {
 			/>
 		</motion.div>
 	) : (
-		<div className="all-projects-project">
+		<div
+			className="all-projects-project"
+			style={{
+				width: "100%",
+				height: "250px",
+			}}
+		>
 			<Project
 				logo={project.logo}
 				title={project.title}
-				description={
-					smallLayout ? project.shortDescription : project.description
-				}
+				description={project.description}
 				linkText={project.linkText}
 				link={project.link}
 			/>
@@ -52,19 +57,6 @@ const AllProjectItem = ({ project, index, smallLayout, showcase }) => {
 const AllProjects = ({ showcase = [] }) => {
 	const [smallLayout, setSmallLayout] = useState(false);
 	const containerRef = useRef(null);
-
-	const projectVariants = {
-		hidden: { opacity: 0, x: -50 },
-		visible: (index) => ({
-			opacity: 1,
-			x: 0,
-			transition: {
-				delay: index * 0.2, // Stagger based on index
-				duration: 0.5,
-				ease: "easeOut",
-			},
-		}),
-	};
 
 	useEffect(() => {
 		const checkWindowWidth = () => {
