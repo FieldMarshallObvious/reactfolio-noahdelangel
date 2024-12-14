@@ -17,10 +17,6 @@ const ReadShowcase = () => {
 	const [past, setPast] = useState("projects");
 	const [mobileSize, setMobileSize] = useState(false);
 
-	useEffect(() => {
-		window.scrollTo(0, 0);
-	}, [id]);
-
 	const mobileLogoStyle = {
 		display: "flex",
 		position: "fixed",
@@ -56,7 +52,7 @@ const ReadShowcase = () => {
 
 	useEffect(() => {
 		window.scrollTo(0, 0);
-	}, [project]);
+	}, []);
 
 	return (
 		<React.Fragment>

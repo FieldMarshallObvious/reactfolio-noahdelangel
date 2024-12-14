@@ -103,11 +103,10 @@ const ProjectShowCase = ({
 	sections = [],
 }) => {
 	const [activeTab, setActiveTab] = useState("1");
-	const [changedLayout, setchangedLayout] = useState(false);
 	const [mainLayout, setMainLayout] = useState(false);
 
 	const navRef = useRef(null);
-	const inView = useInView(navRef, { once: true, amount: "all" });
+	const navInView = useInView(navRef, { once: true, amount: 0.85 });
 
 	useEffect(() => {
 		const checkWindowWidth = () => {
@@ -213,64 +212,78 @@ const ProjectShowCase = ({
 
 			<Row>
 				{!mainLayout ? (
-					<Nav tabs style={{ marginBottom: "24px" }} ref={navRef}>
-						{menuItems.map((item, index) => (
-							<NavItem key={`nav_${index}`}>
-								<StyledNavLink
-									className={
-										activeTab === `${item.tabLocation}`
-											? "active"
-											: ""
-									}
-									onClick={() =>
-										setActiveTab(`${item.tabLocation}`)
-									}
-									initial={["visible", "active"]}
-								>
-									<motion.div
-										initial={{
-											color: "var(--primary-color)",
-										}}
-										animate={{
-											color: [
-												"var(--primary-color)",
-												"var(--link-color)",
-												"var(--primary-color)",
-											],
-										}}
-										transition={{
-											duration: 0.8,
-											delay: 0.1,
-											times: [0, 0.5, 1],
-											type: "tween",
-										}}
+					<div ref={navRef}>
+						<Nav tabs style={{ marginBottom: "24px" }}>
+							{menuItems.map((item, index) => (
+								<NavItem key={`nav_${index}`}>
+									<StyledNavLink
+										className={
+											activeTab === `${item.tabLocation}`
+												? "active"
+												: ""
+										}
+										onClick={() =>
+											setActiveTab(`${item.tabLocation}`)
+										}
+										initial={["visible", "active"]}
 									>
-										<FontAwesomeIcon icon={item.icon} />
-									</motion.div>
-									<motion.div
-										initial={{
-											color: "var(--primary-color)",
-										}}
-										animate={{
-											color: [
-												"var(--primary-color)",
-												"var(--link-color)",
-												"var(--primary-color)",
-											],
-										}}
-										transition={{
-											duration: 0.8,
-											delay: index * 0.1,
-											times: [0, 0.5, 1],
-											type: "tween",
-										}}
-									>
-										{item.title}
-									</motion.div>
-								</StyledNavLink>
-							</NavItem>
-						))}
-					</Nav>
+										<motion.div
+											initial={{
+												color: "var(--primary-color)",
+											}}
+											animate={{
+												color: navInView
+													? [
+															"var(--primary-color)",
+															"var(--link-color)",
+															"var(--primary-color)",
+														]
+													: [
+															"var(--primary-color)",
+															"var(--primary-color)",
+															"var(--primary-color)",
+														],
+											}}
+											transition={{
+												duration: 1.5,
+												delay: 0.1,
+												times: [0, 0.5, 1],
+												type: "tween",
+											}}
+										>
+											<FontAwesomeIcon icon={item.icon} />
+										</motion.div>
+										<motion.div
+											initial={{
+												color: "var(--primary-color)",
+											}}
+											animate={{
+												color: navInView
+													? [
+															"var(--primary-color)",
+															"var(--link-color)",
+															"var(--primary-color)",
+														]
+													: [
+															"var(--primary-color)",
+															"var(--primary-color)",
+															"var(--primary-color)",
+														],
+											}}
+											transition={{
+												duration: 1.5,
+												delay: index * 0.1,
+												times: [0, 0.5, 1],
+												type: "tween",
+											}}
+										>
+											{item.title}
+										</motion.div>
+									</StyledNavLink>
+								</NavItem>
+							))}
+						</Nav>
+					</div>
 				) : (
 					<></>
 				)}
