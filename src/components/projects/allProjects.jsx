@@ -38,10 +38,14 @@ const AllProjectItem = ({ project, index, smallLayout, showcase }) => {
 	) : (
 		<div
 			className="all-projects-project"
-			style={{
-				width: "100%",
-				height: "250px",
-			}}
+			style={
+				smallLayout
+					? {
+							width: "100%",
+							height: "250px",
+						}
+					: {}
+			}
 		>
 			<Project
 				logo={project.logo}
