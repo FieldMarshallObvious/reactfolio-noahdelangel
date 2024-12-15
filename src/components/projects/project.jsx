@@ -24,7 +24,16 @@ const Project = (props) => {
 
 	return (
 		<React.Fragment>
-			<div className="project">
+			<div
+				className="project"
+				style={
+					smallLayout
+						? {
+								height: "250px",
+							}
+						: {}
+				}
+			>
 				<Link
 					to={link}
 					state={

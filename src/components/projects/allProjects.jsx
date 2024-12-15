@@ -75,7 +75,11 @@ const AllProjects = ({ showcase = [] }) => {
 	}, []);
 
 	return (
-		<div ref={containerRef} className="all-projects-container">
+		<div
+			ref={containerRef}
+			className="all-projects-container"
+			style={smallLayout ? { paddingTop: "0px" } : {}}
+		>
 			{INFO.projects
 				.filter((project) => {
 					if (showcase.length === 0) return true;
