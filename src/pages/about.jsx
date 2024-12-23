@@ -11,6 +11,8 @@ import SEO from "../data/seo";
 
 import "./styles/about.css";
 
+import { IoDocumentText } from "react-icons/io5";
+
 const About = () => {
 	const [mobileSize, setMobileSize] = useState(false);
 	const currentSEO = SEO.find((item) => item.page === "about");
@@ -76,6 +78,21 @@ const About = () => {
 								<div className="subtitle about-subtitle">
 									{INFO.about.description}
 								</div>
+
+								<a
+									href={INFO.main.resume}
+									download="noah_del_angel_resume.pdf"
+								>
+									<button className="cv-download-btn">
+										<IoDocumentText
+											style={{
+												marginRight: "5px",
+												marginBottom: "5px",
+											}}
+										/>
+										Resume Download
+									</button>
+								</a>
 							</div>
 
 							<div className="about-left-side">

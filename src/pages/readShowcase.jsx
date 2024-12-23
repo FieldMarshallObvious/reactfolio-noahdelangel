@@ -51,6 +51,7 @@ const ReadShowcase = () => {
 	const project = INFO.projects.find((project) => project.accessor === id);
 
 	useEffect(() => {
+		console.log("Current Scroll Position:", window.scrollY);
 		window.scrollTo(0, 0);
 	}, []);
 
@@ -62,7 +63,7 @@ const ReadShowcase = () => {
 				<meta
 					name="keywords"
 					content={
-						project.keywords?.jjoin(", ") || [
+						project.keywords?.join(", ") || [
 							"software",
 							"engineering",
 							"fullstack",

@@ -111,6 +111,9 @@ const ProjectShowCase = ({
 	useEffect(() => {
 		const checkWindowWidth = () => {
 			setMainLayout(window.innerWidth > 768);
+			if (activeTab === "1" && window.innerWidth > 768) {
+				setActiveTab("2");
+			}
 		};
 
 		checkWindowWidth();
@@ -316,35 +319,40 @@ const ProjectShowCase = ({
 							>
 								<CardBody>
 									<Nav tabs>
-										{menuItems.map((item, index) => (
-											<NavItem key={`nav_${index}`}>
-												<StyledNavLink
-													className={
-														activeTab ===
-														`${item.tabLocation}`
-															? "active"
-															: ""
-													}
-													onClick={() =>
-														setActiveTab(
-															`${item.tabLocation}`,
-														)
-													}
-												>
-													<FontAwesomeIcon
-														icon={item.icon}
-													/>
-													{item.title}
-												</StyledNavLink>
-											</NavItem>
-										))}
+										{menuItems
+											.filter(
+												(item) =>
+													item.tabLocation !== "1",
+											)
+											.map((item, index) => (
+												<NavItem key={`nav_${index}`}>
+													<StyledNavLink
+														className={
+															activeTab ===
+															`${item.tabLocation}`
+																? "active"
+																: ""
+														}
+														onClick={() =>
+															setActiveTab(
+																`${item.tabLocation}`,
+															)
+														}
+													>
+														<FontAwesomeIcon
+															icon={item.icon}
+														/>
+														{item.title}
+													</StyledNavLink>
+												</NavItem>
+											))}
 									</Nav>
 
 									<TabContent
 										activeTab={activeTab}
 										className="mt-3"
 									>
-										<TabPane tabId="1">
+										<TabPane tabId="2">
 											{techStack.map((tech, index) => (
 												<TechItem
 													tech={tech}
@@ -353,13 +361,13 @@ const ProjectShowCase = ({
 											))}
 										</TabPane>
 
-										<TabPane tabId="2">
+										<TabPane tabId="3">
 											<div className="p-3 border rounded">
 												{flowchart}
 											</div>
 										</TabPane>
 
-										<TabPane tabId="3">
+										<TabPane tabId="4">
 											{languages.map((lang, index) => (
 												<LanguageItem
 													lang={lang}
