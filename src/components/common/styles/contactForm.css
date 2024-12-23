@@ -20,6 +20,10 @@
 	color: var(--secondary-color);
 }
 
+.form-input-error {
+	border: 2px solid red !important;
+}
+
 .form-input:focus {
 	border-color: var(--primary-color);
 }

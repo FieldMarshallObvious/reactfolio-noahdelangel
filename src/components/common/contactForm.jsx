@@ -13,15 +13,32 @@ const ContactForm = () => {
 		message: "",
 	});
 
+	const [emailError, setEmailError] = useState(false);
+
+	const validatEmail = (email) => {
+		const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+		return regex.test(email);
+	};
+
 	const handleChange = (e) => {
+		const { name, value } = e.target;
+
 		setFormData({
 			...formData,
 			[e.target.name]: e.target.value,
 		});
+
+		if (name === "email") {
+			setEmailError(!validatEmail(value) && value !== "");
+		}
 	};
 
 	const handleSubmit = (e) => {
 		e.preventDefault();
+		if (!validatEmail(formData.email)) {
+			setEmailError(true);
+			return;
+		}
 		// Handle form submission logic here
 		console.log("Form submitted:", formData);
 	};
@@ -52,12 +69,33 @@ const ContactForm = () => {
 									<input
 										type="email"
 										name="email"
-										className="form-input"
+										className={
+											"form-input " +
+											(emailError
+												? "form-input-error"
+												: "")
+										}
 										placeholder="Your Email"
 										value={formData.email}
 										onChange={handleChange}
 										required
 									/>
+									{emailError ? (
+										<span
+											style={{
+												paddingTop: "3px",
+												paddingLeft: "5px",
+												color: "red",
+												fontFamily:
+													"var(--secondary-font)",
+												fontSize: "11px",
+											}}
+										>
+											Invalid Email
+										</span>
+									) : (
+										<></>
+									)}
 								</div>
 							</Col>
 						</Row>
