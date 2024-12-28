@@ -51,9 +51,15 @@ const ReadShowcase = () => {
 	const project = INFO.projects.find((project) => project.accessor === id);
 
 	useEffect(() => {
-		console.log("Current Scroll Position:", window.scrollY);
-		window.scrollTo(0, 0);
-	}, []);
+		if (project) {
+			requestAnimationFrame(() => {
+				console.log("Current Scroll Position:", window.scrollY);
+				setTimeout(() => {
+					window.scrollTo({ top: 0 });
+				}, 0);
+			});
+		}
+	}, [project, id]);
 
 	return (
 		<React.Fragment>

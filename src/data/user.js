@@ -149,7 +149,7 @@ const INFO = {
 	about: {
 		title: "I'm Noah del Angel, creating innovative software solutions.",
 		description:
-			"Junior level software engineer with hands-on experience across diverse projects and industries, including computer vision, real estate analytics, and digital signage. Skilled in developing solutions that enhance workflow efficiency, optimize deployment, and improve user experience. My GitHub showcases school work alongside innovative projects, and I’m always open to new ideas and collaboration. Experienced with a wide range of technologies, including Node.js, MongoDB, React, Kotlin, TensorFlow, Vertex AI, and AWS, I’m passionate about contributing to impactful, high-quality projects.",
+			"Software engineer with proven experience building solutions across computer vision, real estate analytics, and digital signage. I specialize in developing applications that streamline workflows, optimize deployments, and enhance user experience. My technical expertise spans Node.js, MongoDB, React, Kotlin, TensorFlow, Vertex AI, and AWS. My GitHub portfolio showcases both coursework and innovative personal projects, reflecting my passion for continuous learning and collaboration. I'm eager to contribute my skills to impactful projects that deliver high-quality results.",
 	},
 
 	projects: [
