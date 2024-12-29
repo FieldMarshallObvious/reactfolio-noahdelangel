@@ -379,7 +379,7 @@ const INFO = {
 				],
 				flowchart: (
 					<div style={{ height: "500px", overflow: "hidden" }}>
-						<div style={{ height: "900px" }}>
+						<div style={{ height: "900px", width: "300px" }}>
 							<ReactFlow
 								nodes={signageNodes}
 								edges={signageEdges}
@@ -493,7 +493,7 @@ const INFO = {
 				],
 				flowchart: (
 					<div style={{ height: "500px", overflow: "hidden" }}>
-						<div style={{ height: "800px" }}>
+						<div style={{ height: "800px", width: "300px" }}>
 							<ReactFlow
 								nodes={iceBreakNodes}
 								edges={iceBreakEdges}
