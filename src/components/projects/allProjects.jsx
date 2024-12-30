@@ -6,18 +6,31 @@ import INFO from "../../data/user";
 
 import "./styles/allProjects.css";
 import { motion, useInView } from "motion/react";
-import ProjectShowCase from "../common/ProjectShowcase/ProjectShowcase";
 
-const AllProjectItem = ({ project, index, smallLayout, showcase }) => {
+const AllProjectItem = ({
+	project,
+	index,
+	smallLayout,
+	showcase,
+	setProjectHeights,
+	maxHeight,
+}) => {
 	const ref = useRef(null);
 	const isInView = useInView(ref, { once: true, amount: 0.35 });
 	const linePosition = index % (smallLayout ? 2 : 3);
+
+	useEffect(() => {
+		console.log(`Max Height in item: ${maxHeight}px`);
+	}, [maxHeight]);
 
 	return showcase.length == 0 ? (
 		<motion.div
 			key={project.title}
 			ref={ref}
-			style={{ willChange: "transform" }}
+			style={{
+				willChange: "transform",
+				height: maxHeight > 0 ? `${maxHeight}px` : "fit-content",
+			}}
 			initial={{ opacity: 0, x: -50 }}
 			animate={{ opacity: isInView ? 1 : 0, x: isInView ? 0 : -50 }}
 			transition={{
@@ -28,6 +41,9 @@ const AllProjectItem = ({ project, index, smallLayout, showcase }) => {
 			className="all-projects-project"
 		>
 			<Project
+				index={index}
+				setProjectHeights={setProjectHeights}
+				maxHeight={maxHeight}
 				logo={project.logo}
 				title={project.title}
 				description={project.description}
@@ -41,13 +57,17 @@ const AllProjectItem = ({ project, index, smallLayout, showcase }) => {
 			style={
 				smallLayout
 					? {
-							width: "100%",
+							width: "90%",
 							height: "250px",
+							paddingLeft: "30px",
 						}
 					: {}
 			}
 		>
 			<Project
+				index={index}
+				setProjectHeights={setProjectHeights}
+				maxHeight={250}
 				logo={project.logo}
 				title={project.title}
 				description={project.description}
@@ -60,6 +80,8 @@ const AllProjectItem = ({ project, index, smallLayout, showcase }) => {
 
 const AllProjects = ({ showcase = [] }) => {
 	const [smallLayout, setSmallLayout] = useState(false);
+	const [projectHeights, setProjectHeights] = useState({});
+	const [maxHeight, setMaxHeight] = useState(0);
 	const containerRef = useRef(null);
 
 	useEffect(() => {
@@ -73,6 +95,18 @@ const AllProjects = ({ showcase = [] }) => {
 
 		return () => window.removeEventListener("resize", checkWindowWidth);
 	}, []);
+
+	useEffect(() => {
+		console.log("Project Heights Triggered:", projectHeights);
+		if (Object.keys(projectHeights).length > 0) {
+			const maxHeight = Math.max(...Object.values(projectHeights));
+			setMaxHeight(maxHeight);
+		}
+	}, [projectHeights]);
+
+	useEffect(() => {
+		console.log("New Max Height:", maxHeight);
+	}, [setMaxHeight]);
 
 	return (
 		<div
@@ -91,6 +125,8 @@ const AllProjects = ({ showcase = [] }) => {
 						index={index}
 						smallLayout={smallLayout}
 						showcase={showcase}
+						setProjectHeights={setProjectHeights}
+						maxHeight={maxHeight}
 					/>
 				))}
 		</div>

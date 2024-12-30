@@ -85,7 +85,10 @@ const Projects = () => {
 							feedback.
 						</div>
 
-						<div className="projects-list">
+						<div
+							className="projects-list"
+							style={mobileSize ? { paddingLeft: "20px" } : {}}
+						>
 							<AllProjects />
 						</div>
 					</div>

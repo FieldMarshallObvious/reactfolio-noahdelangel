@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState, useLayoutEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faLink } from "@fortawesome/free-solid-svg-icons";
@@ -6,9 +6,21 @@ import { faLink } from "@fortawesome/free-solid-svg-icons";
 import "./styles/project.css";
 
 const Project = (props) => {
-	const [smallLayout, setSmallLayout] = useState(false);
-	const { logo, title, description, linkText, link } = props;
+	const {
+		logo,
+		title,
+		description,
+		linkText,
+		link,
+		index,
+		setProjectHeights,
+		maxHeight,
+	} = props;
+
+	const ref = useRef(null);
 	const location = useLocation();
+	const [smallLayout, setSmallLayout] = useState(false);
+	const [originalHeight, setOriginalHeight] = useState(0);
 
 	useEffect(() => {
 		const checkWindowWidth = () => {
@@ -22,14 +34,29 @@ const Project = (props) => {
 		return () => window.removeEventListener("resize", checkWindowWidth);
 	}, []);
 
+	useLayoutEffect(() => {
+		if (ref.current && originalHeight == 0) {
+			let projectHeight = ref.current.clientHeight;
+			setOriginalHeight(projectHeight);
+			setProjectHeights((prev) => ({
+				...prev,
+				[`${index}`]: projectHeight,
+			}));
+		}
+	}, [index, setProjectHeights]);
+
 	return (
 		<React.Fragment>
 			<div
+				ref={ref}
 				className="project"
 				style={
 					smallLayout
 						? {
-								height: "250px",
+								height:
+									maxHeight >= 0 && originalHeight >= 0
+										? `${maxHeight}px`
+										: "fit-content",
 							}
 						: {}
 				}
@@ -42,7 +69,18 @@ const Project = (props) => {
 							: undefined
 					}
 				>
-					<div className="project-container">
+					<div
+						className={
+							smallLayout
+								? "project-container-small"
+								: "project-container"
+						}
+						style={{
+							height: "100%",
+							display: "flex",
+							flexDirection: "column",
+						}}
+					>
 						<div className="project-logo">
 							<img src={logo} alt="logo" />
 						</div>
@@ -65,7 +103,7 @@ const Project = (props) => {
 									? {
 											maxHeight: "120px",
 											overflow: "hidden",
-											textOvlow: "ellipsis",
+											textOverflow: "ellipsis",
 										}
 									: {}
 							}
@@ -77,7 +115,7 @@ const Project = (props) => {
 							style={
 								smallLayout
 									? {
-											marginTop: "0",
+											marginTop: "auto",
 										}
 									: {}
 							}

@@ -26,6 +26,10 @@
 	padding: 30px;
 }
 
+.project-container-small {
+	padding: 10px;
+}
+
 .project-logo {
 	width: 30px;
 }
