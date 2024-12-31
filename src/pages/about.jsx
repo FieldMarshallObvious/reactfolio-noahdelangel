@@ -71,7 +71,12 @@ const About = () => {
 					<div className="about-container">
 						<div className="about-main">
 							<div className="about-right-side">
-								<div className="title about-title">
+								<div
+									className="title about-title"
+									style={
+										mobileSize ? { lineHeight: "50px" } : {}
+									}
+								>
 									{INFO.about.title}
 								</div>
 

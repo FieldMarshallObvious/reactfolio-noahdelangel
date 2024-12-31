@@ -2,6 +2,8 @@
 	display: flex;
 	justify-content: left;
 	padding-top: 25px;
+	position: relative;
+	z-index: 999;
 }
 
 .contact-logo {
@@ -33,4 +35,10 @@
 	display: flex;
 	justify-content: flex-start;
 	align-items: center;
+}
+
+@media (max-width: 760px) {
+	.socials-container {
+		margin-top: 20px;
+	}
 }
