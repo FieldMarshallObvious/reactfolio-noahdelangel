@@ -2,6 +2,7 @@ import React, { useRef } from "react";
 import AnimatedCounter from "../../common/animatedCounter";
 import styled from "styled-components";
 import { motion, useInView } from "motion/react";
+import "../../../data/styles.css";
 
 const LanguageBar = styled.div`
 	width: 100%;
@@ -24,7 +25,14 @@ const LanguageItem = ({ lang, key = `lang_progress`, index = 1 }) => {
 
 	return (
 		<div key={key} className="mb-4">
-			<div className="d-flex justify-content-between align-items-center">
+			<div
+				className="d-flex justify-content-between align-items-center"
+				style={{
+					fontFamily: "var(--title-font)",
+					fontWeight: 600,
+					fontStyle: "var(--title-font-style)",
+				}}
+			>
 				<span>{lang.name}</span>
 				<span>
 					<AnimatedCounter

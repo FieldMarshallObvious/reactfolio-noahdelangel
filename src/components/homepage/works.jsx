@@ -10,6 +10,13 @@ const Works = () => {
 		<Card
 			icon={faBriefcase}
 			title="Work"
+			containerStyle={{
+				paddingTop: "20px",
+				paddingBottom: "30px",
+			}}
+			bodyStyle={{
+				paddingTop: "10px",
+			}}
 			body={
 				<div className="works-body">
 					{INFO.work &&

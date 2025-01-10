@@ -9,6 +9,16 @@ const Languages = () => {
 		<Card
 			icon={faCode}
 			title="Languages"
+			containerStyle={{
+				paddingTop: "20px",
+				paddingBottom: "30px",
+			}}
+			headerStyle={{
+				paddingBottom: "0px",
+			}}
+			bodyStyle={{
+				paddingTop: "5px",
+			}}
 			body={
 				INFO.languages &&
 				INFO.languages.map((language_obj) => (

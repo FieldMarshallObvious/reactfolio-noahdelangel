@@ -1,3 +1,5 @@
+@import "../../data/styles.css";
+
 .contact-logo-container {
 	display: flex;
 	justify-content: left;
@@ -15,8 +17,17 @@
 	top: 4vh;
 }
 
+.contact-title {
+	font-family: var(--title-font) !important;
+	font-weight: var(--title-font-weight) !important;
+	font-style: var(--title-font-style) !important;
+}
+
 .contact-subtitle {
 	width: 100% !important;
+	font-family: var(--body-font) !important;
+	font-weight: var(--body-font-weight) !important;
+	font-style: var(--body-font-style) !important;
 }
 
 .contact-container {
@@ -35,6 +46,9 @@
 	display: flex;
 	justify-content: flex-start;
 	align-items: center;
+	font-family: var(--body-font) !important;
+	font-weight: var(--body-font-weight) !important;
+	font-style: var(--body-font-style) !important;
 }
 
 @media (max-width: 760px) {

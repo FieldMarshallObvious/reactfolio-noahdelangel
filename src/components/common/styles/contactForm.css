@@ -1,6 +1,11 @@
+@import "../../../data/styles.css";
+
 .contact-form-body {
 	padding: 20px 0;
 	padding-top: 0px !important;
+	font-family: var(--body-font) !important;
+	font-weight: var(--body-font-weight) !important;
+	font-style: var(--body-font-style) !important;
 }
 
 .form-group {
@@ -44,10 +49,19 @@
 	cursor: pointer;
 	transition: background-color 0.3s ease;
 	width: 100%;
+	font-family: var(--title-font) !important;
+	font-weight: var(--title-font-weight) !important;
+	font-style: var(--title-font-style) !important;
 }
 
 .form-submit-btn:hover {
 	background-color: var(--secondary-color);
+}
+
+.contact-form-body {
+	font-family: var(--body-font) !important;
+	font-weight: var(--body-font-weight) !important;
+	font-style: var(--body-font-style) !important;
 }
 
 @media (max-width: 768px) {

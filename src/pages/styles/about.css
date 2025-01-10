@@ -31,10 +31,16 @@
 
 .about-title {
 	width: 100% !important;
+	font-family: var(--title-font) !important;
+	font-weight: var(--title-font-weight) !important;
+	font-style: var(--title-font-style) !important;
 }
 
 .about-subtitle {
 	width: 80% !important;
+	font-family: var(--body-font) !important;
+	font-weight: var(--body-font-weight) !important;
+	font-style: var(--body-font-style) !important;
 }
 
 .about-left-side {
@@ -66,12 +72,15 @@
 	padding: 12px 24px;
 	border: none;
 	border-radius: 8px;
-	font-size: 14px;
 	font-weight: 600;
 	cursor: pointer;
 	transition: background-color 0.3s ease;
 	width: 80%;
 	margin-top: 40px;
+	font-size: 14px;
+	font-family: var(--title-font) !important;
+	font-weight: var(--title-font-weight) !important;
+	font-style: var(--title-font-style) !important;
 }
 
 .cv-download-btn:hover {
@@ -81,10 +90,16 @@
 .about-socials {
 	padding-top: 50px;
 	padding-bottom: 50px;
+	font-family: var(--title-font) !important;
+	font-weight: var(--title-font-weight) !important;
+	font-style: var(--title-font-style) !important;
 }
 
 .about-socials-mobile {
 	display: none;
+	font-family: var(--title-font) !important;
+	font-weight: var(--title-font-weight) !important;
+	font-style: var(--title-font-style) !important;
 }
 
 @media (max-width: 1024px) {

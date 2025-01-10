@@ -5,6 +5,8 @@
 	display: flex;
 	justify-content: center;
 	align-items: center;
+	position: relative;
+	z-index: 997;
 }
 
 .navbar {
@@ -14,6 +16,9 @@
 	position: fixed;
 	top: 3vh;
 	z-index: 999;
+	font-family: var(--title-font) !important;
+	font-weight: 1000;
+	font-style: var(--title-font-style) !important;
 }
 
 .nav-background {
@@ -38,7 +43,7 @@
 
 .nav-item {
 	font-weight: bold;
-	font-size: 80%;
+	font-size: 85%;
 }
 
 .nav-item.active a {

@@ -1,7 +1,21 @@
+@import "../../data/styles.css";
+
 .projects-logo-container {
 	display: flex;
 	justify-content: left;
 	padding-top: 25px;
+}
+
+.projects-title {
+	font-family: var(--title-font) !important;
+	font-weight: var(--title-font-weight) !important;
+	font-style: var(--title-font-style) !important;
+}
+
+.projects-subtitle {
+	font-family: var(--body-font) !important;
+	font-weight: var(--body-font-weight) !important;
+	font-style: var(--body-font-style) !important;
 }
 
 .projects-logo {

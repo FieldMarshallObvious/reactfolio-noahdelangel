@@ -29,9 +29,26 @@ const TechItem = ({ tech, key = `tech-item` }) => {
 			>
 				<h5>
 					{tech.icon && tech.icon}
-					<span>{tech.name}</span>
+					<span
+						style={{
+							fontFamily: "var(--title-font)",
+							fontWeight: 600,
+							fontStyle: "var(--title-font-style)",
+						}}
+					>
+						{tech.name}
+					</span>
 				</h5>
-				<p className="text-muted mb-0">{tech.description}</p>
+				<p
+					className="text-muted mb-0"
+					style={{
+						fontFamily: "var(--body-font)",
+						fontWeight: "var(--body-font-weight)",
+						fontStyle: "var(--body-font-style)",
+					}}
+				>
+					{tech.description}
+				</p>
 			</TechStackCard>
 		</div>
 	);

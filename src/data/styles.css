@@ -10,6 +10,14 @@
 	/* ------- fonts ------- */
 	--primary-font: "Heebo", sans-serif;
 	--secondary-font: "Roboto", sans-serif;
+
+	--title-font: "Sofia Sans", serif;
+	--title-font-weight: 800;
+	--title-font-style: bolder;
+
+	--body-font: "Lato", serif;
+	--body-font-weight: 400;
+	--body-font-style: normal;
 	/* --------------------- */
 }
 

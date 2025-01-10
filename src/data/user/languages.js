@@ -38,6 +38,7 @@ const LANGAUGES = [
 				style={{
 					color: "#7F52FF",
 					paddingRight: "2px",
+					marginBottom: "3px",
 				}}
 			/>
 		),

@@ -1,4 +1,5 @@
 @import "../../data/styles.css";
+
 .homepage-logo-container {
 	display: flex;
 	justify-content: left;
@@ -20,9 +21,15 @@
 }
 .homepage-title {
 	width: 85% !important;
+	font-family: var(--title-font) !important;
+	font-weight: var(--title-font-weight) !important;
+	font-style: var(--title-font-style) !important;
 }
 .homepage-subtitle {
 	width: 85% !important;
+	font-family: var(--body-font) !important;
+	font-weight: var(--body-font-weight) !important;
+	font-style: var(--body-font-style) !important;
 }
 .homepage-first-area-right-side {
 	display: flex;

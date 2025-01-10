@@ -14,7 +14,7 @@ const ProgressBar = ({ title, filled = 0, max = 10, icon }) => {
 			{title && (
 				<div className="progress-bar-title">
 					{icon && <span className="title-icon">{icon}</span>}
-					<span>{title}</span>
+					<span style={{ paddingLeft: "1.5px" }}>{title}</span>
 				</div>
 			)}
 			<Row className="align-items-center">

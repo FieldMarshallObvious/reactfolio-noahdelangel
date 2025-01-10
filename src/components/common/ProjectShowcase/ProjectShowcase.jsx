@@ -27,6 +27,8 @@ import LanguageItem from "./LanguageItem";
 import TechItem from "./TechItem";
 import { motion, useInView } from "motion/react";
 
+import "../../../data/styles.css";
+
 const ArticleHeader = styled.div`
 	padding: 3rem 0;
 	margin-bottom: 2rem;
@@ -65,6 +67,9 @@ const Section = styled.section`
 const SectionTitle = styled.h3`
 	margin-bottom: 1.5rem;
 	color: var(--primary-color);
+	font-family: var(--title-font) !important;
+	font-weight: 650;
+	font-style: var(--title-font-style) !important;
 `;
 
 const ProjectLinks = styled.div`
@@ -159,7 +164,15 @@ const ProjectShowCase = ({
 							}
 				}
 			>
-				<h1>{title}</h1>
+				<h1
+					style={{
+						fontFamily: "var(--title-font)",
+						fontWeight: 650,
+						fontStyle: "var(--title-font-style)",
+					}}
+				>
+					{title}
+				</h1>
 				{date || duration ? (
 					<ProjectMeta>
 						{date ? (
@@ -188,7 +201,16 @@ const ProjectShowCase = ({
 				) : (
 					<></>
 				)}
-				<p className="lead">{description}</p>
+				<div
+					className="lead"
+					style={{
+						fontFamily: "var(--body-font)",
+						fontWeight: "500",
+						fontStyle: "var(--body-font-style)",
+					}}
+				>
+					{description}
+				</div>
 				<ProjectLinks>
 					{demoLink && (
 						<a
@@ -279,6 +301,13 @@ const ProjectShowCase = ({
 												times: [0, 0.5, 1],
 												type: "tween",
 											}}
+											style={{
+												fontFamily: "var(--title-font)",
+												fontWeight:
+													"var(--title-font-weight)",
+												fontStyle:
+													"var(--title-font-style)",
+											}}
 										>
 											{item.title}
 										</motion.div>
@@ -300,7 +329,17 @@ const ProjectShowCase = ({
 										<SectionTitle>
 											{element.title}
 										</SectionTitle>
-										<p>{element.content}</p>
+										<div
+											style={{
+												fontFamily: "var(--body-font)",
+												fontWeight:
+													"var(--body-font-weight)",
+												fontStyle:
+													"var(--body-font-style)",
+											}}
+										>
+											{element.content}
+										</div>
 									</Section>
 								))
 							) : (
@@ -390,7 +429,17 @@ const ProjectShowCase = ({
 										<SectionTitle>
 											{element.title}
 										</SectionTitle>
-										<p>{element.content}</p>
+										<div
+											style={{
+												fontFamily: "var(--body-font)",
+												fontWeight:
+													"var(--body-font-weight)",
+												fontStyle:
+													"var(--body-font-style)",
+											}}
+										>
+											{element.content}
+										</div>
 									</Section>
 								))
 							) : (

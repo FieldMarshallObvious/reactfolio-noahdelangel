@@ -117,6 +117,10 @@ const ContactForm = () => {
 	return (
 		<Card
 			icon={faEnvelope}
+			cardIconStyle={{
+				marginBottom: "0.2rem",
+				marginRight: "0.2rem",
+			}}
 			title="Contact Form"
 			body={
 				<div className="contact-form-body">
