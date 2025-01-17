@@ -104,20 +104,7 @@ const Project = (props) => {
 						>
 							{title}
 						</div>
-						<div
-							className="project-description"
-							style={
-								smallLayout
-									? {
-											maxHeight: "120px",
-											overflow: "hidden",
-											textOverflow: "ellipsis",
-										}
-									: {}
-							}
-						>
-							{description}
-						</div>
+						<div className="project-description">{description}</div>
 						<div
 							className="project-link"
 							style={
