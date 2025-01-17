@@ -25,17 +25,17 @@ const iceBreakDating = {
 			{
 				title: "Problem Statement",
 				content:
-					"Traditional dating apps face two critical challenges: the anxiety of initiating conversations with strangers and matching algorithms that prioritize superficial metrics over genuine compatibility. Users often struggle with 'cold opens,' leading to low engagement rates and missed connections. Additionally, conventional ranking systems based on popularity or attractiveness metrics can overshadow meaningful personality traits and shared interests, resulting in mismatched connections and unfulfilling user experiences.",
+					"Traditional dating apps faced two critical challenges: the anxiety of initiating conversations with strangers and matching algorithms that prioritized superficial metrics over genuine compatibility. Users often struggled with 'cold opens,' leading to low engagement rates and missed connections. Additionally, conventional ranking systems based on popularity or attractiveness metrics could overshadow meaningful personality traits and shared interests, resulting in mismatched connections and unfulfilling user experiences.",
 			},
 			{
 				title: "Approach",
 				content:
-					"We revolutionized the dating app experience through two key innovations. First, we developed a proprietary compatibility algorithm that focuses exclusively on shared interests and connection patterns, completely eliminating conventional attractiveness-based ranking systems. This algorithm analyzes users' interests, activity patterns, and social graphs to create more meaningful matches. Second, we introduced 'IceBreakers' - interactive mini-games designed for face-to-face video calls. These structured activities help users overcome initial awkwardness and discover genuine connections naturally. The technical architecture combines SwiftUI for smooth native performance with Node.js and Firebase for robust backend operations. We leveraged Google Cloud Platform's advanced services for real-time video processing and facial recognition during IceBreaker sessions, ensuring a seamless and engaging user experience.",
+					"We revolutionized the dating app experience through two key innovations. First, we developed a proprietary compatibility algorithm that focused exclusively on shared interests and connection patterns, completely eliminating conventional attractiveness-based ranking systems. This algorithm analyzed users' interests, activity patterns, and social graphs to create more meaningful matches. Second, we introduced 'IceBreakers' - interactive mini-games designed for face-to-face video calls. These structured activities helped users overcome initial awkwardness and discover genuine connections naturally. The technical architecture combined SwiftUI for smooth native performance with Node.js and Firebase for robust backend operations. We leveraged Google Cloud Platform's advanced services for real-time video processing and facial recognition during IceBreaker sessions, ensuring a seamless and engaging user experience.",
 			},
 			{
 				title: "Technical Architecture",
 				content:
-					"Our platform is built on a sophisticated tech stack designed for scalability and performance. The frontend utilizes SwiftUI for native iOS development, providing fluid animations and responsive user interfaces. The backend infrastructure combines Firebase for real-time data synchronization with custom Node.js microservices deployed on GCP. The system incorporates real-time video processing with WebRTC integration, custom matchmaking algorithms, and comprehensive secure user authentication and data encryption. We've also implemented automated content moderation using machine learning and distributed caching systems to ensure optimal performance across all features.",
+					"Our platform was built on a sophisticated tech stack designed for scalability and performance. The frontend utilized SwiftUI for native iOS development, providing fluid animations and responsive user interfaces. The backend infrastructure combined Firebase for real-time data synchronization with custom Node.js microservices deployed on GCP. The system incorporated real-time video processing with WebRTC integration, custom matchmaking algorithms, and comprehensive secure user authentication and data encryption. We also implemented automated content moderation using machine learning and distributed caching systems to ensure optimal performance across all features.",
 			},
 			{
 				title: "Challenges & Solutions",
@@ -45,7 +45,7 @@ const iceBreakDating = {
 			{
 				title: "Outcome",
 				content:
-					"IceBreak Dating has achieved significant early success, maintaining a daily active user base of 200+ users and facilitating 10-20 quality matches per day. Our unique approach has resulted in a 45% higher user engagement rate compared to industry standards, with users spending an average of 25 minutes per session on the app.\n\nThe platform's architecture has proven highly scalable, maintaining 99.9% uptime while handling increasing user loads. Our matching algorithm has received particularly positive feedback, with 78% of users reporting more meaningful connections compared to traditional dating apps.\n\nThe IceBreakers feature has become our key differentiator, with 85% of users participating in at least one IceBreaker session within their first week, leading to a 60% higher chance of continued conversation compared to standard matches.",
+					"IceBreak Dating achieved significant early success, maintaining a daily active user base of 200+ users and facilitating 10-20 quality matches per day. Our unique approach resulted in a 45% higher user engagement rate compared to industry standards, with users spending an average of 25 minutes per session on the app.\n\nThe platform's architecture proved highly scalable, maintaining 99.9% uptime while handling increasing user loads. Our matching algorithm received particularly positive feedback, with 78% of users reporting more meaningful connections compared to traditional dating apps.\n\nThe IceBreakers feature became our key differentiator, with 85% of users participating in at least one IceBreaker session within their first week, leading to a 60% higher chance of continued conversation compared to standard matches.",
 			},
 		],
 		techStack: [
@@ -60,7 +60,7 @@ const iceBreakDating = {
 						}}
 					/>
 				),
-				description: "Handles all on device application Logic",
+				description: "Handled all on device application Logic",
 			},
 			{
 				name: "Google Cloud Platform",
@@ -73,7 +73,7 @@ const iceBreakDating = {
 						}}
 					/>
 				),
-				description: "Platform used to host serverless infastructure",
+				description: "Platform used to host serverless infrastructure",
 			},
 			{
 				name: "Firebase",
@@ -87,7 +87,7 @@ const iceBreakDating = {
 					/>
 				),
 				description:
-					"Database which holds user data, and user interactions",
+					"Database which held user data, and user interactions",
 			},
 		],
 		languages: [

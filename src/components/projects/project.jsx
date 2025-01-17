@@ -14,6 +14,7 @@ const Project = (props) => {
 		link,
 		index,
 		setProjectHeights,
+		windowWidth,
 		maxHeight,
 	} = props;
 
@@ -27,14 +28,21 @@ const Project = (props) => {
 			setSmallLayout(window.innerWidth <= 600);
 		};
 
-		checkWindowWidth();
-
 		window.addEventListener("resize", checkWindowWidth);
+
+		checkWindowWidth();
 
 		return () => window.removeEventListener("resize", checkWindowWidth);
 	}, []);
 
+	useEffect(() => {
+		if (maxHeight == 0) {
+			setOriginalHeight(0);
+		}
+	}, [maxHeight]);
+
 	useLayoutEffect(() => {
+		console.log("Layout effect window width:", windowWidth);
 		if (ref.current && originalHeight == 0) {
 			let projectHeight = ref.current.clientHeight;
 			setOriginalHeight(projectHeight);
@@ -43,7 +51,7 @@ const Project = (props) => {
 				[`${index}`]: projectHeight,
 			}));
 		}
-	}, [index, setProjectHeights]);
+	}, [index, setProjectHeights, windowWidth]);
 
 	return (
 		<React.Fragment>

@@ -25,7 +25,7 @@ const computerVisionDigitalSignage = {
 			{
 				title: "Problem Statement",
 				content:
-					"Design and implement a smart digital signage solution that could detect and analyze viewers in real-time using computer vision, determine viewer demographics (age, gender) and emotional response, dynamically adjust advertising content based on viewer characteristics, integrate with existing digital signage infrastructure, and scale across multiple display devices.",
+					"Design and implement a smart digital signage solution that analyzes viewers in real-time through computer vision. The system will track key viewer characteristics including age, gender, and emotional responses. Based on this viewer analysis, the solution will personalize advertising content dynamically. The system must seamlessly integrate with existing display infrastructure and deploy across a network of digital displays.",
 			},
 			{
 				title: "Approach",
