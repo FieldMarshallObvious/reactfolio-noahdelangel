@@ -20,7 +20,6 @@ import Languages from "../components/homepage/languages";
 const Homepage = () => {
 	const [stayLogo, setStayLogo] = useState(false);
 	const [mobileSize, setMobileSize] = useState(false);
-	const [smallSize, setSmallSize] = useState(false);
 	const [logoSize, setLogoSize] = useState(80);
 	const [oldLogoSize, setOldLogoSize] = useState(80);
 
@@ -31,7 +30,6 @@ const Homepage = () => {
 	useEffect(() => {
 		const checkWindowWidth = () => {
 			setMobileSize(window.innerWidth <= 600);
-			setSmallSize(window.innerWidth <= 440);
 		};
 
 		checkWindowWidth();
