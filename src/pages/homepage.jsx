@@ -116,8 +116,13 @@ const Homepage = () => {
 
 					<div className="homepage-container">
 						<div className="homepage-first-area">
-							{smallSize ? (
-								<div className="homepage-image-wrapper">
+							{mobileSize ? (
+								<div
+									className="homepage-image-wrapper"
+									style={{
+										position: "relative",
+									}}
+								>
 									<img
 										src="noah_sitting.png"
 										alt="about"
@@ -127,11 +132,26 @@ const Homepage = () => {
 							) : (
 								<></>
 							)}
-							<div className="homepage-first-area-left-side">
+							<div
+								className="homepage-first-area-left-side"
+								style={
+									mobileSize
+										? {
+												marginTop: "0",
+											}
+										: {}
+								}
+							>
 								<div
 									className="title homepage-title"
 									style={
-										mobileSize ? { lineHeight: "50px" } : {}
+										mobileSize
+											? {
+													lineHeight: "50px",
+													marginTop: "0",
+													paddingTop: "4vh",
+												}
+											: {}
 									}
 								>
 									{INFO.homepage.title}
@@ -142,7 +162,7 @@ const Homepage = () => {
 								</div>
 							</div>
 
-							{!smallSize ? (
+							{!mobileSize ? (
 								<div className="homepage-first-area-right-side">
 									<div className="homepage-image-container">
 										<div className="homepage-image-wrapper">

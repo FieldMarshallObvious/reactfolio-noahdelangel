@@ -159,16 +159,19 @@
 	}
 }
 
+@media (max-width: 600px) {
+	.homepage-image-wrapper {
+		transform: rotate(0deg);
+		width: 85vw;
+		margin-top: 7vh;
+	}
+}
+
 @media (max-width: 440px) {
 	.homepage-first-area-right-side {
 		display: flex;
 		justify-content: center;
 		width: 100vw;
-	}
-	.homepage-image-wrapper {
-		transform: rotate(0deg);
-		width: 85vw;
-		margin-top: 7vh;
 	}
 	.homepage-first-area-left-side {
 		margin-top: 45vh;
