@@ -160,9 +160,7 @@
 	.about-image-container {
 		width: 80%;
 	}
-}
 
-@media (max-width: 440px) {
 	.about-image-wrapper {
 		transform: rotate(0deg);
 		width: 85vw;

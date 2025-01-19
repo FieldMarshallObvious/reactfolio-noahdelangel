@@ -71,10 +71,33 @@ const About = () => {
 					<div className="about-container">
 						<div className="about-main">
 							<div className="about-right-side">
+								{mobileSize ? (
+									<div
+										className="about-image-container"
+										style={{
+											position: "relative",
+										}}
+									>
+										<div className="about-image-wrapper">
+											<img
+												src="noah_at_desk.jpg"
+												alt="about"
+												className="about-image"
+											/>
+										</div>
+									</div>
+								) : (
+									<></>
+								)}
 								<div
 									className="title about-title"
 									style={
-										mobileSize ? { lineHeight: "50px" } : {}
+										mobileSize
+											? {
+													lineHeight: "50px",
+													marginTop: "-10px",
+												}
+											: {}
 									}
 								>
 									{INFO.about.title}
@@ -101,15 +124,19 @@ const About = () => {
 							</div>
 
 							<div className="about-left-side">
-								<div className="about-image-container">
-									<div className="about-image-wrapper">
-										<img
-											src="noah_at_desk.jpg"
-											alt="about"
-											className="about-image"
-										/>
+								{!mobileSize ? (
+									<div className="about-image-container">
+										<div className="about-image-wrapper">
+											<img
+												src="noah_at_desk.jpg"
+												alt="about"
+												className="about-image"
+											/>
+										</div>
 									</div>
-								</div>
+								) : (
+									<></>
+								)}
 
 								<div className="about-socials">
 									<Socials />
