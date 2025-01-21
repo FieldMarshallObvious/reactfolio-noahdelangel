@@ -13,6 +13,8 @@ const AllProjectItem = ({
 	setProjectHeights,
 	windowWidth,
 	maxHeight,
+	visibleIndices,
+	setVisibleIndices,
 }) => {
 	const ref = useRef(null);
 	const isInView = useInView(ref, { once: true, amount: 0.35 });
@@ -22,8 +24,18 @@ const AllProjectItem = ({
 	const Component = prefersReducedMotion || lowPowerMode ? "div" : motion.div;
 
 	useEffect(() => {
-		console.log(`Max Height in item - window width: ${maxHeight}px`);
-	}, [maxHeight]);
+		if (isInView) {
+			setVisibleIndices((prev) => {
+				const newIndicies = new Set(prev);
+				for (let i = 0; i <= index; i++) {
+					newIndicies.add(i);
+				}
+				return newIndicies;
+			});
+		}
+	}, [isInView]);
+
+	const isVisible = visibleIndices.has(index);
 
 	// Regular project display (no showcase)
 	if (showcase.length === 0) {
@@ -37,7 +49,7 @@ const AllProjectItem = ({
 					minHeight: "250px",
 				}}
 				initial={{ opacity: 0, x: -50 }}
-				animate={{ opacity: isInView ? 1 : 0, x: isInView ? 0 : -50 }}
+				animate={{ opacity: isVisible ? 1 : 0, x: isVisible ? 0 : -50 }}
 				transition={{
 					duration: 0.5,
 					delay: linePosition * 0.2,
@@ -95,6 +107,7 @@ const AllProjects = ({ showcase = [] }) => {
 	const [projectHeights, setProjectHeights] = useState({});
 	const [maxHeight, setMaxHeight] = useState(0);
 	const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+	const [visibleIndices, setVisibleIndices] = useState(new Set());
 	const containerRef = useRef(null);
 	const windowOffset = 100;
 
@@ -145,6 +158,8 @@ const AllProjects = ({ showcase = [] }) => {
 					setProjectHeights={setProjectHeights}
 					windowWidth={windowWidth}
 					maxHeight={maxHeight}
+					visibleIndices={visibleIndices}
+					setVisibleIndices={setVisibleIndices}
 				/>
 			))}
 		</div>
