@@ -4,6 +4,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faLink } from "@fortawesome/free-solid-svg-icons";
 
 import "./styles/project.css";
+import { Col, Row } from "reactstrap";
 
 const Project = (props) => {
 	const {
@@ -16,6 +17,7 @@ const Project = (props) => {
 		setProjectHeights,
 		windowWidth,
 		maxHeight,
+		isShowcase = true,
 	} = props;
 
 	const ref = useRef(null);
@@ -42,9 +44,9 @@ const Project = (props) => {
 	}, [maxHeight]);
 
 	useLayoutEffect(() => {
-		console.log("Layout effect window width:", windowWidth);
 		if (ref.current && originalHeight == 0) {
 			let projectHeight = ref.current.clientHeight;
+			console.log("Project Height:", projectHeight);
 			setOriginalHeight(projectHeight);
 			setProjectHeights((prev) => ({
 				...prev,
@@ -77,65 +79,126 @@ const Project = (props) => {
 							: undefined
 					}
 				>
-					<div
-						className={
-							smallLayout
-								? "project-container-small"
-								: "project-container"
-						}
-						style={{
-							height: "100%",
-							display: "flex",
-							flexDirection: "column",
-						}}
-					>
-						<div className="project-logo">
-							<img src={logo} alt="logo" />
-						</div>
-						<div
-							className="project-title"
-							style={
+					<div style={isShowcase ? {} : { padding: "10px" }}>
+						<Row
+							className={
 								smallLayout
-									? {
-											marginBottom: "0",
-										}
-									: {}
+									? "project-container-small"
+									: "project-container"
 							}
+							style={{
+								height: "100%",
+								...(isShowcase ? {} : { padding: "10px" }),
+							}}
 						>
-							{title}
-						</div>
-						<div className="project-description">{description}</div>
-						<div
-							className="project-link"
-							style={
-								smallLayout
-									? {
-											marginTop: "auto",
-										}
-									: {}
-							}
-						>
-							<div className="project-link-icon">
-								<FontAwesomeIcon icon={faLink} />
-							</div>
-
-							{smallLayout ? (
-								<div
-									className="project-link-text"
+							<Row
+								style={{
+									paddingRight: "3px",
+									paddingLeft: "3px",
+								}}
+							>
+								<Col
+									lg={12}
+									md={12}
+									xs={12}
 									style={{
-										paddingLeft: "10px",
+										paddingLeft: "0px",
+										paddingRight: "0px",
 									}}
 								>
-									{linkText.includes("Read About")
-										? "Read About"
-										: "View Project"}
-								</div>
-							) : (
-								<div className="project-link-text">
-									{linkText}
-								</div>
-							)}
-						</div>
+									<div className="project-logo">
+										<img src={logo} alt="logo" />
+									</div>
+								</Col>
+								<Col
+									lg={12}
+									md={12}
+									xs={12}
+									style={{
+										paddingLeft: "0px",
+										paddingRight: "0px",
+									}}
+								>
+									<div
+										className="project-title"
+										style={
+											smallLayout
+												? {
+														marginBottom: "0",
+													}
+												: {}
+										}
+									>
+										{title}
+									</div>
+								</Col>
+								<Col
+									lg={12}
+									md={12}
+									xs={12}
+									style={{
+										paddingLeft: "0px",
+										paddingRight: "0px",
+									}}
+								>
+									<div className="project-description">
+										{description}
+									</div>
+								</Col>
+							</Row>
+							<Row
+								className="project-link"
+								style={{
+									paddingRight: "3px",
+									paddingLeft: "3px",
+									paddingBottom:
+										isShowcase || smallLayout
+											? undefined
+											: "20px",
+								}}
+							>
+								<Col
+									lg={1}
+									md={1}
+									xs={1}
+									style={{
+										paddingRight: "0px",
+										paddingLeft: "0px",
+									}}
+								>
+									<div className="project-link-icon">
+										<FontAwesomeIcon icon={faLink} />
+									</div>
+								</Col>
+
+								<Col
+									lg={10}
+									md={10}
+									xs={10}
+									style={{
+										paddingRight: "0px",
+										paddingLeft: "0px",
+									}}
+								>
+									{smallLayout ? (
+										<div
+											className="project-link-text"
+											style={{
+												paddingLeft: "10px",
+											}}
+										>
+											{linkText.includes("Read About")
+												? "Read About"
+												: "View Project"}
+										</div>
+									) : (
+										<div className="project-link-text">
+											{linkText}
+										</div>
+									)}
+								</Col>
+							</Row>
+						</Row>
 					</div>
 				</Link>
 			</div>

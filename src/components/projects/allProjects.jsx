@@ -67,6 +67,7 @@ const AllProjectItem = ({
 					description={project.description}
 					linkText={project.linkText}
 					link={project.link}
+					isShowcase={false}
 				/>
 			</Component>
 		);
@@ -91,7 +92,6 @@ const AllProjectItem = ({
 				index={index}
 				setProjectHeights={setProjectHeights}
 				windowWidth={windowWidth}
-				maxHeight={maxHeight}
 				logo={project.logo}
 				title={project.title}
 				description={project.description}
@@ -155,6 +155,7 @@ const AllProjects = ({ showcase = [] }) => {
 					index={index}
 					smallLayout={smallLayout}
 					showcase={showcase}
+					projectHeights={projectHeights}
 					setProjectHeights={setProjectHeights}
 					windowWidth={windowWidth}
 					maxHeight={maxHeight}
