@@ -78,8 +78,17 @@ const Project = (props) => {
 							? { from: location.pathname }
 							: undefined
 					}
+					style={{
+						height: "100%",
+						display: "inline-block",
+					}}
 				>
-					<div style={isShowcase ? {} : { padding: "10px" }}>
+					<div
+						style={{
+							...(isShowcase ? {} : { padding: "10px" }),
+							height: "100%",
+						}}
+					>
 						<Row
 							className={
 								smallLayout
@@ -155,6 +164,9 @@ const Project = (props) => {
 										isShowcase || smallLayout
 											? undefined
 											: "20px",
+									...(maxHeight >= 0 && originalHeight >= 0
+										? { marginTop: "auto" }
+										: {}),
 								}}
 							>
 								<Col
