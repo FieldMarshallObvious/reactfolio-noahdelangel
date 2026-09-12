@@ -1,0 +1,14 @@
+/* Fonts are self-hosted via next/font in _app.js — no remote font request. */
+@import "../data/styles.css";
+
+body {
+	margin: 0;
+	font-family: var(--primary-font);
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
+
+code {
+	font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+		monospace;
+}

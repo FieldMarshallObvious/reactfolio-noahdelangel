@@ -1,4 +1,4 @@
-:root {
+.root {
 	/* ------- colors ------- */
 	--primary-color: #27272a;
 	--secondary-color: #65656d;
@@ -8,21 +8,21 @@
 	/* ---------------------- */
 
 	/* ------- fonts ------- */
-	--primary-font: "Heebo", sans-serif;
-	--secondary-font: "Roboto", sans-serif;
+	/* All four families are self-hosted by next/font (see _app.js). */
+	--primary-font: var(--font-heebo), sans-serif;
+	--secondary-font: var(--font-roboto), sans-serif;
 
-	--title-font: "Sofia Sans", serif;
+	--title-font: var(--font-sofia-sans);
 	--title-font-weight: 800;
 	--title-font-style: bolder;
 
-	--body-font: "Lato", serif;
+	--body-font: var(--font-lato-latin);
 	--body-font-weight: 400;
 	--body-font-style: normal;
 	/* --------------------- */
 }
 
-html,
-body {
+.container {
 	max-width: 100%;
 	overflow-x: hidden;
 	background-color: #fdfdfd;

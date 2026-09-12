@@ -1,0 +1,63 @@
+@import "../../../data/styles.css";
+
+.footer {
+	display: flex;
+	padding-top: 25px;
+	margin-top: 50px;
+	padding-bottom: 25px;
+	align-items: center;
+}
+
+.footerLinks,
+.footerCredits {
+	flex-basis: 50%;
+}
+
+.footerLinks {
+	margin-left: -40px;
+}
+
+.footerNavLinkList {
+	display: flex;
+	list-style: none;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.footerNavLinkItem {
+	font-weight: bold;
+	font-size: 80%;
+}
+
+.footerNavLinkList a {
+	text-decoration: none;
+	color: var(--secondary-color);
+}
+
+.footerNavLinkList a:hover {
+	color: var(--link-color);
+}
+
+.footerCreditsText {
+	justify-content: flex-end;
+	color: var(--tertiary-color);
+	font-size: 14px;
+	text-align: right;
+}
+
+@media (max-width: 600px) {
+	.footer {
+		flex-direction: column;
+		height: 85px;
+	}
+
+	.footerLinks {
+		display: flex;
+		width: 100%;
+		justify-content: center;
+	}
+
+	.footerNavLinkList {
+		width: 100%;
+	}
+}

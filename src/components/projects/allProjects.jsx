@@ -1,9 +1,12 @@
+"use client";
+
 import React, { useEffect, useRef, useState } from "react";
 import Project from "./project";
 import INFO from "../../data/user";
-import "./styles/allProjects.css";
+import styles from "./styles/allProjects.module.css";
 import { motion, useInView, useReducedMotion } from "motion/react";
 import useLowPowerMode from "../utils/useLowPowerMode";
+import { useIsMobile, useWindowWidth } from "../utils/useMediaQuery";
 
 const AllProjectItem = ({
 	project,
@@ -55,7 +58,7 @@ const AllProjectItem = ({
 					delay: linePosition * 0.2,
 					ease: "easeInOut",
 				}}
-				className="all-projects-project"
+				className={styles.project}
 			>
 				<Project
 					index={index}
@@ -76,7 +79,7 @@ const AllProjectItem = ({
 	// Showcase project display
 	return (
 		<div
-			className="all-projects-project"
+			className={styles.project}
 			style={
 				smallLayout
 					? {
@@ -103,34 +106,21 @@ const AllProjectItem = ({
 };
 
 const AllProjects = ({ showcase = [] }) => {
-	const [smallLayout, setSmallLayout] = useState(false);
+	const smallLayout = useIsMobile();
 	const [projectHeights, setProjectHeights] = useState({});
 	const [maxHeight, setMaxHeight] = useState(0);
-	const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+	// Only remeasure once the viewport moves by 100px, so dragging a window
+	// edge doesn't retrigger the card-height pass on every frame.
+	const windowWidth = useWindowWidth(100);
 	const [visibleIndices, setVisibleIndices] = useState(new Set());
 	const containerRef = useRef(null);
-	const windowOffset = 100;
 
+	// A width change invalidates the cached card heights.
 	useEffect(() => {
-		const checkWindowWidth = () => {
-			let windowInnerWidth = window.innerWidth;
-			const widthDifference = Math.abs(windowWidth - windowInnerWidth);
-
-			if (widthDifference >= windowOffset) {
-				console.log("Set window width:", windowInnerWidth);
-				setWindowWidth(windowInnerWidth);
-				setMaxHeight(0);
-			}
-			setSmallLayout(windowInnerWidth <= 600);
-		};
-
-		window.addEventListener("resize", checkWindowWidth);
-		checkWindowWidth();
-		return () => window.removeEventListener("resize", checkWindowWidth);
+		setMaxHeight(0);
 	}, [windowWidth]);
 
 	useEffect(() => {
-		console.log("Project Heights Triggered:", projectHeights);
 		if (Object.keys(projectHeights).length > 0) {
 			const maxHeight = Math.max(...Object.values(projectHeights));
 			setMaxHeight(maxHeight);
@@ -145,7 +135,7 @@ const AllProjects = ({ showcase = [] }) => {
 	return (
 		<div
 			ref={containerRef}
-			className="all-projects-container"
+			className={styles.container}
 			style={smallLayout ? { paddingTop: "0px" } : {}}
 		>
 			{filteredProjects.map((project, index) => (

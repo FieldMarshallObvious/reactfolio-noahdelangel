@@ -1,35 +1,37 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useRef } from "react";
 import { Row, Col } from "reactstrap";
 import { motion, useInView } from "motion/react";
-
-import "./styles/progressBar.css";
 import AnimatedCounter from "../common/animatedCounter";
+import styles from "./styles/progressBar.module.css";
 
 const ProgressBar = ({ title, filled = 0, max = 10, icon }) => {
 	const ref = useRef(null);
 	const isInView = useInView(ref, { once: true, amount: "some" });
 
 	return (
-		<div ref={ref} className="progress-bar-container">
+		<div ref={ref} className={styles.progressBarContainer}>
 			{title && (
-				<div className="progress-bar-title">
-					{icon && <span className="title-icon">{icon}</span>}
+				<div className={styles.progressBarTitle}>
+					{icon && <span className={styles.titleIcon}>{icon}</span>}
 					<span style={{ paddingLeft: "1.5px" }}>{title}</span>
 				</div>
 			)}
 			<Row className="align-items-center">
 				<Col md={10}>
 					<div
-						className="progress-bar-boxes"
+						className={styles.progressBarBoxes}
 						style={{ paddingRight: "0px" }}
 					>
 						{[...Array(max)].map((_, i) => (
-							<div key={i} className="progress-box-container">
+							<div
+								key={i}
+								className={styles.progressBoxContainer}
+							>
 								<motion.div
-									className={`progress-box ${
+									className={`${styles.progressBox} ${
 										i < filled
-											? "progress-box-filled"
-											: "progress-box-empty"
+											? styles.progressBoxFilled
+											: styles.progressBoxEmpty
 									}`}
 									initial={{ width: 0, zIndex: 500 }}
 									animate={{
@@ -46,9 +48,7 @@ const ProgressBar = ({ title, filled = 0, max = 10, icon }) => {
 									}}
 								/>
 								<div
-									className={
-										"progress-box progress-box-empty"
-									}
+									className={`${styles.progressBox} ${styles.progressBoxEmpty}`}
 									style={{ zIndex: 1 }}
 								/>
 							</div>
@@ -57,11 +57,11 @@ const ProgressBar = ({ title, filled = 0, max = 10, icon }) => {
 				</Col>
 				<Col md={2}>
 					<span
-						className="progress-text"
+						className={styles.progressText}
 						style={{ paddingLeft: "0px" }}
 					>
 						<AnimatedCounter
-							className="filled"
+							className={styles.filled}
 							from={0}
 							to={filled}
 						/>

@@ -1,8 +1,8 @@
+// Card.jsx
 import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Row, Col } from "reactstrap";
-
-import "./styles/card.css";
+import styles from "./styles/card.module.css";
 
 const Card = (props) => {
 	const {
@@ -17,29 +17,25 @@ const Card = (props) => {
 	} = props;
 
 	return (
-		<div className="card" style={cardStyle ? cardStyle : {}}>
-			<div
-				className="card-container"
-				style={containerStyle ? containerStyle : {}}
-			>
-				<div
-					className="card-header"
-					style={headerStyle ? headerStyle : {}}
-				>
+		<div className={styles.card} style={cardStyle}>
+			<div className={styles.cardContainer} style={containerStyle}>
+				<div className={styles.cardHeader} style={headerStyle}>
 					<Row
-						className="d-flex align-items-center mx-0"
-						style={{ width: "100%", marginTop: "0" }}
+						className={`d-flex align-items-center mx-0 ${styles.headerRow}`}
 					>
 						<Col className="d-flex align-items-center p-0">
-							<div className="card-icon" style={cardIconStyle}>
+							<div
+								className={styles.cardIcon}
+								style={cardIconStyle}
+							>
 								<FontAwesomeIcon icon={icon} />
 							</div>
-							<div className="card-title">{title}</div>
+							<div className={styles.cardTitle}>{title}</div>
 						</Col>
-					</Row>{" "}
+					</Row>
 				</div>
-				<div className="card-body" style={bodyStyle ? bodyStyle : {}}>
-					<div className="card-text">{body}</div>
+				<div className={styles.cardBody} style={bodyStyle}>
+					<div className={styles.cardText}>{body}</div>
 				</div>
 			</div>
 		</div>

@@ -6,7 +6,7 @@ import {
 } from "../../../components/projects/flowcharts/llmProspecting";
 import { SiMysql } from "react-icons/si";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { Background, ReactFlow } from "reactflow";
+import Flowchart from "../../../components/projects/flowcharts/flowchart";
 
 const llmScraper = {
 	title: "Automated Prospecting with LLM's",
@@ -105,13 +105,7 @@ const llmScraper = {
 			{ name: "JavaScript", percentage: 25 },
 			{ name: "MySQL", percentage: 10 },
 		],
-		flowchart: (
-			<div style={{ height: "500px" }}>
-				<ReactFlow nodes={llmNodes} edges={llmEdges} fitView>
-					<Background />
-				</ReactFlow>
-			</div>
-		),
+		flowchart: <Flowchart nodes={llmNodes} edges={llmEdges} fitView />,
 	},
 };
 

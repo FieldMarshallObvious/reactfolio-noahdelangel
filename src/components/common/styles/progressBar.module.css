@@ -1,0 +1,65 @@
+@import "../../../data/styles.css";
+
+.progressBarContainer {
+	width: 100%;
+}
+
+.progressBarTitle {
+	display: flex;
+	align-items: center;
+	margin-top: 0.5rem;
+	font-size: 1.055rem;
+	font-family: var(--title-font) !important;
+	font-weight: var(--title-font-weight) !important;
+	font-style: var(--title-font-style) !important;
+}
+
+.titleIcon {
+	font-size: 1.2em;
+}
+
+.progressBarBoxes {
+	display: flex;
+	gap: 0.25rem;
+}
+
+.progressBoxContainer {
+	display: grid;
+	height: 0.9rem;
+	flex: 1 1 0%;
+	border-radius: 0.25rem;
+}
+
+.progressBox {
+	height: 0.9rem;
+	flex: 1 1 0%;
+	border-radius: 0.25rem;
+	transform-origin: center;
+}
+
+.progressBoxFilled {
+	grid-row: 1;
+	grid-column: 1;
+	background-color: var(--link-color);
+	transition: all 0.5s ease-out;
+	z-index: 1;
+}
+
+.progressBoxEmpty {
+	grid-row: 1;
+	grid-column: 1;
+	background-color: #e5e7eb;
+}
+
+.progressText {
+	font-size: 1rem;
+	padding-left: 20px;
+	color: var(--secondary-color);
+	font-family: var(--title-font) !important;
+	font-weight: var(--title-font-weight) !important;
+	font-style: var(--title-font-style) !important;
+}
+
+.progressText .filled {
+	color: var(--link-color) !important;
+}

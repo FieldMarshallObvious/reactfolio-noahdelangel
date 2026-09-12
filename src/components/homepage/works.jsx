@@ -1,8 +1,9 @@
 import React from "react";
+import Image from "next/image";
 import { Row, Col } from "reactstrap";
 import { faBriefcase } from "@fortawesome/free-solid-svg-icons";
 import Card from "../common/card";
-import "./styles/works.css";
+import styles from "./styles/works.module.css";
 import INFO from "../../data/user";
 
 const Works = () => {
@@ -18,11 +19,11 @@ const Works = () => {
 				paddingTop: "10px",
 			}}
 			body={
-				<div className="works-body">
+				<div className={styles.worksBody}>
 					{INFO.work &&
 						INFO.work.map((work_obj, index) => (
 							<Row
-								className="work"
+								className={styles.work}
 								key={index}
 								style={{
 									...(index === INFO.work.length - 1
@@ -33,21 +34,24 @@ const Works = () => {
 								<Col
 									xs={3}
 									md={2}
-									className="work-image-container"
+									className={styles.workImageContainer}
 								>
-									<img
+									<Image
 										src={work_obj.icon_location}
 										alt={work_obj.icon_alt}
-										className="work-image"
+										className={styles.workImage}
+										width={40}
+										height={40}
+										sizes="40px"
 									/>
 								</Col>
 								<Col xs={9} md={10} style={{ paddingLeft: 0 }}>
-									<Row className="work-header">
+									<Row className={styles.workHeader}>
 										<Col
 											xs={12}
 											md={work_obj?.title_col || 7}
 										>
-											<div className="work-title">
+											<div className={styles.workTitle}>
 												{work_obj.title}
 											</div>
 										</Col>
@@ -55,14 +59,18 @@ const Works = () => {
 											xs={12}
 											md={work_obj?.duration_col || 5}
 										>
-											<div className="work-duration">
+											<div
+												className={styles.workDuration}
+											>
 												{work_obj.duration}
 											</div>
 										</Col>
 									</Row>
 									<Row>
 										<Col xs={12}>
-											<div className="work-subtitle">
+											<div
+												className={styles.workSubtitle}
+											>
 												{work_obj.subtitle}
 											</div>
 										</Col>
