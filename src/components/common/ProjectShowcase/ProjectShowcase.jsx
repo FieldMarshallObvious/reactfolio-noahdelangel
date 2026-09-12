@@ -47,9 +47,14 @@ const ProjectShowCase = ({
 
 	useEffect(() => {
 		const checkWindowWidth = () => {
-			setMainLayout(window.innerWidth > 768);
-			if (activeTab === "1" && window.innerWidth > 768) {
-				setActiveTab("2");
+			const isWide = window.innerWidth > 768;
+			setMainLayout(isWide);
+			// Description has no tab on desktop — those sections move into the
+			// left column — so only redirect away from it, and use a functional
+			// update: reading activeTab here would capture its first render
+			// value and reset the reader's tab on every resize.
+			if (isWide) {
+				setActiveTab((tab) => (tab === "1" ? "2" : tab));
 			}
 		};
 
@@ -229,7 +234,7 @@ const ProjectShowCase = ({
 						<Col md={5}>
 							<Card className={`sticky-top ${styles.stickyCard}`}>
 								<CardBody>
-									<Nav tabs>
+									<Nav tabs className={styles.stickyNavTabs}>
 										{menuItems
 											.filter(
 												(item) =>

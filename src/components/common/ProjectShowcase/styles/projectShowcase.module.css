@@ -110,3 +110,19 @@
 .navTabs {
 	margin-bottom: 24px;
 }
+
+/*
+ * Desktop tab bar. It lives in a narrow sticky column (md=5, roughly 350px of
+ * usable width inside the card), where three tabs at Bootstrap's default
+ * nav-link padding total just over the available space and wrap "Languages"
+ * onto a second row. Tighten the padding and keep them on one line.
+ */
+.stickyNavTabs {
+	flex-wrap: nowrap;
+}
+
+.stickyNavTabs .navLink {
+	padding-left: 0.6rem;
+	padding-right: 0.6rem;
+	white-space: nowrap;
+}
