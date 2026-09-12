@@ -1,5 +1,4 @@
 /* Homepage.module.css */
-@import "../data/styles.css";
 
 .container {
 	padding-top: 25px;
@@ -46,6 +45,9 @@
 
 .imageWrapper {
 	position: absolute;
+	/* Without offsets this box has no size, so the image sized itself off its
+	   intrinsic dimensions and overflowed onto the text below. */
+	inset: 0;
 	overflow: hidden;
 	border-radius: 10%;
 	transform: rotate(3deg);

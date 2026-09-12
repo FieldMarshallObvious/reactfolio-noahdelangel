@@ -3,7 +3,8 @@
 
 body {
 	margin: 0;
-	font-family: var(--primary-font);
+	/* font-family lives on .site in data/styles.css — the next/font variables
+	   are scoped to that element and are not visible on body. */
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
 }

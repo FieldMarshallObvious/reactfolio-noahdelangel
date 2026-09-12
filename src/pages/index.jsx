@@ -48,9 +48,10 @@ export default function Homepage() {
 								<div className={styles.imageWrapper}>
 									<Image
 										src="/noah_sitting.png"
-										alt="about"
-										width={400}
-										height={400}
+										alt={`${INFO.main.name} sitting`}
+										width={456}
+										height={531}
+										sizes="(max-width: 1022px) 270px, 370px"
 										priority
 									/>
 								</div>
