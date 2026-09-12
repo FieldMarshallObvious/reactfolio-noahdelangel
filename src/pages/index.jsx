@@ -51,7 +51,7 @@ export default function Homepage() {
 										alt={`${INFO.main.name} sitting`}
 										width={456}
 										height={531}
-										sizes="(max-width: 1022px) 270px, 370px"
+										sizes="(max-width: 600px) 400px, (max-width: 1022px) 270px, 370px"
 										priority
 									/>
 								</div>

@@ -35,19 +35,23 @@
 	align-items: center;
 }
 
+/*
+ * The image sits in normal flow and keeps its natural aspect ratio.
+ *
+ * This used to be a fixed-height square with an absolutely positioned wrapper.
+ * That cannot hold a portrait photo: the image either overflowed the box and
+ * landed on the text below, or object-fit: cover cropped it to a square.
+ * Only the width is set now, so height follows the image.
+ */
 .imageContainer {
 	width: 370px;
-	height: 370px;
-	max-width: 500px;
-	position: relative;
+	max-width: 100%;
 	margin-bottom: 20px;
 }
 
 .imageWrapper {
-	position: absolute;
-	/* Without offsets this box has no size, so the image sized itself off its
-	   intrinsic dimensions and overflowed onto the text below. */
-	inset: 0;
+	display: block;
+	width: 100%;
 	overflow: hidden;
 	border-radius: 10%;
 	transform: rotate(3deg);
@@ -55,8 +59,7 @@
 
 .imageWrapper img {
 	width: 100%;
-	height: 100%;
-	object-fit: cover;
+	height: auto;
 	display: block;
 }
 
@@ -173,7 +176,6 @@
 @media (max-width: 1022px) {
 	.imageContainer {
 		width: 270px;
-		height: 270px;
 	}
 
 	.title {
@@ -181,18 +183,17 @@
 	}
 }
 
-/*
- * The image used to be sized on .imageWrapper and allowed to overflow its
- * container, which is why the text column needed a large margin-top to clear
- * it. The wrapper now fills .imageContainer, so the container carries the
- * size and stays square — a non-square box makes object-fit: cover letterbox
- * this portrait photo.
- */
+/* Stacked layout: the photo spans the content column and is centred. */
 @media (max-width: 600px) {
+	.firstAreaRightSide {
+		justify-content: center;
+	}
+
 	.imageContainer {
-		width: min(85vw, 340px);
-		height: min(85vw, 340px);
-		padding-top: 0;
+		width: 100%;
+		max-width: 400px;
+		margin: 0 auto 20px;
+		padding-top: 20px;
 		padding-bottom: 0;
 	}
 
