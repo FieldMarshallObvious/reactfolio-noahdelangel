@@ -19,6 +19,10 @@
 	display: flex;
 	align-items: center;
 	gap: 0.5rem;
+	/* Without this, Bootstrap's .nav-link default paints inactive tabs link
+	   blue. The compact layout never showed it because its tabs are wrapped in
+	   motion.div elements that set this colour explicitly. */
+	color: var(--primary-color);
 }
 
 .navLink.active {
