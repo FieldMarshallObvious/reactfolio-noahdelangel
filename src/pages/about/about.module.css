@@ -159,12 +159,13 @@
 	}
 
 	.imageContainer {
-		width: 80%;
+		width: 85%;
 	}
 
+	/* Let the container own the width; an 85vw wrapper inside it overflowed. */
 	.imageWrapper {
 		transform: rotate(0deg);
-		width: 85vw;
-		margin-top: 0vh;
+		width: 100%;
+		margin-top: 0;
 	}
 }

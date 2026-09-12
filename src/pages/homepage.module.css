@@ -177,15 +177,27 @@
 	}
 
 	.title {
-		padding-top: 80px;
+		padding-top: 20px;
 	}
 }
 
+/*
+ * The image used to be sized on .imageWrapper and allowed to overflow its
+ * container, which is why the text column needed a large margin-top to clear
+ * it. The wrapper now fills .imageContainer, so the container carries the
+ * size and stays square — a non-square box makes object-fit: cover letterbox
+ * this portrait photo.
+ */
 @media (max-width: 600px) {
+	.imageContainer {
+		width: min(85vw, 340px);
+		height: min(85vw, 340px);
+		padding-top: 0;
+		padding-bottom: 0;
+	}
+
 	.imageWrapper {
 		transform: rotate(0deg);
-		width: 85vw;
-		margin-top: 7vh;
 	}
 }
 
@@ -193,10 +205,7 @@
 	.firstAreaRightSide {
 		display: flex;
 		justify-content: center;
-		width: 100vw;
-	}
-
-	.firstAreaLeftSide {
-		margin-top: 45vh;
+		/* 100vw includes the scrollbar gutter and overflows the page. */
+		width: 100%;
 	}
 }
