@@ -23,9 +23,9 @@ const Contact = () => {
 				keywords={currentSEO.keywords}
 				path="/contact"
 			/>
-			<div className={styles.pageContent}>
+			<div className="page-content">
 				<NavBar active="contact" />
-				<div className={styles.contentWrapper}>
+				<div className="content-wrapper">
 					<div className={styles.logoContainer}>
 						{!mobileSize ? (
 							<div className={styles.logo}>
@@ -38,10 +38,10 @@ const Contact = () => {
 						)}
 					</div>
 					<div className={styles.container}>
-						<div className={styles.title}>
+						<div className={`title ${styles.title}`}>
 							Let&apos;s Get in Touch
 						</div>
-						<div className={styles.subtitle}>
+						<div className={`subtitle ${styles.subtitle}`}>
 							Thank you for your interest in getting in touch with
 							me. I welcome your feedback, questions, and
 							suggestions. If you have a specific question or

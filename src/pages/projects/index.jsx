@@ -35,11 +35,11 @@ const Projects = () => {
 						)}
 					</div>
 					<div className={styles.container}>
-						<div className={styles.title}>
+						<div className={`title ${styles.title}`}>
 							Things I&apos;ve made trying to put my dent in the
 							universe.
 						</div>
-						<div className={styles.subtitle}>
+						<div className={`subtitle ${styles.subtitle}`}>
 							I&apos;ve worked on a variety of projects over the years
 							and I&apos;m proud of the progress I&apos;ve made. Many of
 							these projects are open-source and available for
