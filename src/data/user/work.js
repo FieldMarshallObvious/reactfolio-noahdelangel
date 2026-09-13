@@ -1,10 +1,24 @@
 const WORK = [
 	{
+		icon_location: "/mozilla_corporation_logo.jpg",
+		icon_alt: "Mozilla",
+		title: "Mozilla",
+		subtitle: "Machine Learning Engineer II",
+		duration: "June 2026 - Present",
+	},
+	{
+		icon_location: "/hgs_logo.png",
+		icon_alt: "HGS",
+		title: "HGS",
+		subtitle: "Full Stack Developer & Applied AI Engineer",
+		duration: "April 2025 - June 2026",
+	},
+	{
 		icon_location: "/equity_logo.png",
 		icon_alt: "Equity Sales Finance",
 		title: "Equity Sales Finance",
 		subtitle: "Full Stack Software Engineer",
-		duration: "July 2024 - Present",
+		duration: "July 2024 - April 2025",
 	},
 	{
 		icon_location: "/austin_logo.png",

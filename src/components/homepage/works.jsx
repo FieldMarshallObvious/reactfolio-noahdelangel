@@ -6,6 +6,8 @@ import Card from "../common/card";
 import styles from "./styles/works.module.css";
 import INFO from "../../data/user";
 
+const MAX_LENGTH = 5
+
 const Works = () => {
 	return (
 		<Card
@@ -21,12 +23,12 @@ const Works = () => {
 			body={
 				<div className={styles.worksBody}>
 					{INFO.work &&
-						INFO.work.map((work_obj, index) => (
+						INFO.work.slice(0, MAX_LENGTH).map((work_obj, index) => (
 							<Row
 								className={styles.work}
 								key={index}
 								style={{
-									...(index === INFO.work.length - 1
+									...(index === MAX_LENGTH - 1
 										? { paddingBottom: "0px" }
 										: {}),
 								}}

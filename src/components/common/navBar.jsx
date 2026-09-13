@@ -5,7 +5,7 @@ import styles from "./styles/navBar.module.css";
 const NavBarFullLayout = ({ active }) => {
 	return (
 		<div className={styles.navContainer}>
-			<nav className={styles.navbar}>
+			<nav className={`navbar ${styles.navbar}`}>
 				<div className={styles.navBackground}>
 					<ul className={styles.navList}>
 						<li

@@ -193,8 +193,13 @@
 		width: 100%;
 		max-width: 400px;
 		margin: 0 auto 20px;
-		padding-top: 20px;
+		padding-top: 50px;
 		padding-bottom: 0;
+	}
+
+	.title {
+		margin-top: 5px;
+		padding-top: 10px;
 	}
 
 	.imageWrapper {

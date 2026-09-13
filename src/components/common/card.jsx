@@ -17,11 +17,15 @@ const Card = (props) => {
 	} = props;
 
 	return (
-		<div className={styles.card} style={cardStyle}>
+		<div className={`card ${styles.card}`} style={cardStyle}>
 			<div className={styles.cardContainer} style={containerStyle}>
-				<div className={styles.cardHeader} style={headerStyle}>
+				<div
+					className={`card-header ${styles.cardHeader}`}
+					style={headerStyle}
+				>
 					<Row
-						className={`d-flex align-items-center mx-0 ${styles.headerRow}`}
+						className="d-flex align-items-center mx-0"
+						style={{ width: "100%", marginTop: 0 }}
 					>
 						<Col className="d-flex align-items-center p-0">
 							<div
@@ -30,12 +34,17 @@ const Card = (props) => {
 							>
 								<FontAwesomeIcon icon={icon} />
 							</div>
-							<div className={styles.cardTitle}>{title}</div>
+							<div className={`card-title ${styles.cardTitle}`}>
+								{title}
+							</div>
 						</Col>
 					</Row>
 				</div>
-				<div className={styles.cardBody} style={bodyStyle}>
-					<div className={styles.cardText}>{body}</div>
+				<div
+					className={`card-body ${styles.cardBody}`}
+					style={bodyStyle}
+				>
+					<div className="card-text">{body}</div>
 				</div>
 			</div>
 		</div>
