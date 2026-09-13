@@ -2,7 +2,7 @@ import { faSwift } from "@fortawesome/free-brands-svg-icons";
 import { SiGooglecloud } from "react-icons/si";
 import { RiFirebaseFill } from "react-icons/ri";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { Background, Controls, ReactFlow } from "reactflow";
+import Flowchart from "../../../components/projects/flowcharts/flowchart";
 import {
 	iceBreakEdges,
 	iceBreakNodes,
@@ -95,24 +95,19 @@ const iceBreakDating = {
 			{ name: "JavaScript", percentage: 40 },
 		],
 		flowchart: (
-			<div style={{ height: "500px", overflow: "hidden" }}>
-				<div style={{ height: "800px", width: "300px" }}>
-					<ReactFlow
-						nodes={iceBreakNodes}
-						edges={iceBreakEdges}
-						defaultViewport={{ x: 60, y: 0, zoom: 0.5 }}
-						edgesUpdatable={false}
-						edgesFocusable={false}
-						nodesDraggable={false}
-						nodesConnectable={false}
-						nodesFocusable={false}
-						elementsSelectable={false}
-					>
-						<Background />
-						<Controls position="top-right" />
-					</ReactFlow>
-				</div>
-			</div>
+			<Flowchart
+				nodes={iceBreakNodes}
+				edges={iceBreakEdges}
+				controls
+				innerStyle={{ height: "800px", width: "300px" }}
+				defaultViewport={{ x: 60, y: 0, zoom: 0.5 }}
+				edgesUpdatable={false}
+				edgesFocusable={false}
+				nodesDraggable={false}
+				nodesConnectable={false}
+				nodesFocusable={false}
+				elementsSelectable={false}
+			/>
 		),
 	},
 	get link() {

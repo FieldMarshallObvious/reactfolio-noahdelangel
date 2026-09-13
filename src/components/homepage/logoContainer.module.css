@@ -1,0 +1,25 @@
+.logoContainer {
+	display: flex;
+	justify-content: left;
+	align-items: center;
+	padding-top: 130px;
+}
+
+/*
+ * The navbar is position:fixed at top:3vh and about 56px tall, so it occupies
+ * roughly y=27..83. The original CSS dropped this padding straight to 0 below
+ * 1022px, which left the in-flow logo rendering underneath it all the way down
+ * to the mobile breakpoint. Keep enough room to clear the navbar instead.
+ */
+@media (max-width: 1022px) {
+	.logoContainer {
+		padding-top: 100px;
+	}
+}
+
+/* At mobile the logo is position:fixed and out of flow, so it needs no room. */
+@media (max-width: 600px) {
+	.logoContainer {
+		padding-top: 0;
+	}
+}

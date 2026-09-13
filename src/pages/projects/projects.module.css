@@ -1,0 +1,60 @@
+
+.logoContainer {
+	display: flex;
+	justify-content: left;
+	padding-top: 25px;
+}
+
+.title {
+	font-family: var(--title-font) !important;
+	font-weight: var(--title-font-weight) !important;
+	font-style: var(--title-font-style) !important;
+}
+
+.subtitle {
+	font-family: var(--body-font) !important;
+	font-weight: var(--body-font-weight) !important;
+	font-style: var(--body-font-style) !important;
+}
+
+.logo {
+	display: flex;
+	position: fixed;
+	border: 1px solid white;
+	border-radius: 50%;
+	box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.25);
+	top: 4vh;
+	z-index: 999;
+}
+
+.mobileLogo {
+	display: flex;
+	position: fixed;
+	top: 2vh;
+	z-index: 999;
+	border: 1px solid white;
+	border-radius: 50%;
+	box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.25);
+}
+
+.container {
+	display: flex;
+	flex-direction: column;
+	height: 100%;
+	margin: 0;
+	padding-top: 120px;
+}
+
+.list {
+	/* Add any specific styles for the projects list */
+}
+
+@media (max-width: 600px) {
+	.container {
+		padding-top: 60px;
+	}
+
+	.project {
+		width: calc(100% / 2);
+	}
+}

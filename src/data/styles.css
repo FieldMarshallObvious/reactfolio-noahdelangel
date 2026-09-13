@@ -7,23 +7,37 @@
 	--link-color: #14b8a6;
 	/* ---------------------- */
 
-	/* ------- fonts ------- */
-	--primary-font: "Heebo", sans-serif;
-	--secondary-font: "Roboto", sans-serif;
-
-	--title-font: "Sofia Sans", serif;
+	/* ------- type scale ------- */
 	--title-font-weight: 800;
 	--title-font-style: bolder;
 
-	--body-font: "Lato", serif;
 	--body-font-weight: 400;
 	--body-font-style: normal;
-	/* --------------------- */
+	/* -------------------------- */
 }
 
+/* Must not be a ".container" rule: that collides with Bootstrap's grid
+   container, which clamps width to 540/720/960/1140px and adds gutters. */
 html,
 body {
 	max-width: 100%;
 	overflow-x: hidden;
 	background-color: #fdfdfd;
+}
+
+/*
+ * Font families are defined here rather than on :root because the next/font
+ * --font-* variables are set by the class on this same element (see _app.js).
+ * A :root rule sits above that element and would resolve them to nothing.
+ *
+ * Every stack ends in sans-serif: if a face fails to load the page should
+ * degrade to the system sans, not to the default serif.
+ */
+.site {
+	--primary-font: var(--font-heebo), sans-serif;
+	--secondary-font: var(--font-roboto), sans-serif;
+	--title-font: var(--font-sofia-sans), sans-serif;
+	--body-font: var(--font-lato-latin), sans-serif;
+
+	font-family: var(--primary-font);
 }

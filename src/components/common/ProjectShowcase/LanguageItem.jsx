@@ -1,37 +1,16 @@
 import React, { useRef } from "react";
-import AnimatedCounter from "../../common/animatedCounter";
-import styled from "styled-components";
 import { motion, useInView } from "motion/react";
-import "../../../data/styles.css";
+import AnimatedCounter from "../../common/animatedCounter";
+import styles from "./showcaseItems.module.css";
 
-const LanguageBar = styled.div`
-	width: 100%;
-	height: 8px;
-	background-color: var(--secondary-background-color);
-	border-radius: 4px;
-	overflow: hidden;
-	margin-top: 0.5rem;
-`;
-
-const LanguageProgress = styled.div`
-	height: 100%;
-	border-radius: 4px;
-	transition: width 0.3s ease-in-out;
-`;
-
-const LanguageItem = ({ lang, key = `lang_progress`, index = 1 }) => {
+const LanguageItem = ({ lang, index = 1 }) => {
 	const ref = useRef(null);
 	const isInView = useInView(ref, { once: true, amount: 1 });
 
 	return (
-		<div key={key} className="mb-4">
+		<div className="mb-4">
 			<div
-				className="d-flex justify-content-between align-items-center"
-				style={{
-					fontFamily: "var(--title-font)",
-					fontWeight: 600,
-					fontStyle: "var(--title-font-style)",
-				}}
+				className={`d-flex justify-content-between align-items-center ${styles.languageHeader}`}
 			>
 				<span>{lang.name}</span>
 				<span>
@@ -43,7 +22,7 @@ const LanguageItem = ({ lang, key = `lang_progress`, index = 1 }) => {
 					%
 				</span>
 			</div>
-			<LanguageBar>
+			<div className={styles.languageBar}>
 				<motion.div
 					ref={ref}
 					style={{
@@ -52,12 +31,8 @@ const LanguageItem = ({ lang, key = `lang_progress`, index = 1 }) => {
 						borderRadius: "4px",
 						willChange: "transform",
 					}}
-					initial={{
-						width: 0,
-					}}
-					animate={{
-						width: isInView ? `${lang.percentage}%` : 0,
-					}}
+					initial={{ width: 0 }}
+					animate={{ width: isInView ? `${lang.percentage}%` : 0 }}
 					transition={{
 						duration: 0.5,
 						delay: index * 0.1,
@@ -65,7 +40,7 @@ const LanguageItem = ({ lang, key = `lang_progress`, index = 1 }) => {
 						mass: 0.7,
 					}}
 				/>
-			</LanguageBar>
+			</div>
 		</div>
 	);
 };

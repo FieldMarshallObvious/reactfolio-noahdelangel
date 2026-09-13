@@ -1,37 +1,41 @@
+const KEYWORDS = [
+	"Noah del Angel",
+	"software engineer",
+	"full stack developer",
+	"computer vision",
+	"React",
+	"Node.js",
+	"TensorFlow",
+	"AWS",
+];
+
 const SEO = [
 	{
 		page: "home",
 		description:
-			"I am a backend developer with expertise in Node.js. I have experience in building scalable, secure and reliable web applications using various frameworks and technologies.",
-		keywords: ["Tharindu", "Tharindu N", "Tharindu Nayanajith"],
+			"Noah del Angel is a full-stack web and mobile developer focused on computer vision. Experienced with Node.js, React, Kotlin, TensorFlow, Vertex AI, and AWS.",
+		keywords: KEYWORDS,
 	},
 
 	{
 		page: "about",
 		description:
-			"I am a backend developer with expertise in Node.js. I have experience in building scalable, secure and reliable web applications using various frameworks and technologies.",
-		keywords: ["Tharindu", "Tharindu N", "Tharindu Nayanajith"],
-	},
-
-	{
-		page: "articles",
-		description:
-			"Chronological collection of my long-form thoughts on programming, leadership, product design, and more.",
-		keywords: ["Tharindu", "Tharindu N", "Tharindu Nayanajith"],
+			"Software engineer building solutions across computer vision, real estate analytics, and digital signage — applications that streamline workflows, optimize deployments, and improve user experience.",
+		keywords: KEYWORDS,
 	},
 
 	{
 		page: "projects",
 		description:
-			"I've worked on a variety of projects over the years and I'm proud of the progress I've made. Many of these projects are open-source and available for others to explore and contribute to.",
-		keywords: ["Tharindu", "Tharindu N", "Tharindu Nayanajith"],
+			"Projects by Noah del Angel, spanning LLM-driven prospecting automation, computer vision digital signage, plagiarism detection, and systems programming.",
+		keywords: [...KEYWORDS, "projects", "portfolio", "open source"],
 	},
 
 	{
 		page: "contact",
 		description:
-			"If you're interested in collaborating on a project, feel free to reach out to me. I'm always open to new ideas and opportunities.",
-		keywords: ["Tharindu", "Tharindu N", "Tharindu Nayanajith"],
+			"Get in touch with Noah del Angel about collaboration, engineering roles, or project work.",
+		keywords: [...KEYWORDS, "contact", "hire"],
 	},
 ];
 

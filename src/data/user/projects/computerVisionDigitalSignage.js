@@ -1,7 +1,7 @@
 import { faAws } from "@fortawesome/free-brands-svg-icons";
 import { SiKotlin, SiTensorflow } from "react-icons/si";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { Background, Controls, ReactFlow } from "reactflow";
+import Flowchart from "../../../components/projects/flowcharts/flowchart";
 import { MdPermMedia } from "react-icons/md";
 import {
 	signageEdges,
@@ -101,24 +101,19 @@ const computerVisionDigitalSignage = {
 			{ name: "PHP", percentage: 5 },
 		],
 		flowchart: (
-			<div style={{ height: "500px", overflow: "hidden" }}>
-				<div style={{ height: "900px", width: "300px" }}>
-					<ReactFlow
-						nodes={signageNodes}
-						edges={signageEdges}
-						defaultViewport={{ x: 60, y: 0, zoom: 0.5 }}
-						edgesUpdatable={false}
-						edgesFocusable={false}
-						nodesDraggable={false}
-						nodesConnectable={false}
-						nodesFocusable={false}
-						elementsSelectable={false}
-					>
-						<Background />
-						<Controls position="top-right" />
-					</ReactFlow>
-				</div>
-			</div>
+			<Flowchart
+				nodes={signageNodes}
+				edges={signageEdges}
+				controls
+				innerStyle={{ height: "900px", width: "300px" }}
+				defaultViewport={{ x: 60, y: 0, zoom: 0.5 }}
+				edgesUpdatable={false}
+				edgesFocusable={false}
+				nodesDraggable={false}
+				nodesConnectable={false}
+				nodesFocusable={false}
+				elementsSelectable={false}
+			/>
 		),
 	},
 

@@ -1,0 +1,173 @@
+.logoContainer {
+	display: flex;
+	justify-content: left;
+	padding-top: 25px;
+}
+
+.logo {
+	display: flex;
+	position: fixed;
+	border: 1px solid white;
+	border-radius: 50%;
+	box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.25);
+	top: 4vh;
+}
+
+.container {
+	display: flex;
+	flex-direction: column;
+	height: 100%;
+	margin: 0;
+	padding-top: 120px;
+}
+
+.main {
+	display: flex;
+}
+
+.rightSide {
+	flex-basis: 900px;
+}
+
+.title {
+	width: 100% !important;
+	font-family: var(--title-font) !important;
+	font-weight: var(--title-font-weight) !important;
+	font-style: var(--title-font-style) !important;
+}
+
+.subtitle {
+	width: 80% !important;
+	font-family: var(--body-font) !important;
+	font-weight: var(--body-font-weight) !important;
+	font-style: var(--body-font-style) !important;
+}
+
+.leftSide {
+	display: flex;
+	flex-direction: column;
+	flex-basis: 300px;
+}
+
+.imageContainer {
+	width: 370px;
+}
+
+.imageWrapper {
+	display: inline-block;
+	overflow: hidden;
+	width: 100%;
+	border-radius: 10%;
+	transform: rotate(3deg);
+}
+
+.imageWrapper img {
+	display: block;
+	width: 100%;
+	height: auto;
+}
+
+.cvButton {
+	background-color: var(--primary-color);
+	color: white;
+	padding: 12px 24px;
+	border: none;
+	border-radius: 8px;
+	font-weight: 600;
+	cursor: pointer;
+	transition: background-color 0.3s ease;
+	width: 80%;
+	margin-top: 40px;
+	font-size: 14px;
+	font-family: var(--title-font) !important;
+	font-weight: var(--title-font-weight) !important;
+	font-style: var(--title-font-style) !important;
+}
+
+.cvButton:hover {
+	background-color: var(--secondary-color);
+}
+
+.socials {
+	padding-top: 50px;
+	padding-bottom: 50px;
+	font-family: var(--title-font) !important;
+	font-weight: var(--title-font-weight) !important;
+	font-style: var(--title-font-style) !important;
+}
+
+.socialsMobile {
+	display: none;
+	font-family: var(--title-font) !important;
+	font-weight: var(--title-font-weight) !important;
+	font-style: var(--title-font-style) !important;
+}
+
+@media (max-width: 1024px) {
+	.logo {
+		z-index: 100;
+	}
+
+	.main {
+		flex-direction: column;
+	}
+
+	.subtitle {
+		margin-top: 20px !important;
+	}
+
+	.leftSide {
+		flex-basis: 100%;
+		order: 1;
+	}
+
+	.rightSide {
+		flex-basis: 100%;
+		order: 2;
+	}
+
+	.imageContainer {
+		padding-bottom: 40px;
+	}
+
+	.socials {
+		display: none;
+	}
+
+	.socialsMobile {
+		padding-top: 30px;
+		display: flex;
+	}
+}
+
+@media (max-width: 800px) {
+	.subtitle {
+		margin-top: 25px !important;
+		padding-top: 0px !important;
+		width: 100% !important;
+	}
+
+	.cvButton {
+		width: 100% !important;
+		margin-top: 20px;
+	}
+}
+
+@media (max-width: 600px) {
+	.container {
+		padding-top: 60px;
+	}
+
+	/* Master sized the wrapper at 85vw inside an 80% container, so the image
+	   deliberately overflowed. Putting that width on the container instead
+	   keeps the original size without the overflow. */
+	.imageContainer {
+		width: 85vw;
+	}
+
+	.imageWrapper {
+		transform: rotate(0deg);
+		width: 100%;
+		margin-top: 0;
+	}
+}
