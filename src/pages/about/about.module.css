@@ -158,11 +158,13 @@
 		padding-top: 60px;
 	}
 
+	/* Master sized the wrapper at 85vw inside an 80% container, so the image
+	   deliberately overflowed. Putting that width on the container instead
+	   keeps the original size without the overflow. */
 	.imageContainer {
-		width: 85%;
+		width: 85vw;
 	}
 
-	/* Let the container own the width; an 85vw wrapper inside it overflowed. */
 	.imageWrapper {
 		transform: rotate(0deg);
 		width: 100%;

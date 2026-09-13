@@ -46,17 +46,27 @@ export default defineConfig({
 	},
 
 	projects: [
+		// The breakpoint sweep sets its own viewports, so it is excluded from
+		// the device projects rather than run three times at the wrong sizes.
 		{
 			name: "desktop",
+			testIgnore: /breakpoints\.spec\.js/,
 			use: { ...devices["Desktop Chrome"], viewport: { width: 1440, height: 900 } },
 		},
 		{
 			name: "tablet",
+			testIgnore: /breakpoints\.spec\.js/,
 			use: { ...devices["Desktop Chrome"], viewport: { width: 900, height: 1000 } },
 		},
 		{
 			name: "mobile",
+			testIgnore: /breakpoints\.spec\.js/,
 			use: { ...devices["Pixel 5"] },
+		},
+		{
+			name: "breakpoints",
+			testMatch: /breakpoints\.spec\.js/,
+			use: { ...devices["Desktop Chrome"] },
 		},
 	],
 
