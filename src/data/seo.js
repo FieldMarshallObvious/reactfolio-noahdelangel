@@ -1,11 +1,15 @@
 const KEYWORDS = [
 	"Noah del Angel",
-	"software engineer",
-	"full stack developer",
-	"computer vision",
-	"React",
-	"Node.js",
+	"machine learning engineer",
+	"AI platform",
+	"MLOps",
+	"RAG",
+	"LangChain",
+	"LangGraph",
 	"TensorFlow",
+	"PyTorch",
+	"Python",
+	"React",
 	"AWS",
 ];
 
@@ -13,14 +17,14 @@ const SEO = [
 	{
 		page: "home",
 		description:
-			"Noah del Angel is a full-stack web and mobile developer focused on computer vision. Experienced with Node.js, React, Kotlin, TensorFlow, Vertex AI, and AWS.",
+			"Noah del Angel is a machine learning engineer building scalable AI systems and the platforms that serve them, currently working on Mozilla's AI Platform behind Firefox's AI features.",
 		keywords: KEYWORDS,
 	},
 
 	{
 		page: "about",
 		description:
-			"Software engineer building solutions across computer vision, real estate analytics, and digital signage — applications that streamline workflows, optimize deployments, and improve user experience.",
+			"Machine learning engineer shipping AI systems end to end — model serving infrastructure at Mozilla, enterprise RAG platforms at HGS Digital, and computer vision on edge devices.",
 		keywords: KEYWORDS,
 	},
 
@@ -34,7 +38,7 @@ const SEO = [
 	{
 		page: "contact",
 		description:
-			"Get in touch with Noah del Angel about collaboration, engineering roles, or project work.",
+			"Get in touch with Noah del Angel about machine learning platform work, AI infrastructure, collaboration, or engineering roles.",
 		keywords: [...KEYWORDS, "contact", "hire"],
 	},
 ];

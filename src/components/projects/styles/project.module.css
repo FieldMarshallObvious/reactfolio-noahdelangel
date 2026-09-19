@@ -37,8 +37,15 @@
 	width: 100%;
 }
 
-.container > .row,
-.containerSmall > .row {
+/*
+ * :global is required here. .row belongs to Bootstrap, and CSS Modules hash
+ * every class in a selector — without it this compiled to
+ * `.project_container__x > .project_row__y`, which matches nothing. The rule
+ * cancels Bootstrap's negative row gutters; losing it let the row pull its
+ * content out past the card's padding.
+ */
+.container > :global(.row),
+.containerSmall > :global(.row) {
 	margin: 0;
 	width: 100%;
 }

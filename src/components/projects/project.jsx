@@ -33,16 +33,37 @@ const Project = (props) => {
 		}
 	}, [maxHeight]);
 
+	// Swapping in the webfonts changes the card's height after first paint, so
+	// re-measure once they settle. Without this the only thing that produced a
+	// correct measurement was resizing the window.
+	useEffect(() => {
+		if (!document.fonts) return;
+		let cancelled = false;
+		document.fonts.ready.then(() => {
+			if (!cancelled) setOriginalHeight(0);
+		});
+		return () => {
+			cancelled = true;
+		};
+	}, []);
+
 	useLayoutEffect(() => {
+		// originalHeight has to be a dependency: resetting it to 0 is how a
+		// re-measure is requested, and without it here that reset did nothing
+		// until the next resize.
 		if (ref.current && originalHeight === 0) {
-			let projectHeight = ref.current.clientHeight;
-			setOriginalHeight(projectHeight);
-			setProjectHeights((prev) => ({
-				...prev,
-				[`${index}`]: projectHeight,
-			}));
+			const projectHeight = ref.current.clientHeight;
+			// A zero height means the card has not been laid out yet. Storing
+			// it would leave originalHeight at 0 and spin this effect.
+			if (projectHeight > 0) {
+				setOriginalHeight(projectHeight);
+				setProjectHeights((prev) => ({
+					...prev,
+					[`${index}`]: projectHeight,
+				}));
+			}
 		}
-	}, [index, setProjectHeights, windowWidth]);
+	}, [index, setProjectHeights, windowWidth, originalHeight]);
 
 	return (
 		<React.Fragment>
