@@ -1,4 +1,24 @@
 
+/* `display: contents` keeps these wrappers from introducing a box, so both bars
+   position exactly as they did when navBar.jsx rendered one or the other. */
+.desktopOnly {
+	display: contents;
+}
+
+.mobileOnly {
+	display: none;
+}
+
+@media (max-width: 600px) {
+	.desktopOnly {
+		display: none;
+	}
+
+	.mobileOnly {
+		display: contents;
+	}
+}
+
 .navContainer {
 	margin: 0;
 	display: flex;

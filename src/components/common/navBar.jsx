@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import Link from "next/link";
 import styles from "./styles/navBar.module.css";
 
@@ -66,28 +66,15 @@ const MobileLayout = ({ active }) => {
 	);
 };
 
-const NavBar = (props) => {
-	const [mobileSize, setMobileSize] = useState(false);
-
-	useEffect(() => {
-		const checkWindowWidth = () => {
-			setMobileSize(window.innerWidth <= 600);
-		};
-
-		checkWindowWidth();
-		window.addEventListener("resize", checkWindowWidth);
-		return () => window.removeEventListener("resize", checkWindowWidth);
-	}, []);
-
-	return (
-		<React.Fragment>
-			{!mobileSize ? (
-				<NavBarFullLayout {...props} />
-			) : (
-				<MobileLayout {...props} />
-			)}
-		</React.Fragment>
-	);
-};
+const NavBar = (props) => (
+	<React.Fragment>
+		<div className={styles.desktopOnly}>
+			<NavBarFullLayout {...props} />
+		</div>
+		<div className={styles.mobileOnly}>
+			<MobileLayout {...props} />
+		</div>
+	</React.Fragment>
+);
 
 export default NavBar;

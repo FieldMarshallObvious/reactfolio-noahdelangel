@@ -276,8 +276,8 @@ test.describe("prerendered content", () => {
 
 	test("body copy is present without JS", async ({ request }) => {
 		for (const [path, needle] of [
-			["/", "Full stack developer"],
-			["/about", "Software engineer"],
+			["/", "Machine learning engineer "],
+			["/about", "machine learning engineer "],
 			["/contact", "getting in touch"],
 		]) {
 			const html = await (await request.get(path)).text();

@@ -4,7 +4,7 @@ import INFO from "../../data/user";
 // Set NEXT_PUBLIC_SITE_URL in the Vercel project settings. Canonical and
 // Open Graph URLs must be absolute, so this needs the real production origin.
 const SITE_URL = (
-	process.env.NEXT_PUBLIC_SITE_URL || "https://noahdelangel.com"
+	process.env.NEXT_PUBLIC_SITE_URL || "https://noahdelangel.dev"
 ).replace(/\/$/, "");
 
 /**
