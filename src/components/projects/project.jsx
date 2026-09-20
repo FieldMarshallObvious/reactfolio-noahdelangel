@@ -1,9 +1,11 @@
-import React, { useEffect, useRef, useState, useLayoutEffect } from "react";
-import { Link, useLocation } from "react-router-dom";
+import React from "react";
+import Image from "next/image";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faLink } from "@fortawesome/free-solid-svg-icons";
-
-import "./styles/project.css";
+import { useIsMobile } from "../utils/useMediaQuery";
+import styles from "./styles/project.module.css";
 import { Col, Row } from "reactstrap";
 
 const Project = (props) => {
@@ -13,70 +15,20 @@ const Project = (props) => {
 		description,
 		linkText,
 		link,
-		index,
-		setProjectHeights,
-		windowWidth,
-		maxHeight,
 		isShowcase = true,
 	} = props;
 
-	const ref = useRef(null);
-	const location = useLocation();
-	const [smallLayout, setSmallLayout] = useState(false);
-	const [originalHeight, setOriginalHeight] = useState(0);
-
-	useEffect(() => {
-		const checkWindowWidth = () => {
-			setSmallLayout(window.innerWidth <= 600);
-		};
-
-		window.addEventListener("resize", checkWindowWidth);
-
-		checkWindowWidth();
-
-		return () => window.removeEventListener("resize", checkWindowWidth);
-	}, []);
-
-	useEffect(() => {
-		if (maxHeight == 0) {
-			setOriginalHeight(0);
-		}
-	}, [maxHeight]);
-
-	useLayoutEffect(() => {
-		if (ref.current && originalHeight == 0) {
-			let projectHeight = ref.current.clientHeight;
-			console.log("Project Height:", projectHeight);
-			setOriginalHeight(projectHeight);
-			setProjectHeights((prev) => ({
-				...prev,
-				[`${index}`]: projectHeight,
-			}));
-		}
-	}, [index, setProjectHeights, windowWidth]);
+	const location = usePathname();
+	const smallLayout = useIsMobile();
 
 	return (
 		<React.Fragment>
-			<div
-				ref={ref}
-				className="project"
-				style={
-					smallLayout
-						? {
-								height:
-									maxHeight >= 0 && originalHeight >= 0
-										? `${maxHeight}px`
-										: "fit-content",
-							}
-						: {}
-				}
-			>
+			<div className={styles.project}>
 				<Link
-					to={link}
-					state={
-						link?.includes("/projects/")
-							? { from: location.pathname }
-							: undefined
+					href={
+						link?.includes("/projects/showcase/")
+							? `${link}?from=${encodeURIComponent(location)}`
+							: link
 					}
 					style={{
 						height: "100%",
@@ -92,8 +44,8 @@ const Project = (props) => {
 						<Row
 							className={
 								smallLayout
-									? "project-container-small"
-									: "project-container"
+									? styles.containerSmall
+									: styles.container
 							}
 							style={{
 								height: "100%",
@@ -115,8 +67,14 @@ const Project = (props) => {
 										paddingRight: "0px",
 									}}
 								>
-									<div className="project-logo">
-										<img src={logo} alt="logo" />
+									<div className={styles.logo}>
+										<Image
+											src={logo}
+											alt={`${title} logo`}
+											width={60}
+											height={60}
+											sizes="30px"
+										/>
 									</div>
 								</Col>
 								<Col
@@ -129,12 +87,12 @@ const Project = (props) => {
 									}}
 								>
 									<div
-										className="project-title"
+										className={styles.title}
 										style={
 											smallLayout
 												? {
-														marginBottom: "0",
-													}
+													marginBottom: "0",
+												}
 												: {}
 										}
 									>
@@ -150,13 +108,13 @@ const Project = (props) => {
 										paddingRight: "0px",
 									}}
 								>
-									<div className="project-description">
+									<div className={styles.description}>
 										{description}
 									</div>
 								</Col>
 							</Row>
 							<Row
-								className="project-link"
+								className={styles.link}
 								style={{
 									paddingRight: "3px",
 									paddingLeft: "3px",
@@ -164,9 +122,10 @@ const Project = (props) => {
 										isShowcase || smallLayout
 											? undefined
 											: "20px",
-									...(maxHeight >= 0 && originalHeight >= 0
-										? { marginTop: "auto" }
-										: {}),
+									// Pins the link to the bottom of a stretched
+									// card. Only the grid stretches; showcase
+									// cards size to their content.
+									...(isShowcase ? {} : { marginTop: "auto" }),
 								}}
 							>
 								<Col
@@ -178,7 +137,7 @@ const Project = (props) => {
 										paddingLeft: "0px",
 									}}
 								>
-									<div className="project-link-icon">
+									<div className={styles.linkIcon}>
 										<FontAwesomeIcon icon={faLink} />
 									</div>
 								</Col>
@@ -194,7 +153,7 @@ const Project = (props) => {
 								>
 									{smallLayout ? (
 										<div
-											className="project-link-text"
+											className={styles.linkText}
 											style={{
 												paddingLeft: "10px",
 											}}
@@ -204,7 +163,7 @@ const Project = (props) => {
 												: "View Project"}
 										</div>
 									) : (
-										<div className="project-link-text">
+										<div className={styles.linkText}>
 											{linkText}
 										</div>
 									)}

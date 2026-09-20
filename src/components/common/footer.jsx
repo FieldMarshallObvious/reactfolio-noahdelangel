@@ -1,31 +1,29 @@
 import React from "react";
-import { Link } from "react-router-dom";
-
-import "./styles/footer.css";
+import Link from "next/link";
+import styles from "./styles/footer.module.css";
 
 const Footer = () => {
 	return (
 		<React.Fragment>
-			<div className="footer">
-				<div className="footer-links">
-					<ul className="footer-nav-link-list">
-						<li className="footer-nav-link-item">
-							<Link to="/">Home</Link>
+			<div className={styles.footer}>
+				<div className={styles.footerLinks}>
+					<ul className={styles.footerNavLinkList}>
+						<li className={styles.footerNavLinkItem}>
+							<Link href="/">Home</Link>
 						</li>
-						<li className="footer-nav-link-item">
-							<Link to="/about">About</Link>
+						<li className={styles.footerNavLinkItem}>
+							<Link href="/about">About</Link>
 						</li>
-						<li className="footer-nav-link-item">
-							<Link to="/projects">Projects</Link>
+						<li className={styles.footerNavLinkItem}>
+							<Link href="/projects">Projects</Link>
 						</li>
-						<li className="footer-nav-link-item">
-							<Link to="/contact">Contact</Link>
+						<li className={styles.footerNavLinkItem}>
+							<Link href="/contact">Contact</Link>
 						</li>
 					</ul>
 				</div>
-
-				<div className="footer-credits">
-					<div className="footer-credits-text">
+				<div className={styles.footerCredits}>
+					<div className={styles.footerCreditsText}>
 						© 2023 delAngel.dev. All Rights Reserved.
 					</div>
 				</div>

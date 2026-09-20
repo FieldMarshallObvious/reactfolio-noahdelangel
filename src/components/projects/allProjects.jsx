@@ -1,18 +1,18 @@
+"use client";
+
 import React, { useEffect, useRef, useState } from "react";
 import Project from "./project";
 import INFO from "../../data/user";
-import "./styles/allProjects.css";
+import styles from "./styles/allProjects.module.css";
 import { motion, useInView, useReducedMotion } from "motion/react";
 import useLowPowerMode from "../utils/useLowPowerMode";
+import { useIsMobile } from "../utils/useMediaQuery";
 
 const AllProjectItem = ({
 	project,
 	index,
 	smallLayout,
 	showcase,
-	setProjectHeights,
-	windowWidth,
-	maxHeight,
 	visibleIndices,
 	setVisibleIndices,
 }) => {
@@ -21,7 +21,8 @@ const AllProjectItem = ({
 	const linePosition = index % (smallLayout ? 2 : 3);
 	const prefersReducedMotion = useReducedMotion();
 	const lowPowerMode = useLowPowerMode();
-	const Component = prefersReducedMotion || lowPowerMode ? "div" : motion.div;
+	const isStatic = prefersReducedMotion || lowPowerMode;
+	const Component = isStatic ? "div" : motion.div;
 
 	useEffect(() => {
 		if (isInView) {
@@ -45,23 +46,30 @@ const AllProjectItem = ({
 				ref={ref}
 				style={{
 					willChange: "transform",
-					height: maxHeight > 0 ? `${maxHeight}px` : "fit-content",
 					minHeight: "250px",
+					// The server cannot know the motion preference, so it always
+					// renders motion.div's hidden initial state into the style
+					// attribute. A plain div never animates that away, which left
+					// the cards invisible for good under prefers-reduced-motion.
+					...(isStatic ? { opacity: 1, transform: "none" } : {}),
 				}}
-				initial={{ opacity: 0, x: -50 }}
-				animate={{ opacity: isVisible ? 1 : 0, x: isVisible ? 0 : -50 }}
-				transition={{
-					duration: 0.5,
-					delay: linePosition * 0.2,
-					ease: "easeInOut",
-				}}
-				className="all-projects-project"
+				{...(isStatic
+					? {}
+					: {
+							initial: { opacity: 0, x: -50 },
+							animate: {
+								opacity: isVisible ? 1 : 0,
+								x: isVisible ? 0 : -50,
+							},
+							transition: {
+								duration: 0.5,
+								delay: linePosition * 0.2,
+								ease: "easeInOut",
+							},
+						})}
+				className={styles.project}
 			>
 				<Project
-					index={index}
-					setProjectHeights={setProjectHeights}
-					windowWidth={windowWidth}
-					maxHeight={maxHeight}
 					logo={project.logo}
 					title={project.title}
 					description={project.description}
@@ -76,22 +84,19 @@ const AllProjectItem = ({
 	// Showcase project display
 	return (
 		<div
-			className="all-projects-project"
+			className={styles.project}
 			style={
 				smallLayout
 					? {
-							width: "90%",
-							minHeight: "250px",
-							height: "auto",
-							paddingLeft: "30px",
-						}
+						width: "90%",
+						minHeight: "250px",
+						height: "auto",
+						paddingLeft: "30px",
+					}
 					: {}
 			}
 		>
 			<Project
-				index={index}
-				setProjectHeights={setProjectHeights}
-				windowWidth={windowWidth}
 				logo={project.logo}
 				title={project.title}
 				description={project.description}
@@ -103,39 +108,9 @@ const AllProjectItem = ({
 };
 
 const AllProjects = ({ showcase = [] }) => {
-	const [smallLayout, setSmallLayout] = useState(false);
-	const [projectHeights, setProjectHeights] = useState({});
-	const [maxHeight, setMaxHeight] = useState(0);
-	const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+	const smallLayout = useIsMobile();
 	const [visibleIndices, setVisibleIndices] = useState(new Set());
 	const containerRef = useRef(null);
-	const windowOffset = 100;
-
-	useEffect(() => {
-		const checkWindowWidth = () => {
-			let windowInnerWidth = window.innerWidth;
-			const widthDifference = Math.abs(windowWidth - windowInnerWidth);
-
-			if (widthDifference >= windowOffset) {
-				console.log("Set window width:", windowInnerWidth);
-				setWindowWidth(windowInnerWidth);
-				setMaxHeight(0);
-			}
-			setSmallLayout(windowInnerWidth <= 600);
-		};
-
-		window.addEventListener("resize", checkWindowWidth);
-		checkWindowWidth();
-		return () => window.removeEventListener("resize", checkWindowWidth);
-	}, [windowWidth]);
-
-	useEffect(() => {
-		console.log("Project Heights Triggered:", projectHeights);
-		if (Object.keys(projectHeights).length > 0) {
-			const maxHeight = Math.max(...Object.values(projectHeights));
-			setMaxHeight(maxHeight);
-		}
-	}, [projectHeights]);
 
 	const filteredProjects = INFO.projects.filter((project) => {
 		if (showcase.length === 0) return true;
@@ -145,7 +120,7 @@ const AllProjects = ({ showcase = [] }) => {
 	return (
 		<div
 			ref={containerRef}
-			className="all-projects-container"
+			className={styles.container}
 			style={smallLayout ? { paddingTop: "0px" } : {}}
 		>
 			{filteredProjects.map((project, index) => (
@@ -155,10 +130,6 @@ const AllProjects = ({ showcase = [] }) => {
 					index={index}
 					smallLayout={smallLayout}
 					showcase={showcase}
-					projectHeights={projectHeights}
-					setProjectHeights={setProjectHeights}
-					windowWidth={windowWidth}
-					maxHeight={maxHeight}
 					visibleIndices={visibleIndices}
 					setVisibleIndices={setVisibleIndices}
 				/>

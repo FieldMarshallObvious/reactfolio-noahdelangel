@@ -1,50 +1,32 @@
-import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import React from "react";
+import Link from "next/link";
+import styles from "./styles/navBar.module.css";
 
-import "./styles/navBar.css";
-
-const NavBarFullLayout = (props) => {
-	const { active } = props;
+const NavBarFullLayout = ({ active }) => {
 	return (
-		<div className="nav-container">
-			<nav className="navbar">
-				<div className="nav-background">
-					<ul className="nav-list">
+		<div className={styles.navContainer}>
+			<nav className={`navbar ${styles.navbar}`}>
+				<div className={styles.navBackground}>
+					<ul className={styles.navList}>
 						<li
-							className={
-								active === "home"
-									? "nav-item active"
-									: "nav-item"
-							}
+							className={`${styles.navItem} ${active === "home" ? styles.active : ""}`}
 						>
-							<Link to="/">Home</Link>
+							<Link href="/">Home</Link>
 						</li>
 						<li
-							className={
-								active === "about"
-									? "nav-item active"
-									: "nav-item"
-							}
+							className={`${styles.navItem} ${active === "about" ? styles.active : ""}`}
 						>
-							<Link to="/about">About</Link>
+							<Link href="/about">About</Link>
 						</li>
 						<li
-							className={
-								active === "projects"
-									? "nav-item active"
-									: "nav-item"
-							}
+							className={`${styles.navItem} ${active === "projects" ? styles.active : ""}`}
 						>
-							<Link to="/projects">Projects</Link>
+							<Link href="/projects">Projects</Link>
 						</li>
 						<li
-							className={
-								active === "contact"
-									? "nav-item active"
-									: "nav-item"
-							}
+							className={`${styles.navItem} ${active === "contact" ? styles.active : ""}`}
 						>
-							<Link to="/contact">Contact</Link>
+							<Link href="/contact">Contact</Link>
 						</li>
 					</ul>
 				</div>
@@ -53,47 +35,30 @@ const NavBarFullLayout = (props) => {
 	);
 };
 
-const MobileLayout = (props) => {
-	const { active } = props;
+const MobileLayout = ({ active }) => {
 	return (
-		<div className="mobile-nav-container">
-			<nav className="mobile-navbar">
-				<ul className="mobile-nav-list">
+		<div className={styles.mobileNavContainer}>
+			<nav className={styles.mobileNavbar}>
+				<ul className={styles.mobileNavList}>
 					<li
-						className={
-							active === "home"
-								? "mobile-nav-item active"
-								: "mobile-nav-item"
-						}
+						className={`${styles.mobileNavItem} ${active === "home" ? styles.active : ""}`}
 					>
-						<Link to="/">Home</Link>
+						<Link href="/">Home</Link>
 					</li>
 					<li
-						className={
-							active === "about"
-								? "mobile-nav-item active"
-								: "mobile-nav-item"
-						}
+						className={`${styles.mobileNavItem} ${active === "about" ? styles.active : ""}`}
 					>
-						<Link to="/about">About</Link>
+						<Link href="/about">About</Link>
 					</li>
 					<li
-						className={
-							active === "projects"
-								? "mobile-nav-item active"
-								: "mobile-nav-item"
-						}
+						className={`${styles.mobileNavItem} ${active === "projects" ? styles.active : ""}`}
 					>
-						<Link to="/projects">Projects</Link>
+						<Link href="/projects">Projects</Link>
 					</li>
 					<li
-						className={
-							active === "contact"
-								? "mobile-nav-item active"
-								: "mobile-nav-item"
-						}
+						className={`${styles.mobileNavItem} ${active === "contact" ? styles.active : ""}`}
 					>
-						<Link to="/contact">Contact</Link>
+						<Link href="/contact">Contact</Link>
 					</li>
 				</ul>
 			</nav>
@@ -101,30 +66,15 @@ const MobileLayout = (props) => {
 	);
 };
 
-const NavBar = (props) => {
-	const [mobileSize, setMobileSize] = useState(false);
-
-	useEffect(() => {
-		const checkWindowWidth = () => {
-			setMobileSize(window.innerWidth <= 600);
-		};
-
-		checkWindowWidth();
-
-		window.addEventListener("resize", checkWindowWidth);
-
-		return () => window.removeEventListener("resize", checkWindowWidth);
-	}, []);
-
-	return (
-		<React.Fragment>
-			{!mobileSize ? (
-				<NavBarFullLayout {...props} />
-			) : (
-				<MobileLayout {...props} />
-			)}
-		</React.Fragment>
-	);
-};
+const NavBar = (props) => (
+	<React.Fragment>
+		<div className={styles.desktopOnly}>
+			<NavBarFullLayout {...props} />
+		</div>
+		<div className={styles.mobileOnly}>
+			<MobileLayout {...props} />
+		</div>
+	</React.Fragment>
+);
 
 export default NavBar;

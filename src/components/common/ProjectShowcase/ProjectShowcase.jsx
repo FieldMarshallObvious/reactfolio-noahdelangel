@@ -1,3 +1,4 @@
+"use client";
 import React, { useEffect, useRef, useState } from "react";
 import {
 	Container,
@@ -21,79 +22,10 @@ import {
 	faCalendar,
 	faBook,
 } from "@fortawesome/free-solid-svg-icons";
-import styled from "styled-components";
-import "@xyflow/react/dist/style.css";
 import LanguageItem from "./LanguageItem";
 import TechItem from "./TechItem";
 import { motion, useInView } from "motion/react";
-
-import "../../../data/styles.css";
-
-const ArticleHeader = styled.div`
-	padding: 3rem 0;
-	margin-bottom: 2rem;
-	border-bottom: 1px solid var(--secondary-color);
-`;
-
-const ProjectMeta = styled.div`
-	display: flex;
-	gap: 2rem;
-	margin: 1rem 0;
-	color: var(--secondary-color);
-	font-size: 0.9rem;
-`;
-
-const StyledNavLink = styled(NavLink)`
-	cursor: pointer;
-	display: flex;
-	align-items: center;
-	gap: 0.5rem;
-
-	&.active {
-		color: var(--primary-color) !important;
-		border-bottom: 2px solid var(--primary-color) !important;
-		background-color: transparent !important;
-	}
-
-	&:hover {
-		color: var(--primary-color) !important;
-	}
-`;
-
-const Section = styled.section`
-	margin-bottom: 3rem;
-`;
-
-const SectionTitle = styled.h3`
-	margin-bottom: 1.5rem;
-	color: var(--primary-color);
-	font-family: var(--title-font) !important;
-	font-weight: 650;
-	font-style: var(--title-font-style) !important;
-`;
-
-const ProjectLinks = styled.div`
-	display: flex;
-	gap: 1rem;
-	margin-top: 1rem;
-
-	a {
-		padding: 0.5rem 1rem;
-		border: 1px solid var(--primary-color);
-		border-radius: 4px;
-		color: var(--primary-color);
-		text-decoration: none;
-		transition: all 0.2s ease-in-out;
-		display: flex;
-		align-items: center;
-		gap: 0.5rem;
-
-		&:hover {
-			background-color: var(--primary-color);
-			color: var(--background-color);
-		}
-	}
-`;
+import styles from "./styles/projectShowcase.module.css";
 
 const ProjectShowCase = ({
 	title,
@@ -115,9 +47,14 @@ const ProjectShowCase = ({
 
 	useEffect(() => {
 		const checkWindowWidth = () => {
-			setMainLayout(window.innerWidth > 768);
-			if (activeTab === "1" && window.innerWidth > 768) {
-				setActiveTab("2");
+			const isWide = window.innerWidth > 768;
+			setMainLayout(isWide);
+			// Description has no tab on desktop — those sections move into the
+			// left column — so only redirect away from it, and use a functional
+			// update: reading activeTab here would capture its first render
+			// value and reset the reader's tab on every resize.
+			if (isWide) {
+				setActiveTab((tab) => (tab === "1" ? "2" : tab));
 			}
 		};
 
@@ -152,30 +89,14 @@ const ProjectShowCase = ({
 	];
 
 	return (
-		<Container className="project-article" style={{}}>
-			<ArticleHeader
-				style={
-					mainLayout
-						? { paddingBottom: "25px" }
-						: {
-								borderBottom: "0px",
-								marginBottom: "0px",
-								paddingBottom: "24px",
-							}
-				}
+		<Container className="project-article">
+			<div
+				className={`${styles.articleHeader} ${mainLayout ? styles.desktopHeader : styles.compactHeader}`}
 			>
-				<h1
-					style={{
-						fontFamily: "var(--title-font)",
-						fontWeight: 650,
-						fontStyle: "var(--title-font-style)",
-					}}
-				>
-					{title}
-				</h1>
-				{date || duration ? (
-					<ProjectMeta>
-						{date ? (
+				<h1 className={styles.mainTitle}>{title}</h1>
+				{(date || duration) && (
+					<div className={styles.projectMeta}>
+						{date && (
 							<span>
 								<FontAwesomeIcon
 									icon={faCalendar}
@@ -183,10 +104,8 @@ const ProjectShowCase = ({
 								/>
 								{date}
 							</span>
-						) : (
-							<></>
 						)}
-						{duration ? (
+						{duration && (
 							<span>
 								<FontAwesomeIcon
 									icon={faClock}
@@ -194,24 +113,11 @@ const ProjectShowCase = ({
 								/>
 								{duration}
 							</span>
-						) : (
-							<></>
 						)}
-					</ProjectMeta>
-				) : (
-					<></>
+					</div>
 				)}
-				<div
-					className="lead"
-					style={{
-						fontFamily: "var(--body-font)",
-						fontWeight: "500",
-						fontStyle: "var(--body-font-style)",
-					}}
-				>
-					{description}
-				</div>
-				<ProjectLinks>
+				<div className={styles.description}>{description}</div>
+				<div className={styles.projectLinks}>
 					{demoLink && (
 						<a
 							href={demoLink}
@@ -232,29 +138,24 @@ const ProjectShowCase = ({
 							<FontAwesomeIcon icon={faArrowRight} />
 						</a>
 					)}
-				</ProjectLinks>
-			</ArticleHeader>
+				</div>
+			</div>
 
 			<Row>
-				{!mainLayout ? (
+				{!mainLayout && (
 					<div ref={navRef}>
-						<Nav tabs style={{ marginBottom: "24px" }}>
+						<Nav tabs className={styles.navTabs}>
 							{menuItems.map((item, index) => (
 								<NavItem key={`nav_${index}`}>
-									<StyledNavLink
-										className={
-											activeTab === `${item.tabLocation}`
-												? "active"
-												: ""
-										}
+									<NavLink
+										className={`${styles.navLink} ${activeTab === item.tabLocation ? styles.active : ""}`}
 										onClick={() =>
-											setActiveTab(`${item.tabLocation}`)
+											setActiveTab(item.tabLocation)
 										}
-										initial={["visible", "active"]}
 									>
 										<motion.div
 											initial={{
-												color: "var(--primary-color)",
+												color: "#27272a",
 											}}
 											animate={{
 												color: navInView
@@ -301,63 +202,39 @@ const ProjectShowCase = ({
 												times: [0, 0.5, 1],
 												type: "tween",
 											}}
-											style={{
-												fontFamily: "var(--title-font)",
-												fontWeight:
-													"var(--title-font-weight)",
-												fontStyle:
-													"var(--title-font-style)",
-											}}
+											className={styles.mainTitle}
 										>
 											{item.title}
 										</motion.div>
-									</StyledNavLink>
+									</NavLink>
 								</NavItem>
 							))}
 						</Nav>
 					</div>
-				) : (
-					<></>
 				)}
 
 				{mainLayout ? (
 					<>
 						<Col md={7}>
-							{sections && Array.isArray(sections) ? (
-								sections.map((element) => (
-									<Section key={`${element.title}`}>
-										<SectionTitle>
-											{element.title}
-										</SectionTitle>
-										<div
-											style={{
-												fontFamily: "var(--body-font)",
-												fontWeight:
-													"var(--body-font-weight)",
-												fontStyle:
-													"var(--body-font-style)",
-											}}
-										>
-											{element.content}
-										</div>
-									</Section>
-								))
-							) : (
-								<></>
-							)}
+							{sections?.map((element) => (
+								<div
+									className={styles.section}
+									key={element.title}
+								>
+									<h3 className={styles.sectionTitle}>
+										{element.title}
+									</h3>
+									<div className={styles.sectionContent}>
+										{element.content}
+									</div>
+								</div>
+							))}
 						</Col>
 
 						<Col md={5}>
-							<Card
-								className="sticky-top"
-								style={{
-									top: "2rem",
-									postion: "sticky",
-									zIndex: "1",
-								}}
-							>
+							<Card className={`sticky-top ${styles.stickyCard}`}>
 								<CardBody>
-									<Nav tabs>
+									<Nav tabs className={styles.stickyNavTabs}>
 										{menuItems
 											.filter(
 												(item) =>
@@ -365,16 +242,11 @@ const ProjectShowCase = ({
 											)
 											.map((item, index) => (
 												<NavItem key={`nav_${index}`}>
-													<StyledNavLink
-														className={
-															activeTab ===
-															`${item.tabLocation}`
-																? "active"
-																: ""
-														}
+													<NavLink
+														className={`${styles.navLink} ${activeTab === item.tabLocation ? styles.active : ""}`}
 														onClick={() =>
 															setActiveTab(
-																`${item.tabLocation}`,
+																item.tabLocation,
 															)
 														}
 													>
@@ -382,7 +254,7 @@ const ProjectShowCase = ({
 															icon={item.icon}
 														/>
 														{item.title}
-													</StyledNavLink>
+													</NavLink>
 												</NavItem>
 											))}
 									</Nav>
@@ -401,7 +273,11 @@ const ProjectShowCase = ({
 										</TabPane>
 
 										<TabPane tabId="3">
-											<div className="p-3 border rounded">
+											<div
+												className={
+													styles.flowchartContainer
+												}
+											>
 												{flowchart}
 											</div>
 										</TabPane>
@@ -423,28 +299,19 @@ const ProjectShowCase = ({
 				) : (
 					<TabContent activeTab={activeTab} className="mt-3">
 						<TabPane tabId="1">
-							{sections && Array.isArray(sections) ? (
-								sections.map((element) => (
-									<Section key={`${element.title}`}>
-										<SectionTitle>
-											{element.title}
-										</SectionTitle>
-										<div
-											style={{
-												fontFamily: "var(--body-font)",
-												fontWeight:
-													"var(--body-font-weight)",
-												fontStyle:
-													"var(--body-font-style)",
-											}}
-										>
-											{element.content}
-										</div>
-									</Section>
-								))
-							) : (
-								<></>
-							)}
+							{sections?.map((element) => (
+								<div
+									className={styles.section}
+									key={element.title}
+								>
+									<h3 className={styles.sectionTitle}>
+										{element.title}
+									</h3>
+									<div className={styles.sectionContent}>
+										{element.content}
+									</div>
+								</div>
+							))}
 						</TabPane>
 						<TabPane tabId="2">
 							{techStack.map((tech, index) => (
@@ -453,7 +320,7 @@ const ProjectShowCase = ({
 						</TabPane>
 
 						<TabPane tabId="3">
-							<div className="p-3 border rounded">
+							<div className={styles.flowchartContainer}>
 								{flowchart}
 							</div>
 						</TabPane>

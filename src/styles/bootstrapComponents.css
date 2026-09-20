@@ -1,0 +1,178 @@
+/*
+ * The Bootstrap components this site renders, lifted verbatim from bootstrap.css.
+ * _app.js loads bootstrap-reboot + bootstrap-grid rather than the full bundle,
+ * which was ~31KB gzipped of render-blocking CSS and 96% unused. Reboot supplies
+ * the :root --bs-* variables these rules read.
+ */
+
+.card {
+	--bs-card-spacer-y: 1rem;
+	--bs-card-spacer-x: 1rem;
+	--bs-card-title-spacer-y: 0.5rem;
+	--bs-card-title-color: ;
+	--bs-card-subtitle-color: ;
+	--bs-card-border-width: var(--bs-border-width);
+	--bs-card-border-color: var(--bs-border-color-translucent);
+	--bs-card-border-radius: var(--bs-border-radius);
+	--bs-card-box-shadow: ;
+	--bs-card-inner-border-radius: calc(
+		var(--bs-border-radius) - (var(--bs-border-width))
+	);
+	--bs-card-cap-padding-y: 0.5rem;
+	--bs-card-cap-padding-x: 1rem;
+	--bs-card-cap-bg: rgba(var(--bs-body-color-rgb), 0.03);
+	--bs-card-cap-color: ;
+	--bs-card-height: ;
+	--bs-card-color: ;
+	--bs-card-bg: var(--bs-body-bg);
+	--bs-card-img-overlay-padding: 1rem;
+	--bs-card-group-margin: 0.75rem;
+	position: relative;
+	display: flex;
+	flex-direction: column;
+	min-width: 0;
+	height: var(--bs-card-height);
+	color: var(--bs-body-color);
+	word-wrap: break-word;
+	background-color: var(--bs-card-bg);
+	background-clip: border-box;
+	border: var(--bs-card-border-width) solid var(--bs-card-border-color);
+	border-radius: var(--bs-card-border-radius);
+}
+
+.card-body {
+	flex: 1 1 auto;
+	padding: var(--bs-card-spacer-y) var(--bs-card-spacer-x);
+	color: var(--bs-card-color);
+}
+
+.card-header {
+	padding: var(--bs-card-cap-padding-y) var(--bs-card-cap-padding-x);
+	margin-bottom: 0;
+	color: var(--bs-card-cap-color);
+	background-color: var(--bs-card-cap-bg);
+	border-bottom: var(--bs-card-border-width) solid
+		var(--bs-card-border-color);
+}
+
+.card-header:first-child {
+	border-radius: var(--bs-card-inner-border-radius)
+		var(--bs-card-inner-border-radius) 0 0;
+}
+
+.card-title {
+	margin-bottom: var(--bs-card-title-spacer-y);
+	color: var(--bs-card-title-color);
+}
+
+.card-text:last-child {
+	margin-bottom: 0;
+}
+
+.nav {
+	--bs-nav-link-padding-x: 1rem;
+	--bs-nav-link-padding-y: 0.5rem;
+	--bs-nav-link-font-weight: ;
+	--bs-nav-link-color: var(--bs-link-color);
+	--bs-nav-link-hover-color: var(--bs-link-hover-color);
+	--bs-nav-link-disabled-color: var(--bs-secondary-color);
+	display: flex;
+	flex-wrap: wrap;
+	padding-left: 0;
+	margin-bottom: 0;
+	list-style: none;
+}
+
+.nav-link {
+	display: block;
+	padding: var(--bs-nav-link-padding-y) var(--bs-nav-link-padding-x);
+	font-size: var(--bs-nav-link-font-size);
+	font-weight: var(--bs-nav-link-font-weight);
+	color: var(--bs-nav-link-color);
+	text-decoration: none;
+	background: none;
+	border: 0;
+	transition:
+		color 0.15s ease-in-out,
+		background-color 0.15s ease-in-out,
+		border-color 0.15s ease-in-out;
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.nav-link {
+		transition: none;
+	}
+}
+
+.nav-link:hover,
+.nav-link:focus {
+	color: var(--bs-nav-link-hover-color);
+}
+
+.nav-link:focus-visible {
+	outline: 0;
+	box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
+}
+
+.nav-link.disabled,
+.nav-link:disabled {
+	color: var(--bs-nav-link-disabled-color);
+	pointer-events: none;
+	cursor: default;
+}
+
+.nav-tabs {
+	--bs-nav-tabs-border-width: var(--bs-border-width);
+	--bs-nav-tabs-border-color: var(--bs-border-color);
+	--bs-nav-tabs-border-radius: var(--bs-border-radius);
+	--bs-nav-tabs-link-hover-border-color: var(--bs-secondary-bg)
+		var(--bs-secondary-bg) var(--bs-border-color);
+	--bs-nav-tabs-link-active-color: var(--bs-emphasis-color);
+	--bs-nav-tabs-link-active-bg: var(--bs-body-bg);
+	--bs-nav-tabs-link-active-border-color: var(--bs-border-color)
+		var(--bs-border-color) var(--bs-body-bg);
+	border-bottom: var(--bs-nav-tabs-border-width) solid
+		var(--bs-nav-tabs-border-color);
+}
+
+.nav-tabs .nav-link {
+	margin-bottom: calc(-1 * var(--bs-nav-tabs-border-width));
+	border: var(--bs-nav-tabs-border-width) solid transparent;
+	border-top-left-radius: var(--bs-nav-tabs-border-radius);
+	border-top-right-radius: var(--bs-nav-tabs-border-radius);
+}
+
+.nav-tabs .nav-link:hover,
+.nav-tabs .nav-link:focus {
+	isolation: isolate;
+	border-color: var(--bs-nav-tabs-link-hover-border-color);
+}
+
+.nav-tabs .nav-link.active,
+.nav-tabs .nav-item.show .nav-link {
+	color: var(--bs-nav-tabs-link-active-color);
+	background-color: var(--bs-nav-tabs-link-active-bg);
+	border-color: var(--bs-nav-tabs-link-active-border-color);
+}
+
+.tab-content > .tab-pane {
+	display: none;
+}
+
+.tab-content > .active {
+	display: block;
+}
+
+.fade {
+	transition: opacity 0.15s linear;
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.fade {
+		transition: none;
+	}
+}
+
+.fade:not(.show) {
+	opacity: 0;
+}
