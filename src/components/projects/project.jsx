@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState, useLayoutEffect } from "react";
+import React from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -15,72 +15,15 @@ const Project = (props) => {
 		description,
 		linkText,
 		link,
-		index,
-		setProjectHeights,
-		windowWidth,
-		maxHeight,
 		isShowcase = true,
 	} = props;
 
-	const ref = useRef(null);
 	const location = usePathname();
 	const smallLayout = useIsMobile();
-	const [originalHeight, setOriginalHeight] = useState(0);
-
-	useEffect(() => {
-		if (maxHeight == 0) {
-			setOriginalHeight(0);
-		}
-	}, [maxHeight]);
-
-	// Swapping in the webfonts changes the card's height after first paint, so
-	// re-measure once they settle. Without this the only thing that produced a
-	// correct measurement was resizing the window.
-	useEffect(() => {
-		if (!document.fonts) return;
-		let cancelled = false;
-		document.fonts.ready.then(() => {
-			if (!cancelled) setOriginalHeight(0);
-		});
-		return () => {
-			cancelled = true;
-		};
-	}, []);
-
-	useLayoutEffect(() => {
-		// originalHeight has to be a dependency: resetting it to 0 is how a
-		// re-measure is requested, and without it here that reset did nothing
-		// until the next resize.
-		if (ref.current && originalHeight === 0) {
-			const projectHeight = ref.current.clientHeight;
-			// A zero height means the card has not been laid out yet. Storing
-			// it would leave originalHeight at 0 and spin this effect.
-			if (projectHeight > 0) {
-				setOriginalHeight(projectHeight);
-				setProjectHeights((prev) => ({
-					...prev,
-					[`${index}`]: projectHeight,
-				}));
-			}
-		}
-	}, [index, setProjectHeights, windowWidth, originalHeight]);
 
 	return (
 		<React.Fragment>
-			<div
-				ref={ref}
-				className={styles.project}
-				style={
-					smallLayout
-						? {
-								height:
-									maxHeight >= 0 && originalHeight >= 0
-										? `${maxHeight}px`
-										: "fit-content",
-							}
-						: {}
-				}
-			>
+			<div className={styles.project}>
 				<Link
 					href={
 						link?.includes("/projects/showcase/")
@@ -148,8 +91,8 @@ const Project = (props) => {
 										style={
 											smallLayout
 												? {
-														marginBottom: "0",
-													}
+													marginBottom: "0",
+												}
 												: {}
 										}
 									>
@@ -179,9 +122,10 @@ const Project = (props) => {
 										isShowcase || smallLayout
 											? undefined
 											: "20px",
-									...(maxHeight >= 0 && originalHeight >= 0
-										? { marginTop: "auto" }
-										: {}),
+									// Pins the link to the bottom of a stretched
+									// card. Only the grid stretches; showcase
+									// cards size to their content.
+									...(isShowcase ? {} : { marginTop: "auto" }),
 								}}
 							>
 								<Col

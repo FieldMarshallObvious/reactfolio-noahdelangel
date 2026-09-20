@@ -24,29 +24,3 @@ export function useIsMobile(maxWidth = 600) {
 
 	return isMobile;
 }
-
-/**
- * Current viewport width, updated only once it moves by more than `threshold`
- * pixels. The projects grid remeasures card heights on every change, so
- * throttling by distance avoids a remeasure storm while dragging a window.
- */
-export function useWindowWidth(threshold = 0) {
-	const [width, setWidth] = useState(0);
-
-	useEffect(() => {
-		const update = () => {
-			setWidth((previous) =>
-				Math.abs(previous - window.innerWidth) >= threshold ||
-				previous === 0
-					? window.innerWidth
-					: previous,
-			);
-		};
-
-		update();
-		window.addEventListener("resize", update);
-		return () => window.removeEventListener("resize", update);
-	}, [threshold]);
-
-	return width;
-}

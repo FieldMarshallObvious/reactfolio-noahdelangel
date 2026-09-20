@@ -20,3 +20,17 @@
 		width: calc(100% / 2);
 	}
 }
+
+/*
+ * The server renders motion.div's hidden initial state into the style
+ * attribute because it cannot know the viewer's motion preference. Reduced
+ * motion swaps in a plain div that never animates it away, and React keeps the
+ * server's style through hydration, so the cards stayed invisible for good.
+ * A stylesheet rule is not subject to hydration, so it settles this reliably.
+ */
+@media (prefers-reduced-motion: reduce) {
+	.project {
+		opacity: 1 !important;
+		transform: none !important;
+	}
+}
