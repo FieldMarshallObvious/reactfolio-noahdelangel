@@ -17,7 +17,7 @@ const NotFound = () => {
 	const [currentUrl, setCurrentUrl] = useState("");
 
 	useEffect(() => {
-		setCurrentUrl(window.location.href);
+		setCurrentUrl(window.location.pathname);
 	}, []);
 
 	return (
@@ -26,32 +26,35 @@ const NotFound = () => {
 				<title>{`404 | ${INFO.main.title}`}</title>
 				<meta name="robots" content="noindex" />
 			</Head>
-			<div className={styles.root}>
+			<div className={`page-content ${styles.root}`}>
 				<NavBar />
-				<div className={styles.container}>
-					<div className={styles.logoContainer}>
-						<div className={styles.logo}>
-							<Logo width={46} />
+				<div className="content-wrapper">
+					<div className={styles.container}>
+						<div className={styles.logoContainer}>
+							<div className={styles.logo}>
+								<Logo width={46} />
+							</div>
 						</div>
-					</div>
-					<div className={styles.messageWrapper}>
-						<div className={styles.title}>
-							Oops! <FontAwesomeIcon icon={faFaceSadTear} />
+						<div className={styles.messageWrapper}>
+							<div className={styles.title}>
+								Oops!{" "}
+								<FontAwesomeIcon icon={faFaceSadTear} />
+							</div>
+							<div className={styles.message}>
+								We can&apos;t seem to find the page
+								you&apos;re looking for.
+								{currentUrl && (
+									<>
+										<br />
+										The requested URL &quot;{currentUrl}
+										&quot; was not found on this server.
+									</>
+								)}
+							</div>
+							<Link href="/" className={styles.link}>
+								Go back to the home page
+							</Link>
 						</div>
-						<div className={styles.message}>
-							We can&apos;t seem to find the page you&apos;re
-							looking for.
-							{currentUrl && (
-								<>
-									<br />
-									The requested URL &quot;{currentUrl}&quot;
-									was not found on this server.
-								</>
-							)}
-						</div>
-						<Link href="/" className={styles.link}>
-							Go back to the home page
-						</Link>
 					</div>
 				</div>
 			</div>

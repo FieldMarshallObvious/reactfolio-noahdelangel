@@ -8,9 +8,8 @@
 # inside the Playwright Linux image to keep one set of -linux.png baselines that
 # both this machine and CI can use.
 #
-# Both modes photograph whatever TARGET serves. That needs a production build
-# running on the host first:
-#   npm run build && npx next start -p 3210
+# Both modes photograph whatever TARGET serves. A production build is started on
+# port 3210 automatically unless something is already listening there.
 #
 #   update  Rewrite the baselines.  ./scripts/snapshots.sh update
 #   check   Diff against them.      ./scripts/snapshots.sh check
