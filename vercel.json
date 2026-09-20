@@ -14,5 +14,8 @@
 			]
 		}
 	],
-	"framework": "nextjs"
+	"framework": "nextjs",
+	"git": {
+		"deploymentEnabled": false
+	}
 }
