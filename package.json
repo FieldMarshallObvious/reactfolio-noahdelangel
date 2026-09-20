@@ -34,8 +34,11 @@
 		"start": "next start",
 		"lint": "next lint",
 		"test:ui": "playwright test",
+		"test:ui:functional": "playwright test --grep-invert \"matches its baseline\"",
 		"test:ui:update": "playwright test --update-snapshots",
-		"test:ui:report": "playwright show-report"
+		"test:ui:report": "playwright show-report",
+		"verify": "npm run lint && npm run test:ui:functional",
+		"prepare": "git config core.hooksPath .githooks || true"
 	},
 	"browserslist": {
 		"production": [
