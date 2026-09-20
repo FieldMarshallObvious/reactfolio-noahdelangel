@@ -24,6 +24,8 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 
+/.vercel/
+
 # playwright
 /test-results/
 /playwright-report/
@@ -31,3 +33,5 @@ yarn-error.log*
 /playwright/.cache/
 
 **/*-darwin.png
+.vercel
+.env*
