@@ -63,9 +63,35 @@ check)
 	;;
 esac
 
+# The container is handed BASE_URL, which switches off Playwright's webServer,
+# so nothing inside it starts the app. Without a server here every test fails on
+# ERR_CONNECTION_REFUSED before taking a screenshot and no baseline is written.
+# Only the default local target is ours to start; anything else is assumed up.
+if [ -z "$REFERENCE_URL" ] && [ -z "$BASE_URL" ]; then
+	if curl -s -o /dev/null http://localhost:3210; then
+		echo "Using the server already on :3210. Stop it if it predates your changes." >&2
+	else
+		echo "Building and starting the app on :3210" >&2
+		npm run build
+		# Run next itself, not npx: killing npx leaves its child serving.
+		./node_modules/.bin/next start -p 3210 >/dev/null 2>&1 &
+		SERVER_PID=$!
+		trap 'kill $SERVER_PID 2>/dev/null' EXIT INT TERM
+		i=0
+		until curl -s -o /dev/null http://localhost:3210; do
+			i=$((i + 1))
+			if [ $i -gt 60 ]; then
+				echo "Server did not come up on :3210" >&2
+				exit 1
+			fi
+			sleep 1
+		done
+	fi
+fi
+
 # --user keeps rewritten PNGs owned by the caller rather than root; the image's
 # default HOME is not writable for an arbitrary uid, so point it at /tmp.
-exec docker run --rm \
+docker run --rm \
 	-v "$PWD":/work \
 	-w /work \
 	--user "$(id -u):$(id -g)" \
