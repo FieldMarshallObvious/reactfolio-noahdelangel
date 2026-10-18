@@ -16,8 +16,20 @@
 }
 
 @media (max-width: 600px) {
+	.container {
+		padding-top: 0;
+	}
+
 	.project {
 		width: calc(100% / 2);
+	}
+
+	/* Homepage showcase stacks full width instead of the two-up grid. */
+	.project.showcase {
+		width: 90%;
+		min-height: 250px;
+		height: auto;
+		padding-left: 30px;
 	}
 }
 

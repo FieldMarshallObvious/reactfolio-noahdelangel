@@ -83,19 +83,7 @@ const AllProjectItem = ({
 
 	// Showcase project display
 	return (
-		<div
-			className={styles.project}
-			style={
-				smallLayout
-					? {
-						width: "90%",
-						minHeight: "250px",
-						height: "auto",
-						paddingLeft: "30px",
-					}
-					: {}
-			}
-		>
+		<div className={`${styles.project} ${styles.showcase}`}>
 			<Project
 				logo={project.logo}
 				title={project.title}
@@ -118,11 +106,7 @@ const AllProjects = ({ showcase = [] }) => {
 	});
 
 	return (
-		<div
-			ref={containerRef}
-			className={styles.container}
-			style={smallLayout ? { paddingTop: "0px" } : {}}
-		>
+		<div ref={containerRef} className={styles.container}>
 			{filteredProjects.map((project, index) => (
 				<AllProjectItem
 					key={project.title}

@@ -10,7 +10,14 @@ export default function LogoContainer() {
 	const [pinned, setPinned] = useState(false);
 
 	useEffect(() => {
+		// Phones pin the logo at its minimum size from the first paint (see the
+		// stylesheet), so skip the shrink there. Re-rendering it on every scroll
+		// frame is what made it jitter while scrolling on mobile.
+		const mobile = window.matchMedia("(max-width: 600px)");
+
 		const handleScroll = () => {
+			if (mobile.matches) return;
+
 			const scrolled = (window.scrollY * 4) / 10;
 			const next = MAX_LOGO_SIZE - scrolled;
 

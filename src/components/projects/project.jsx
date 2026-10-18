@@ -4,7 +4,6 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faLink } from "@fortawesome/free-solid-svg-icons";
-import { useIsMobile } from "../utils/useMediaQuery";
 import styles from "./styles/project.module.css";
 import { Col, Row } from "reactstrap";
 
@@ -19,7 +18,6 @@ const Project = (props) => {
 	} = props;
 
 	const location = usePathname();
-	const smallLayout = useIsMobile();
 
 	return (
 		<React.Fragment>
@@ -42,11 +40,7 @@ const Project = (props) => {
 						}}
 					>
 						<Row
-							className={
-								smallLayout
-									? styles.containerSmall
-									: styles.container
-							}
+							className={styles.container}
 							style={{
 								height: "100%",
 								...(isShowcase ? {} : { padding: "10px" }),
@@ -86,16 +80,7 @@ const Project = (props) => {
 										paddingRight: "0px",
 									}}
 								>
-									<div
-										className={styles.title}
-										style={
-											smallLayout
-												? {
-													marginBottom: "0",
-												}
-												: {}
-										}
-									>
+									<div className={styles.title}>
 										{title}
 									</div>
 								</Col>
@@ -114,59 +99,46 @@ const Project = (props) => {
 								</Col>
 							</Row>
 							<Row
-								className={styles.link}
+								className={`${styles.link} ${isShowcase ? "" : styles.linkGrid}`}
 								style={{
 									paddingRight: "3px",
 									paddingLeft: "3px",
-									paddingBottom:
-										isShowcase || smallLayout
-											? undefined
-											: "20px",
 									// Pins the link to the bottom of a stretched
 									// card. Only the grid stretches; showcase
 									// cards size to their content.
 									...(isShowcase ? {} : { marginTop: "auto" }),
 								}}
 							>
+								{/* One full-width column with a flex row inside. Split
+								    into lg=1 / lg=10 columns, the icon's column was
+								    narrower than the icon on two-up phone cards, so it
+								    ran into the label. */}
 								<Col
-									lg={1}
-									md={1}
-									xs={1}
+									xs={12}
 									style={{
 										paddingRight: "0px",
 										paddingLeft: "0px",
 									}}
 								>
-									<div className={styles.linkIcon}>
-										<FontAwesomeIcon icon={faLink} />
-									</div>
-								</Col>
-
-								<Col
-									lg={10}
-									md={10}
-									xs={10}
-									style={{
-										paddingRight: "0px",
-										paddingLeft: "0px",
-									}}
-								>
-									{smallLayout ? (
-										<div
-											className={styles.linkText}
-											style={{
-												paddingLeft: "10px",
-											}}
-										>
-											{linkText.includes("Read About")
-												? "Read About"
-												: "View Project"}
+									<div className={styles.linkRow}>
+										<div className={styles.linkIcon}>
+											<FontAwesomeIcon icon={faLink} />
 										</div>
-									) : (
+										{/* Both labels ship in the HTML and CSS picks
+										    one. The server cannot see the viewport, so
+										    a JS switch here painted the desktop label on
+										    phones until hydration. */}
 										<div className={styles.linkText}>
-											{linkText}
+											<span className={styles.linkTextFull}>
+												{linkText}
+											</span>
+											<span className={styles.linkTextShort}>
+												{linkText.includes("Read About")
+													? "Read About"
+													: "View Project"}
+											</span>
 										</div>
-									)}
+									</div>
 								</Col>
 							</Row>
 						</Row>

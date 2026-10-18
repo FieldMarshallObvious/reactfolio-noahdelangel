@@ -25,14 +25,6 @@
 
 .container {
 	padding: 30px;
-}
-
-.containerSmall {
-	padding: 15px;
-}
-
-.container,
-.containerSmall {
 	margin: 0;
 	width: 100%;
 }
@@ -44,8 +36,7 @@
  * cancels Bootstrap's negative row gutters; losing it let the row pull its
  * content out past the card's padding.
  */
-.container > :global(.row),
-.containerSmall > :global(.row) {
+.container > :global(.row) {
 	margin: 0;
 	width: 100%;
 }
@@ -85,12 +76,58 @@
 	padding-top: 20px;
 }
 
+.linkRow {
+	display: flex;
+	align-items: center;
+	gap: 20px;
+}
+
 .linkIcon {
+	flex: 0 0 auto;
 	padding-left: 5px;
 	font-size: 13px;
 }
 
 .linkText {
-	padding-left: 20px;
 	font-weight: 700;
+}
+
+/* Grid cards only; showcase cards size to their content. */
+.linkGrid {
+	padding-bottom: 20px;
+}
+
+.linkTextShort {
+	display: none;
+}
+
+/*
+ * Mobile layout lives here rather than behind a JS viewport check. The server
+ * renders without a viewport, so a JS switch shipped the desktop card to
+ * phones and only corrected it after hydration.
+ */
+@media (max-width: 600px) {
+	.container {
+		padding: 15px;
+	}
+
+	.title {
+		margin-bottom: 0;
+	}
+
+	.linkGrid {
+		padding-bottom: 0;
+	}
+
+	.linkRow {
+		gap: 10px;
+	}
+
+	.linkTextFull {
+		display: none;
+	}
+
+	.linkTextShort {
+		display: inline;
+	}
 }
