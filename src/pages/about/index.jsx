@@ -18,7 +18,9 @@ const About = () => {
 	const mobileLogoStyle = {
 		display: "flex",
 		position: "fixed",
-		top: "2vh",
+		// px, not vh: mobile browsers resize the viewport as the address bar
+		// shows and hides while scrolling, and a vh offset moves with it.
+		top: "16px",
 		zIndex: 999,
 		border: "1px solid white",
 		borderRadius: "50%",

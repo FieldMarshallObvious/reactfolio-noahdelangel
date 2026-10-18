@@ -125,7 +125,9 @@
 }
 
 @media (max-width: 600px) {
+	/* px, not vh: the address bar resizes the mobile viewport mid-scroll. */
 	.navbar {
+		top: 24px;
 		margin-left: 25%;
 		margin-right: 25%;
 		width: 80%;

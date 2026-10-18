@@ -27,10 +27,12 @@
 	z-index: 999;
 }
 
+/* px, not vh: mobile browsers resize the viewport as the address bar shows
+   and hides while scrolling, and a vh offset moves the logo with it. */
 .mobileLogo {
 	display: flex;
 	position: fixed;
-	top: 2vh;
+	top: 16px;
 	z-index: 999;
 	border: 1px solid white;
 	border-radius: 50%;
