@@ -1,0 +1,23 @@
+#!/bin/sh
+#
+# Lint plus the functional Playwright specs. The screenshot specs ("... matches
+# its baseline") are left to CI: they are the slow half, and they compare against
+# committed PNGs that legitimately need refreshing whenever the design changes.
+#
+# Playwright builds and serves the app itself (see webServer in
+# playwright.config.js) because these tests are meaningless against `next dev`.
+#
+# Skip with: git commit --no-verify
+
+set -e
+
+# Hooks run from the repo root, but don't rely on it.
+cd "$(git rev-parse --show-toplevel)"
+
+if [ ! -d node_modules ]; then
+	echo "pre-commit: node_modules missing — run 'npm install' first." >&2
+	exit 1
+fi
+
+echo "pre-commit: lint + functional UI tests (screenshots run in CI)"
+npm run verify

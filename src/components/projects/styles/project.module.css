@@ -1,0 +1,133 @@
+
+.project {
+	mix-blend-mode: normal;
+	border-radius: 20px;
+	opacity: 0.8;
+	height: 100%;
+	width: 100%;
+}
+
+.project a {
+	text-decoration: none;
+	width: 100%;
+}
+
+.project:hover {
+	background: #f6f6f6;
+	opacity: 1;
+	transition: background-color 0.5s ease-in-out;
+}
+
+.project:hover .link {
+	color: var(--link-color);
+	transition: color 0.3s ease-in-out;
+}
+
+.container {
+	padding: 30px;
+	margin: 0;
+	width: 100%;
+}
+
+/*
+ * :global is required here. .row belongs to Bootstrap, and CSS Modules hash
+ * every class in a selector — without it this compiled to
+ * `.project_container__x > .project_row__y`, which matches nothing. The rule
+ * cancels Bootstrap's negative row gutters; losing it let the row pull its
+ * content out past the card's padding.
+ */
+.container > :global(.row) {
+	margin: 0;
+	width: 100%;
+}
+
+.logo {
+	width: 30px;
+}
+
+.logo img {
+	width: 100%;
+	height: auto;
+}
+
+.title {
+	font-family: var(--secondary-font);
+	color: var(--primary-color);
+	font-size: 16px;
+	padding-top: 15px;
+	margin-bottom: 1em;
+	font-family: var(--title-font) !important;
+	font-weight: var(--title-font-weight) !important;
+	font-style: var(--title-font-style) !important;
+}
+
+.description {
+	color: var(--secondary-color);
+	font-family: var(--body-font) !important;
+	font-weight: var(--body-font-weight) !important;
+	font-style: var(--body-font-style) !important;
+}
+
+.link {
+	display: flex;
+	align-items: center;
+	color: var(--secondary-color);
+	font-size: 12px;
+	padding-top: 20px;
+}
+
+.linkRow {
+	display: flex;
+	align-items: center;
+	gap: 20px;
+}
+
+.linkIcon {
+	flex: 0 0 auto;
+	padding-left: 5px;
+	font-size: 13px;
+}
+
+.linkText {
+	font-weight: 700;
+}
+
+/* Grid cards only; showcase cards size to their content. */
+.linkGrid {
+	padding-bottom: 20px;
+}
+
+.linkTextShort {
+	display: none;
+}
+
+/*
+ * Mobile layout lives here rather than behind a JS viewport check. The server
+ * renders without a viewport, so a JS switch shipped the desktop card to
+ * phones and only corrected it after hydration.
+ */
+@media (max-width: 600px) {
+	.container {
+		padding: 15px;
+	}
+
+	.title {
+		margin-bottom: 0;
+	}
+
+	.linkGrid {
+		padding-bottom: 0;
+	}
+
+	.linkRow {
+		gap: 10px;
+	}
+
+	.linkTextFull {
+		display: none;
+	}
+
+	.linkTextShort {
+		display: inline;
+	}
+}

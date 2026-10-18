@@ -1,60 +1,52 @@
 import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEnvelope } from "@fortawesome/free-solid-svg-icons";
-import {
-	faTwitter,
-	faGithub,
-	faLinkedin,
-	faInstagram,
-} from "@fortawesome/free-brands-svg-icons";
-
+import { faGithub, faLinkedin } from "@fortawesome/free-brands-svg-icons";
 import INFO from "../../data/user";
-
-import "./styles/socials.css";
+import styles from "./styles/socials.module.css";
 
 const Socials = () => {
 	return (
-		<div className="socials">
-			<div className="social">
+		<div className={styles.socials}>
+			<div className={styles.social}>
 				<a href={INFO.socials.github} target="_blank" rel="noreferrer">
-					<div className="social-icon">
+					<div className={styles.socialIcon}>
 						<FontAwesomeIcon
 							icon={faGithub}
-							className="social-icon"
+							className={styles.socialIcon}
 						/>
 					</div>
-					<div className="social-text">Follow on GitHub</div>
+					<div className={styles.socialText}>Follow on GitHub</div>
 				</a>
 			</div>
-
-			<div className="social">
+			<div className={styles.social}>
 				<a
 					href={INFO.socials.linkedin}
 					target="_blank"
 					rel="noreferrer"
 				>
-					<div className="social-icon">
+					<div className={styles.socialIcon}>
 						<FontAwesomeIcon
 							icon={faLinkedin}
-							className="social-icon"
+							className={styles.socialIcon}
 						/>
 					</div>
-					<div className="social-text">Follow on LinkedIn</div>
+					<div className={styles.socialText}>Follow on LinkedIn</div>
 				</a>
 			</div>
-
-			<div className="email">
-				<div className="email-wrapper">
+			<div className={styles.email}>
+				<div className={styles.emailWrapper}>
 					<a
 						href={`mailto:${INFO.main.email}`}
 						target="_blank"
 						rel="noreferrer"
 					>
-						<div className="social-icon">
+						<div className={styles.socialIcon}>
 							<FontAwesomeIcon icon={faEnvelope} />
 						</div>
-
-						<div className="social-text">{INFO.main.email}</div>
+						<div className={styles.socialText}>
+							{INFO.main.email}
+						</div>
 					</a>
 				</div>
 			</div>

@@ -3,7 +3,7 @@ const plagiarismChecker = {
 	description:
 		"Built a plagiarism checker leveraging advanced NLP techniques and Google Search API in Python, with a React-based interface.",
 	shortDescription: "Plagiarism detection tool using NLP and Google API.",
-	logo: "../nlp.png",
+	logo: "/nlp.png",
 	linkText: "View Project",
 	link: "https://github.com/FieldMarshallObvious/PlagiarismChecker",
 };

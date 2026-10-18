@@ -1,0 +1,70 @@
+name: CD
+
+# Called by CI once its verify job is green - see the deploy job in ci.yml.
+# This is workflow_call, not workflow_run: a local ./ reference resolves against
+# the calling branch's own commit, so it works on every branch with no
+# dependency on what the default branch happens to contain.
+on:
+  workflow_call:
+  # Also allows a deploy by hand from any branch without re-running the suite.
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    name: Deploy to Vercel
+    # Tag pushes have no branch to map onto a Vercel environment.
+    if: ${{ github.ref_type == 'branch' }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    environment: ${{ github.ref_name == github.event.repository.default_branch && 'Production' || 'Preview' }}
+
+    env:
+      VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
+      VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
+      VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Install Vercel CLI
+        run: npm install -g vercel@latest
+
+      # Which GitHub environment supplied the credentials above and which Vercel
+      # environment they deploy into are two separate things that happen to line
+      # up: default branch -> production, everything else -> a per-branch preview.
+      - name: Select deployment target
+        run: |
+          if [ "${{ github.ref_name }}" = "${{ github.event.repository.default_branch }}" ]; then
+            echo "TARGET=production" >> "$GITHUB_ENV"
+            echo "FLAG=--prod" >> "$GITHUB_ENV"
+          else
+            echo "TARGET=preview" >> "$GITHUB_ENV"
+            echo "FLAG=" >> "$GITHUB_ENV"
+          fi
+
+      # --git-branch selects branch-scoped variables on the Vercel side and is
+      # only meaningful for preview, so the production path omits it.
+      - name: Pull Vercel environment
+        run: |
+          if [ "$TARGET" = "preview" ]; then
+            vercel pull --yes --environment=preview \
+              --git-branch="${{ github.ref_name }}" --token="$VERCEL_TOKEN"
+          else
+            vercel pull --yes --environment=production --token="$VERCEL_TOKEN"
+          fi
+
+      - name: Build
+        run: vercel build $FLAG --token="$VERCEL_TOKEN"
+
+      - name: Deploy
+        run: |
+          url=$(vercel deploy --prebuilt $FLAG --token="$VERCEL_TOKEN")
+          echo "### $TARGET deployment" >> "$GITHUB_STEP_SUMMARY"
+          echo "Branch \`${{ github.ref_name }}\`" >> "$GITHUB_STEP_SUMMARY"
+          echo "$url" >> "$GITHUB_STEP_SUMMARY"

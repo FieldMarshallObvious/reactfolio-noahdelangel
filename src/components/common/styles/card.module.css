@@ -1,0 +1,44 @@
+
+.card {
+	mix-blend-mode: normal;
+	border-radius: 20px;
+	outline: 2px solid #f4f4f5;
+}
+
+.cardContainer {
+	padding: 30px;
+	padding-top: 5px;
+	padding-bottom: 5px;
+}
+
+.cardHeader {
+	display: flex;
+	align-items: center;
+	background-color: white !important;
+	border: none !important;
+}
+
+.cardIcon {
+	font-size: 15px;
+	margin-bottom: 0.3rem;
+	color: var(--tertiary-color);
+}
+
+.cardTitle {
+	color: var(--secondary-color) !important;
+	font-size: 16px !important;
+	padding-top: 7px;
+	padding-left: 5px;
+
+	font-family: var(--title-font) !important;
+	font-weight: var(--title-font-weight) !important;
+	font-style: var(--title-font-style) !important;
+}
+
+.cardBody {
+	padding-top: 40px;
+	font-size: 15px;
+	font-family: var(--body-font) !important;
+	font-weight: var(--body-font-weight) !important;
+	font-style: var(--body-font-style) !important;
+}

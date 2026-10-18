@@ -1,0 +1,132 @@
+
+.articleHeader {
+	padding: 3rem 0;
+	margin-bottom: 2rem;
+	border-bottom: 1px solid var(--secondary-color);
+	font-family: var(--title-font);
+}
+
+.projectMeta {
+	display: flex;
+	gap: 2rem;
+	margin: 1rem 0;
+	color: var(--secondary-color);
+	font-size: 0.9rem;
+}
+
+.navLink {
+	cursor: pointer;
+	display: flex;
+	align-items: center;
+	gap: 0.5rem;
+	/* Without this, Bootstrap's .nav-link default paints inactive tabs link
+	   blue. The compact layout never showed it because its tabs are wrapped in
+	   motion.div elements that set this colour explicitly. */
+	color: var(--primary-color);
+}
+
+.navLink.active {
+	color: var(--primary-color) !important;
+	border-bottom: 2px solid var(--primary-color) !important;
+	background-color: transparent !important;
+}
+
+.navLink:hover {
+	color: var(--primary-color) !important;
+}
+
+.section {
+	margin-bottom: 3rem;
+}
+
+.sectionTitle {
+	margin-bottom: 1.5rem;
+	color: var(--primary-color);
+	font-family: var(--title-font) !important;
+	font-weight: 650;
+	font-style: var(--title-font-style) !important;
+}
+
+.projectLinks {
+	display: flex;
+	gap: 1rem;
+	margin-top: 1rem;
+}
+
+.projectLinks a {
+	padding: 0.5rem 1rem;
+	border: 1px solid var(--primary-color);
+	border-radius: 4px;
+	color: var(--primary-color);
+	text-decoration: none;
+	transition: all 0.2s ease-in-out;
+	display: flex;
+	align-items: center;
+	gap: 0.5rem;
+}
+
+.projectLinks a:hover {
+	background-color: var(--primary-color);
+	color: var(--background-color);
+}
+
+.mainTitle {
+	font-family: var(--title-font);
+	font-weight: 650;
+	font-style: var(--title-font-style);
+}
+
+.description {
+	font-family: var(--body-font);
+	font-weight: 500;
+	font-style: var(--body-font-style);
+}
+
+.stickyCard {
+	top: 2rem;
+	position: sticky;
+	z-index: 1;
+}
+
+.sectionContent {
+	font-family: var(--body-font);
+	font-weight: var(--body-font-weight);
+	font-style: var(--body-font-style);
+}
+
+.flowchartContainer {
+	padding: 1rem;
+	border: 1px solid;
+	border-radius: 0.25rem;
+}
+
+/* Layout specific styles */
+.compactHeader {
+	border-bottom: 0;
+	margin-bottom: 0;
+	padding-bottom: 24px;
+}
+
+.desktopHeader {
+	padding-bottom: 25px;
+}
+
+.navTabs {
+	margin-bottom: 24px;
+}
+
+/*
+ * Desktop tab bar. It lives in a narrow sticky column (md=5, roughly 350px of
+ * usable width inside the card), where three tabs at Bootstrap's default
+ * nav-link padding total just over the available space and wrap "Languages"
+ * onto a second row. Tighten the padding and keep them on one line.
+ */
+.stickyNavTabs {
+	flex-wrap: nowrap;
+}
+
+.stickyNavTabs .navLink {
+	padding-left: 0.6rem;
+	padding-right: 0.6rem;
+	white-space: nowrap;
+}

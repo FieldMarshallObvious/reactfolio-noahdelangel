@@ -1,37 +1,45 @@
+const KEYWORDS = [
+	"Noah del Angel",
+	"machine learning engineer",
+	"AI platform",
+	"MLOps",
+	"RAG",
+	"LangChain",
+	"LangGraph",
+	"TensorFlow",
+	"PyTorch",
+	"Python",
+	"React",
+	"AWS",
+];
+
 const SEO = [
 	{
 		page: "home",
 		description:
-			"I am a backend developer with expertise in Node.js. I have experience in building scalable, secure and reliable web applications using various frameworks and technologies.",
-		keywords: ["Tharindu", "Tharindu N", "Tharindu Nayanajith"],
+			"Noah del Angel is a machine learning engineer building scalable AI systems and the platforms that serve them, currently working on Mozilla's AI Platform behind Firefox's AI features.",
+		keywords: KEYWORDS,
 	},
 
 	{
 		page: "about",
 		description:
-			"I am a backend developer with expertise in Node.js. I have experience in building scalable, secure and reliable web applications using various frameworks and technologies.",
-		keywords: ["Tharindu", "Tharindu N", "Tharindu Nayanajith"],
-	},
-
-	{
-		page: "articles",
-		description:
-			"Chronological collection of my long-form thoughts on programming, leadership, product design, and more.",
-		keywords: ["Tharindu", "Tharindu N", "Tharindu Nayanajith"],
+			"Machine learning engineer shipping AI systems end to end — model serving infrastructure at Mozilla, enterprise RAG platforms at HGS Digital, and computer vision on edge devices.",
+		keywords: KEYWORDS,
 	},
 
 	{
 		page: "projects",
 		description:
-			"I've worked on a variety of projects over the years and I'm proud of the progress I've made. Many of these projects are open-source and available for others to explore and contribute to.",
-		keywords: ["Tharindu", "Tharindu N", "Tharindu Nayanajith"],
+			"Projects by Noah del Angel, spanning LLM-driven prospecting automation, computer vision digital signage, plagiarism detection, and systems programming.",
+		keywords: [...KEYWORDS, "projects", "portfolio", "open source"],
 	},
 
 	{
 		page: "contact",
 		description:
-			"If you're interested in collaborating on a project, feel free to reach out to me. I'm always open to new ideas and opportunities.",
-		keywords: ["Tharindu", "Tharindu N", "Tharindu Nayanajith"],
+			"Get in touch with Noah del Angel about machine learning platform work, AI infrastructure, collaboration, or engineering roles.",
+		keywords: [...KEYWORDS, "contact", "hire"],
 	},
 ];
 

@@ -1,6 +1,7 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
+import Head from "next/head";
+import Link from "next/link";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-
 import { faFaceSadTear } from "@fortawesome/free-regular-svg-icons";
 
 import NavBar from "../components/common/navBar";
@@ -8,38 +9,51 @@ import Logo from "../components/common/logo";
 
 import INFO from "../data/user";
 
-import "./styles/404.css";
+import styles from "./404.module.css";
 
-const Notfound = () => {
+const NotFound = () => {
+	// Read on the client only — this page is prerendered at build time, where
+	// there is no location to read from.
+	const [currentUrl, setCurrentUrl] = useState("");
+
 	useEffect(() => {
-		document.title = `404 | ${INFO.main.title}`;
+		setCurrentUrl(window.location.pathname);
 	}, []);
 
 	return (
 		<React.Fragment>
-			<div className="not-found page-content">
+			<Head>
+				<title>{`404 | ${INFO.main.title}`}</title>
+				<meta name="robots" content="noindex" />
+			</Head>
+			<div className={`page-content ${styles.root}`}>
 				<NavBar />
 				<div className="content-wrapper">
-					<div className="notfound-logo-container">
-						<div className="projects-logo">
-							<Logo width={46} />
+					<div className={styles.container}>
+						<div className={styles.logoContainer}>
+							<div className={styles.logo}>
+								<Logo width={46} />
+							</div>
 						</div>
-					</div>
-					<div className="notfound-container">
-						<div className="notfound-message">
-							<div className="notfound-title">
-								Oops! <FontAwesomeIcon icon={faFaceSadTear} />
+						<div className={styles.messageWrapper}>
+							<div className={styles.title}>
+								Oops!{" "}
+								<FontAwesomeIcon icon={faFaceSadTear} />
 							</div>
-							<div className="not-found-message">
-								We can't seem to find the page you're looking
-								for.
-								<br />
-								The requested URL "{window.location.href}" was
-								not found on this server.
+							<div className={styles.message}>
+								We can&apos;t seem to find the page
+								you&apos;re looking for.
+								{currentUrl && (
+									<>
+										<br />
+										The requested URL &quot;{currentUrl}
+										&quot; was not found on this server.
+									</>
+								)}
 							</div>
-							<a href="/" className="not-found-link">
+							<Link href="/" className={styles.link}>
 								Go back to the home page
-							</a>
+							</Link>
 						</div>
 					</div>
 				</div>
@@ -48,4 +62,4 @@ const Notfound = () => {
 	);
 };
 
-export default Notfound;
+export default NotFound;

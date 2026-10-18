@@ -1,12 +1,22 @@
+// ContactForm.jsx
 import React, { useEffect, useRef, useState } from "react";
 import { Row, Col } from "reactstrap";
 import Card from "../common/card";
 import emailjs from "@emailjs/browser";
 import { AnimatePresence, motion } from "motion/react";
 import { faEnvelope } from "@fortawesome/free-solid-svg-icons";
-
-import "./styles/contactForm.css";
 import { LoaderCircle } from "lucide-react";
+import styles from "./styles/contactForm.module.css";
+
+// EmailJS identifiers are public by design, but keeping them in env vars means
+// the form can be repointed without a code change. Defaults preserve the
+// existing configuration so the form keeps working if the vars are unset.
+const EMAILJS_SERVICE_ID =
+	process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID || "service_iuu5z9d";
+const EMAILJS_TEMPLATE_ID =
+	process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID || "template_1gdkans";
+const EMAILJS_PUBLIC_KEY =
+	process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY || "vcMsV_rKOxT3DGhBO";
 
 const ContactForm = () => {
 	const form = useRef();
@@ -47,7 +57,6 @@ const ContactForm = () => {
 		}
 
 		setSending(true);
-
 		sendEmail(e);
 	};
 
@@ -55,18 +64,18 @@ const ContactForm = () => {
 		e.preventDefault();
 
 		emailjs
-			.sendForm("service_iuu5z9d", "template_1gdkans", form.current, {
-				publicKey: "vcMsV_rKOxT3DGhBO",
+			.sendForm(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, form.current, {
+				publicKey: EMAILJS_PUBLIC_KEY,
 			})
 			.then(
 				() => {
 					setSending(false);
 					setSuccess(true);
-					console.log("SUCCESS!");
 				},
 				(error) => {
+					setSending(false);
 					setFailed(true);
-					console.log("FAILED...", error.text);
+					console.error("Contact form send failed:", error?.text);
 				},
 			);
 	};
@@ -100,20 +109,6 @@ const ContactForm = () => {
 		},
 	};
 
-	const styles = {
-		"@keyframes spin": {
-			from: {
-				transform: "rotate(0deg)",
-			},
-			to: {
-				transform: "rotate(360deg)",
-			},
-		},
-		spinner: {
-			animation: "spin 1s linear infinite",
-		},
-	};
-
 	return (
 		<Card
 			icon={faEnvelope}
@@ -123,15 +118,15 @@ const ContactForm = () => {
 			}}
 			title="Contact Form"
 			body={
-				<div className="contact-form-body">
+				<div className={styles.contactFormBody}>
 					<form onSubmit={handleSubmit} ref={form}>
 						<Row className="mb-4">
 							<Col xs={12} md={6} className="mb-4 mb-md-0">
-								<div className="form-group">
+								<div className={styles.formGroup}>
 									<input
 										type="text"
 										name="user_name"
-										className="form-input"
+										className={styles.formInput}
 										placeholder="Your Name"
 										value={formData.user_name}
 										onChange={handleChange}
@@ -140,47 +135,35 @@ const ContactForm = () => {
 								</div>
 							</Col>
 							<Col xs={12} md={6}>
-								<div className="form-group">
+								<div className={styles.formGroup}>
 									<input
 										type="email"
 										name="user_email"
-										className={
-											"form-input " +
-											(emailError
-												? "form-input-error"
-												: "")
-										}
+										className={`${styles.formInput} ${
+											emailError
+												? styles.formInputError
+												: ""
+										}`}
 										placeholder="Your Email"
 										value={formData.user_email}
 										onChange={handleChange}
 										required
 									/>
-									{emailError ? (
-										<span
-											style={{
-												paddingTop: "3px",
-												paddingLeft: "5px",
-												color: "red",
-												fontFamily:
-													"var(--secondary-font)",
-												fontSize: "11px",
-											}}
-										>
+									{emailError && (
+										<span className={styles.errorMessage}>
 											Invalid Email
 										</span>
-									) : (
-										<></>
 									)}
 								</div>
 							</Col>
 						</Row>
 						<Row className="mb-4">
 							<Col xs={12}>
-								<div className="form-group">
+								<div className={styles.formGroup}>
 									<input
 										type="text"
 										name="subject"
-										className="form-input"
+										className={styles.formInput}
 										placeholder="Subject"
 										value={formData.subject}
 										onChange={handleChange}
@@ -191,10 +174,10 @@ const ContactForm = () => {
 						</Row>
 						<Row className="mb-4">
 							<Col xs={12}>
-								<div className="form-group">
+								<div className={styles.formGroup}>
 									<textarea
 										name="message"
-										className="form-input form-textarea"
+										className={`${styles.formInput} ${styles.formTextarea}`}
 										placeholder="Your Message"
 										value={formData.message}
 										onChange={handleChange}
@@ -208,7 +191,7 @@ const ContactForm = () => {
 							<Col xs={12}>
 								<motion.button
 									type="submit"
-									className="form-submit-btn"
+									className={styles.formSubmitBtn}
 									disabled={success || sending || failed}
 									variants={buttonVariants}
 									animate={
@@ -243,10 +226,7 @@ const ContactForm = () => {
 												exit={{ opacity: 0 }}
 											>
 												<Row
-													style={{
-														justifyContent:
-															"center",
-													}}
+													className={styles.loaderRow}
 												>
 													<motion.div
 														animate={{
@@ -257,9 +237,9 @@ const ContactForm = () => {
 															repeat: Infinity,
 															ease: "linear",
 														}}
-														style={{
-															width: "fit-content",
-														}}
+														className={
+															styles.loader
+														}
 													>
 														<LoaderCircle className="w-4 h-4" />
 													</motion.div>
@@ -277,7 +257,7 @@ const ContactForm = () => {
 											</motion.div>
 										) : (
 											<motion.div
-												key="failed"
+												key="send"
 												initial={{ opacity: 0 }}
 												animate={{ opacity: 1 }}
 												exit={{ opacity: 0 }}

@@ -17,15 +17,15 @@ const INFO = {
 	},
 
 	homepage: {
-		title: "Full-stack web and mobile developer with a focus on computer vision",
+		title: "Machine learning engineer building scalable AI systems",
 		description:
-			"Full stack developer with a strong foundation in Node.js, experienced in building scalable, secure, and reliable web applications. Skilled in a range of frameworks and technologies, including MongoDB, MSSQL, React, Kotlin, TensorFlow, Vertex AI, and AWS. Passionate about solving complex problems and writing high-quality code that aligns with best practices. Continuously seeking new challenges and growth opportunities as a developer.",
+			"Machine learning engineer focused on carrying AI systems from prototype through to production. Currently building Mozilla's AI Platform, the model hosting and serving layer behind Firefox's AI features, and partnering with teams across the company to ship AI capabilities. Previously delivered enterprise automation at HGS Digital, including RAG systems serving more than a thousand concurrent users. Works day to day across React, Python, Node.js, TensorFlow, LangChain, and AWS, and is most drawn to the point where modern ML turns into infrastructure other teams can rely on.",
 	},
 
 	about: {
 		title: "I'm Noah del Angel, creating innovative software solutions.",
 		description:
-			"Software engineer with proven experience building solutions across computer vision, real estate analytics, and digital signage. I specialize in developing applications that streamline workflows, optimize deployments, and enhance user experience. My technical expertise spans Node.js, MongoDB, React, Kotlin, TensorFlow, Vertex AI, and AWS. My GitHub portfolio showcases both coursework and innovative personal projects, reflecting my passion for continuous learning and collaboration. I'm eager to contribute my skills to impactful projects that deliver high-quality results.",
+			"I'm a machine learning engineer who ships AI systems end to end, from statement of work through delivery and maintenance. At Mozilla I work on the AI Platform, developing new features and collaborating across teams to bring AI capabilities to Firefox. Before that I built an enterprise automation platform at HGS Digital that supported over a thousand concurrent users and cut case analysis from four hours to one, and led pre-sales work on agentic workflow demos in LangGraph and LangChain. Earlier I modernized a monolithic system into a modular React and Node.js architecture at Equity Sales Finance, and trained TensorFlow Lite models for computer vision running on edge devices at Austin GIS. My day-to-day spans Python, TypeScript, React, Node.js, TensorFlow, PyTorch, Docker, AWS, and GCP.",
 	},
 
 	work: WORK,

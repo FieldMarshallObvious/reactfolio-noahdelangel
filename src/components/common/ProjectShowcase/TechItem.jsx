@@ -1,55 +1,21 @@
 import React from "react";
-import styled from "styled-components";
+import styles from "./showcaseItems.module.css";
 
-const TechStackCard = styled.div`
-	padding: 1.5rem;
-	border: 1px solid var(--secondary-color);
-	border-radius: 0.5rem;
-	margin-bottom: 1rem;
-	transition: all 0.2s ease-in-out;
-
-	&:hover {
-		background-color: var(--secondary-background-color);
-		transform: translateY(-2px);
-		box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.25);
-	}
-`;
-
-const TechItem = ({ tech, key = `tech-item` }) => {
+const TechItem = ({ tech }) => {
 	return (
-		<div key={key}>
-			<TechStackCard
-				style={
-					tech.borderColor
-						? {
-								borderColor: tech.borderColor,
-							}
-						: undefined
-				}
-			>
-				<h5>
-					{tech.icon && tech.icon}
-					<span
-						style={{
-							fontFamily: "var(--title-font)",
-							fontWeight: 600,
-							fontStyle: "var(--title-font-style)",
-						}}
-					>
-						{tech.name}
-					</span>
-				</h5>
-				<p
-					className="text-muted mb-0"
-					style={{
-						fontFamily: "var(--body-font)",
-						fontWeight: "var(--body-font-weight)",
-						fontStyle: "var(--body-font-style)",
-					}}
-				>
-					{tech.description}
-				</p>
-			</TechStackCard>
+		<div
+			className={styles.techStackCard}
+			style={
+				tech.borderColor ? { borderColor: tech.borderColor } : undefined
+			}
+		>
+			<h5>
+				{tech.icon && tech.icon}
+				<span className={styles.techName}>{tech.name}</span>
+			</h5>
+			<p className={`text-muted mb-0 ${styles.techDescription}`}>
+				{tech.description}
+			</p>
 		</div>
 	);
 };

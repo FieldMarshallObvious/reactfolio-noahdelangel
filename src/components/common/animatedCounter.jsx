@@ -42,7 +42,11 @@ const AnimatedCounter = ({ from, to, animationOptions, duration = 2 }) => {
 		};
 	}, [ref, from, to, inView, animationOptions]);
 
-	return <span ref={ref} />;
+	// Render the target value rather than an empty span: the effect overwrites
+	// it with `from` before animating, so the count still runs, but the number
+	// is present in the prerendered HTML instead of appearing only once
+	// IntersectionObserver fires.
+	return <span ref={ref}>{Math.round(to)}</span>;
 };
 
 export default AnimatedCounter;

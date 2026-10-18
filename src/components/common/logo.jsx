@@ -1,44 +1,37 @@
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
-
+import React from "react";
+import Link from "next/link";
+import Image from "next/image";
 import INFO from "../../data/user";
+import styles from "./styles/logo.module.css";
 
-import "./styles/logo.css";
+// Largest size any caller renders. The image is always requested at this size
+// and scaled by its container, so the scroll-shrink effect never changes the
+// srcset — doing so re-requested the image on every scroll frame.
+const IMAGE_SIZE = 80;
 
-const Logo = (props) => {
-	let { width, link } = props;
-	const [imageLoaded, setImageLoaded] = useState(false);
-
-	const handleImageLoad = () => {
-		setImageLoaded(true);
-	};
-
-	if (link === undefined) {
-		link = true;
-	}
+const Logo = ({ width = 45, link = true }) => {
+	const size = Math.round(width);
 
 	const imageElement = (
 		<div
-			style={{
-				width: `${width}px`,
-				height: `${width}px`,
-				display: imageLoaded ? "block" : "none",
-			}}
-			className="logo_container"
+			style={{ width: `${size}px`, height: `${size}px` }}
+			className={styles.logoContainer}
 		>
-			<img
+			<Image
 				src={INFO.main.logo}
-				alt="logo"
-				className="logo"
-				onLoad={handleImageLoad}
-				width={width}
+				alt={`${INFO.main.name} logo`}
+				className={styles.logo}
+				width={IMAGE_SIZE}
+				height={IMAGE_SIZE}
+				style={{ width: "100%", height: "100%" }}
+				priority
 			/>
 		</div>
 	);
 
 	return (
 		<React.Fragment>
-			{link ? <Link to="/">{imageElement}</Link> : imageElement}
+			{link ? <Link href="/">{imageElement}</Link> : imageElement}
 		</React.Fragment>
 	);
 };
